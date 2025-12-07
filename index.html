@@ -2,91 +2,75 @@
 <html lang="tr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramazan İmsakiyesi & Sayaç</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
+    <option value="tr">Türkçe</option>
+    <option value="en">English</option>
+    <option value="ar">العربية</option>
+    <option value="id">Bahasa Indonesia</option>
+    <option value="ur">اردو</option>
+    </select>
+    </div>
+    <h1 id="app-title">Hoşgeldin Ramazan 2026</h1>
+    <div class="location-badge" id="location-display">
+        <span class="icon">📍</span>
+        <span id="city-name">Konum Bulunuyor...</span>
+    </div>
+    </header>
 
-<body>
-    <div class="background-overlay"></div>
+    <section class="timer-card">
+        <div class="timer-header">
+            <h2 id="next-event-label">Sıradaki Vakit</h2>
+            <p id="next-event-name">Yükleniyor...</p>
+        </div>
 
-    <main class="container">
-        <header class="app-header">
-            <div class="header-top">
-                <select id="language-selector" class="language-selector">
-                    <option value="tr">Türkçe</option>
-                    <option value="en">English</option>
-                    <option value="ar">العربية</option>
-                    <option value="id">Bahasa Indonesia</option>
-                    <option value="ur">اردو</option>
-                </select>
+        <div class="countdown-display">
+            <div class="time-unit">
+                <span id="hours">00</span>
+                <label>Saat</label>
             </div>
-            <h1 id="app-title">Hoşgeldin Ramazan 2026</h1>
-            <div class="location-badge" id="location-display">
-                <span class="icon">📍</span>
-                <span id="city-name">Konum Bulunuyor...</span>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <span id="minutes">00</span>
+                <label>Dakika</label>
             </div>
-        </header>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <span id="seconds">00</span>
+                <label>Saniye</label>
+            </div>
+        </div>
 
-        <section class="timer-card">
-            <div class="timer-header">
-                <h2 id="next-event-label">Sıradaki Vakit</h2>
-                <p id="next-event-name">Yükleniyor...</p>
-            </div>
+        <div class="current-date" id="current-date">
+            --/--/----
+        </div>
+    </section>
 
-            <div class="countdown-display">
-                <div class="time-unit">
-                    <span id="hours">00</span>
-                    <label>Saat</label>
-                </div>
-                <div class="separator">:</div>
-                <div class="time-unit">
-                    <span id="minutes">00</span>
-                    <label>Dakika</label>
-                </div>
-                <div class="separator">:</div>
-                <div class="time-unit">
-                    <span id="seconds">00</span>
-                    <label>Saniye</label>
-                </div>
-            </div>
-
-            <div class="current-date" id="current-date">
-                --/--/----
-            </div>
-        </section>
-
-        <section class="prayer-times-list">
-            <h3>Bugünün Vakitleri</h3>
-            <div class="prayer-item" id="imsak-row">
-                <span class="prayer-name">İmsak</span>
-                <span class="prayer-time" id="imsak-time">--:--</span>
-            </div>
-            <div class="prayer-item" id="gunes-row">
-                <span class="prayer-name">Güneş</span>
-                <span class="prayer-time" id="gunes-time">--:--</span>
-            </div>
-            <div class="prayer-item" id="ogle-row">
-                <span class="prayer-name">Öğle</span>
-                <span class="prayer-time" id="ogle-time">--:--</span>
-            </div>
-            <div class="prayer-item" id="ikindi-row">
-                <span class="prayer-name">İkindi</span>
-                <span class="prayer-time" id="ikindi-time">--:--</span>
-            </div>
-            <div class="prayer-item" id="aksam-row">
-                <span class="prayer-name">Akşam (İftar)</span>
-                <span class="prayer-time" id="aksam-time">--:--</span>
-            </div>
-            <div class="prayer-item" id="yatsi-row">
-                <span class="prayer-name">Yatsı</span>
-                <span class="prayer-time" id="yatsi-time">--:--</span>
-            </div>
-        </section>
+    <section class="prayer-times-list">
+        <h3>Bugünün Vakitleri</h3>
+        <div class="prayer-item" id="imsak-row">
+            <span class="prayer-name">İmsak</span>
+            <span class="prayer-time" id="imsak-time">--:--</span>
+        </div>
+        <div class="prayer-item" id="gunes-row">
+            <span class="prayer-name">Güneş</span>
+            <span class="prayer-time" id="gunes-time">--:--</span>
+        </div>
+        <div class="prayer-item" id="ogle-row">
+            <span class="prayer-name">Öğle</span>
+            <span class="prayer-time" id="ogle-time">--:--</span>
+        </div>
+        <div class="prayer-item" id="ikindi-row">
+            <span class="prayer-name">İkindi</span>
+            <span class="prayer-time" id="ikindi-time">--:--</span>
+        </div>
+        <div class="prayer-item" id="aksam-row">
+            <span class="prayer-name">Akşam (İftar)</span>
+            <span class="prayer-time" id="aksam-time">--:--</span>
+        </div>
+        <div class="prayer-item" id="yatsi-row">
+            <span class="prayer-name">Yatsı</span>
+            <span class="prayer-time" id="yatsi-time">--:--</span>
+        </div>
+    </section>
     </main>
 
     <script src="app.js"></script>
@@ -97,6 +81,6 @@
                 .catch((err) => console.log('Service Worker Failed', err));
         }
     </script>
-</body>
+    </body>
 
 </html>
