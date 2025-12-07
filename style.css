@@ -1,0 +1,250 @@
+:root {
+    --primary-color: #FFD700;
+    /* Gold */
+    --secondary-color: #1a2a6c;
+    /* Deep Blue */
+    --accent-color: #b21f1f;
+    /* Deep Red/Purple hint */
+    --text-light: #ffffff;
+    --text-dim: #e0e0e0;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: var(--text-light);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* RTL Support */
+body.rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+body.rtl .app-header,
+body.rtl .timer-card,
+body.rtl .prayer-times-list h3 {
+    text-align: center;
+    /* Keep center alignment for these */
+}
+
+body.rtl .countdown-display {
+    flex-direction: row-reverse;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("masjid_bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.container {
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.header-top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.language-selector {
+    background: var(--glass-bg);
+    color: var(--text-light);
+    border: 1px solid var(--glass-border);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+.language-selector option {
+    background: #203a43;
+    color: var(--text-light);
+}
+
+.app-header h1 {
+    font-weight: 700;
+    font-size: 2.2rem;
+    /* Slightly smaller to fit longer texts */
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #FFD700, #FDB931);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--glass-bg);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(4px);
+    font-size: 0.9rem;
+}
+
+.timer-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+}
+
+.timer-header h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-bottom: 5px;
+}
+
+#next-event-name {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.countdown-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-unit span {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.time-unit label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    margin-top: 5px;
+    color: var(--text-dim);
+}
+
+.separator {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: -15px;
+    color: var(--glass-border);
+}
+
+.current-date {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-top: 15px;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 15px;
+}
+
+.prayer-times-list {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.prayer-times-list h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: var(--text-dim);
+}
+
+.prayer-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.3s;
+}
+
+.prayer-item:last-child {
+    border-bottom: none;
+}
+
+.prayer-item.active {
+    background: rgba(255, 215, 0, 0.15);
+    border-radius: 10px;
+    border-bottom: none;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.prayer-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+@media (max-width: 400px) {
+    .time-unit span {
+        font-size: 2rem;
+    }
+
+    .app-header h1 {
+        font-size: 1.8rem;
+    }
+}
