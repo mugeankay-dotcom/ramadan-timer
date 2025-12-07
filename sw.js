@@ -1,11 +1,13 @@
-const CACHE_NAME = 'ramadan-timer-v4';
+const CACHE_NAME = 'ramadan-timer-v5';
 const ASSETS = [
     './',
     './index.html',
     './style.css',
     './app.js',
     './masjid_bg.png',
-    './manifest.json'
+    './manifest.json',
+    './icon-192.png',
+    './icon-512.png'
 ];
 
 self.addEventListener('install', (e) => {
