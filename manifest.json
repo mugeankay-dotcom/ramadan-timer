@@ -1,6 +1,7 @@
 {
     "name": "Ramazan 2026",
     "short_name": "Ramazan",
+    "id": "./",
     "description": "Ramazan 2026 için geri sayım sayacı ve namaz vakitleri uygulaması. İmsak ve iftar vakitlerini takip edin.",
     "categories": [
         "lifestyle",
@@ -22,6 +23,20 @@
             "src": "https://cdn-icons-png.flaticon.com/512/4358/4358665.png",
             "sizes": "512x512",
             "type": "image/png"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "screenshots/mobile.png",
+            "sizes": "1024x1024",
+            "type": "image/png",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "screenshots/desktop.png",
+            "sizes": "1024x1024",
+            "type": "image/png",
+            "form_factor": "wide"
         }
     ]
 }
