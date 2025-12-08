@@ -121,7 +121,7 @@ body.rtl .countdown-display {
     background: #203a43;
     color: var(--text-light);
 }
-}
+
 
 .app-title-wrapper {
     display: flex;
