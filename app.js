@@ -276,24 +276,12 @@ function getLocation() {
         );
     } else {
         elements.cityName.textContent = t.locationDefault;
-        fetchPrayerTimes(41.0082, 28.9784);
+        updatePrayerTimesUI(prayerTimesData);
+        startCountdown();
     }
+} catch (error) {
+    console.error("Fetch Error:", error);
 }
-
-async function fetchPrayerTimes(lat, lng) {
-    try {
-        const dateStr = "18-02-2026";
-        const response = await fetch(`${API_URL}/${dateStr}?latitude=${lat}&longitude=${lng}&method=13`);
-        const data = await response.json();
-
-        if (data.code === 200) {
-            prayerTimesData = data.data.timings;
-            updatePrayerTimesUI(prayerTimesData);
-            startCountdown();
-        }
-    } catch (error) {
-        console.error("Fetch Error:", error);
-    }
 }
 
 function updatePrayerTimesUI(timings) {
