@@ -304,6 +304,15 @@ async function fetchPrayerTimes(lat, lng) {
 
         if (data.code === 200) {
             prayerTimesData = data.data.timings;
+
+            // CACHE THE DATA: Save to LocalStorage
+            try {
+                const cacheKey = `prayer_times_${formattedDate}`; // Uses same var from above
+                localStorage.setItem(cacheKey, JSON.stringify(prayerTimesData));
+            } catch (e) {
+                console.warn("Storage warning", e);
+            }
+
             updatePrayerTimesUI(prayerTimesData);
             startCountdown();
         } else {
