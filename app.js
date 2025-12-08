@@ -182,13 +182,30 @@ function init() {
         checkPrayerReminders();
     }, 60000);
 
-    // Start Countdown IMMEDIATELY (Don't wait for API)
-    // This fixes the delay user mentioned
-    startCountdown();
+    // 1. Try to load Prayer Times from Local Cache first (Instant UI)
+    loadPrayerTimesFromCache();
 
-    // Start Countdown IMMEDIATELY (Don't wait for API)
+    // 2. Start Countdown IMMEDIATELY (Don't wait for API)
     // This fixes the delay user mentioned
     startCountdown();
+}
+
+function loadPrayerTimesFromCache() {
+    const date = new Date();
+    const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+    const cacheKey = `prayer_times_${formattedDate}`;
+
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+        try {
+            const timings = JSON.parse(cached);
+            prayerTimesData = timings;
+            updatePrayerTimesUI(timings);
+            console.log("Loaded prayer times from cache");
+        } catch (e) {
+            console.error("Cache parse error", e);
+        }
+    }
 }
 
 function checkPrayerReminders() {
