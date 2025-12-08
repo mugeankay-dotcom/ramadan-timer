@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.mugeankay_dotcom.twa",
+        "sha256_cert_fingerprints": ["82:E7:AB:94:A2:5B:5F:9C:9D:48:26:E4:7B:56:EC:8E:01:41:6D:DB:B1:4F:80:B7:9D:18:31:20:99:22:8A:8E"]
+      }
+    }]
