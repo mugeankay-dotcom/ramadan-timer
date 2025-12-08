@@ -182,6 +182,9 @@ function init() {
     // Start Countdown IMMEDIATELY (Don't wait for API)
     // This fixes the delay user mentioned
     startCountdown();
+
+    // Disable Right-Click (Context Menu) for App-like feel
+    document.addEventListener('contextmenu', event => event.preventDefault());
 }
 
 function checkPrayerReminders() {
