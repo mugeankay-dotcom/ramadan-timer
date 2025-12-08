@@ -4,7 +4,7 @@ const RAMADAN_START_DATE = new Date('2026-02-18T00:00:00'); // Estimated Start
 const translations = {
     tr: {
         title: "Hoşgeldin Ramazan 2026",
-        nextEventLabel: "Ramazan'a Kalan Süre",
+        nextEventLabel: "Ramazan Başlangıcına Kalan Süre",
         loading: "Yükleniyor...",
         hours: "Saat",
         minutes: "Dakika",
