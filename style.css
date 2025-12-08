@@ -92,23 +92,307 @@ body.rtl .countdown-display {
     margin-bottom: 30px;
     position: relative;
     padding-top: 40px;
+    /* Clear space for top-right controls */
 }
+
+.header-controls {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    /* Fully to the right */
+    padding-right: 10px;
+    margin-top: 0;
+    z-index: 10;
+}
+
+/* .header-top removed as it is no longer used */
+
+.language-selector {
+    background: var(--glass-bg);
+    color: var(--text-light);
+    border: 1px solid var(--glass-border);
+    padding: 3px 8px;
+    /* Reduced padding */
+    border-radius: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    font-size: 0.75rem;
+    /* Smaller font */
+}
+
+.language-selector option {
+    background: #203a43;
+    color: var(--text-light);
+}
+
+.app-header h1 {
+    font-weight: 700;
+    font-size: 2.8rem;
+    /* Increased size */
+    margin-bottom: 25px;
+    /* More space */
+    background: linear-gradient(to right, #FFD700, #FDB931);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 0px 20px rgba(255, 215, 0, 0.6), 0px 0px 40px rgba(255, 215, 0, 0.4);
+    /* Glowing Effect */
+    line-height: 1.2;
+}
+
+.location-badge {
+    display: none !important;
+}
+
+/* Premium Gold Theme Updates */
+
+.app-title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.crescent-icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.location-badge,
+.language-selector {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.timer-card {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+}
+
+.timer-header h2 {
+    color: var(--primary-color);
+    letter-spacing: 2px;
+    font-size: 1.3rem;
+    /* Increased Size */
+    font-weight: 700;
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    margin-bottom: 15px;
+}
+
+#next-event-name {
+    display: none;
+    /* Hide for now to focus on countdown */
+}
+
+.countdown-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+/* UNIFIED CIRCLE SIZE: 80px */
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    /* Standardized Size */
+    height: 80px;
+    /* Standardized Size */
+    border-radius: 50%;
+    /* Perfect Circle */
+    background: radial-gradient(circle, rgba(20, 30, 48, 0.9), rgba(36, 59, 85, 0.9));
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.15), inset 0 0 8px rgba(0, 0, 0, 0.8);
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Clock ticks for countdown as well */
+.time-unit::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    width: 2px;
+    height: 5px;
+    background: var(--primary-color);
+}
+
+.time-unit .number {
+    font-size: 1.8rem;
+    /* Adjusted for 80px */
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+    z-index: 2;
+    margin-bottom: 2px;
+}
+
+.time-unit .label {
+    font-size: 0.55rem;
+    color: #fff;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+}
+
+.time-separator {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-top: -15px;
+    font-weight: bold;
+}
+
+.prayer-times-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Force 3 cols to make items smaller */
+    gap: 10px;
+    background: transparent;
+    padding: 0;
+    backdrop-filter: none;
+}
+
+@media (min-width: 600px) {
+    .prayer-times-list {
+        grid-template-columns: repeat(6, 1fr);
+        /* All in one row on big screens */
+    }
+}
+
+.prayer-times-list h3 {
+    display: none;
+    /* Hide header inside grid area */
+}
+
+/* UNIFIED CIRCLE SIZE: 80px (Same as time-unit) */
+.prayer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    /* Standardized Size */
+    height: 80px;
+    /* Standardized Size */
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(32, 58, 67, 0.95), rgba(0, 0, 0, 0.9));
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.8);
+    position: relative;
+    padding: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 auto;
+    flex-shrink: 0;
+}
+
+.prayer-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+}
+
+/* Clock Ticks (Pseudo-element visual trick) */
+.prayer-item::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 10px;
+    background: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+.prayer-item::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 10px;
+    background: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+.prayer-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    /* Adjusted */
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #FFD700;
+    margin-bottom: 2px;
+    letter-spacing: 0.5px;
+    z-index: 2;
+    text-shadow: none;
+}
+
+.prayer-time {
+    font-size: 1.4rem;
+    /* Adjusted for 80px */
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    z-index: 2;
+}
+
+/* Add a clock icon feel */
+.prayer-time::before {
+    content: '🕒';
+    display: block;
+    font-size: 0.8rem;
+    /* Smaller icon */
+    margin-bottom: 0;
+    opacity: 0.7;
+    filter: grayscale(1);
+    line-height: unknown;
+    /* Reset if needed */
+}
+
+.prayer-item.active {
+    border-color: #fff;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.2), rgba(0, 0, 0, 0.9));
+}
+
+.prayer-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+}
+
+/* Ornamental Golden Corners - Hidden for Round Design cleanliness, or adjusted */
+/* Removed corner ornaments for clean round clock look */
 
 #current-date {
     display: none;
 }
 
 @media (max-width: 400px) {
-    .time-unit {
+
+    .time-unit,
+    .prayer-item {
         width: 65px;
-        height: 75px;
+        height: 65px;
     }
 
-    .time-unit .number {
-        font-size: 1.8rem;
-    }
-
+    .time-unit .number,
     .prayer-time {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
+    }
+
+    .prayer-name {
+        font-size: 0.6rem;
     }
 }
