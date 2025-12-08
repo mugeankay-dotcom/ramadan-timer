@@ -216,139 +216,140 @@ function sendNotification(title, body) {
             }
         });
     }
+}
 
-    function setLanguage(lang) {
-        currentLang = lang;
-        const t = translations[lang];
+function setLanguage(lang) {
+    currentLang = lang;
+    const t = translations[lang];
 
-        // Update Static Text
-        elements.appTitle.textContent = t.title;
-        elements.nextEventLabel.textContent = t.nextEventLabel;
-        elements.todayPrayersTitle.textContent = t.todayPrayers;
+    // Update Static Text
+    elements.appTitle.textContent = t.title;
+    elements.nextEventLabel.textContent = t.nextEventLabel;
+    elements.todayPrayersTitle.textContent = t.todayPrayers;
 
-        // Update Prayer Names
-        document.querySelector('#imsak-row .prayer-name').textContent = t.prayers.Imsak;
-        document.querySelector('#gunes-row .prayer-name').textContent = t.prayers.Sunrise;
-        document.querySelector('#ogle-row .prayer-name').textContent = t.prayers.Dhuhr;
-        document.querySelector('#ikindi-row .prayer-name').textContent = t.prayers.Asr;
-        document.querySelector('#aksam-row .prayer-name').textContent = t.prayers.Maghrib;
-        document.querySelector('#yatsi-row .prayer-name').textContent = t.prayers.Isha;
+    // Update Prayer Names
+    document.querySelector('#imsak-row .prayer-name').textContent = t.prayers.Imsak;
+    document.querySelector('#gunes-row .prayer-name').textContent = t.prayers.Sunrise;
+    document.querySelector('#ogle-row .prayer-name').textContent = t.prayers.Dhuhr;
+    document.querySelector('#ikindi-row .prayer-name').textContent = t.prayers.Asr;
+    document.querySelector('#aksam-row .prayer-name').textContent = t.prayers.Maghrib;
+    document.querySelector('#yatsi-row .prayer-name').textContent = t.prayers.Isha;
 
-        // RTL Handling
-        if (lang === 'ar' || lang === 'ur') {
-            document.body.classList.add('rtl');
-        } else {
-            document.body.classList.remove('rtl');
-        }
-
-        // Update Dynamic Text (Countdown labels, Date, etc.)
-        updateDate();
-        updateCountdown(); // Refresh countdown text immediately
+    // RTL Handling
+    if (lang === 'ar' || lang === 'ur') {
+        document.body.classList.add('rtl');
+    } else {
+        document.body.classList.remove('rtl');
     }
 
-    function updateDate() {
-        const now = new Date();
-        // Use locale based on selected language
-        let locale = 'tr-TR';
-        if (currentLang === 'en') locale = 'en-US';
-        if (currentLang === 'ar') locale = 'ar-SA';
-        if (currentLang === 'id') locale = 'id-ID';
-        if (currentLang === 'ur') locale = 'ur-PK';
+    // Update Dynamic Text (Countdown labels, Date, etc.)
+    updateDate();
+    updateCountdown(); // Refresh countdown text immediately
+}
 
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        elements.currentDate.textContent = now.toLocaleDateString(locale, options);
-    }
+function updateDate() {
+    const now = new Date();
+    // Use locale based on selected language
+    let locale = 'tr-TR';
+    if (currentLang === 'en') locale = 'en-US';
+    if (currentLang === 'ar') locale = 'ar-SA';
+    if (currentLang === 'id') locale = 'id-ID';
+    if (currentLang === 'ur') locale = 'ur-PK';
 
-    function getLocation() {
-        const t = translations[currentLang];
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    fetchPrayerTimes(latitude, longitude);
-                    elements.cityName.textContent = t.locationFound;
-                },
-                (error) => {
-                    console.error("Error getting location:", error);
-                    elements.cityName.textContent = t.locationDefault;
-                    fetchPrayerTimes(41.0082, 28.9784);
-                }
-            );
-        } else {
-            elements.cityName.textContent = t.locationDefault;
-            fetchPrayerTimes(41.0082, 28.9784);
-        }
-    }
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    elements.currentDate.textContent = now.toLocaleDateString(locale, options);
+}
 
-    async function fetchPrayerTimes(lat, lng) {
-        try {
-            const dateStr = "18-02-2026";
-            const response = await fetch(`${API_URL}/${dateStr}?latitude=${lat}&longitude=${lng}&method=13`);
-            const data = await response.json();
-
-            if (data.code === 200) {
-                prayerTimesData = data.data.timings;
-                updatePrayerTimesUI(prayerTimesData);
-                startCountdown();
+function getLocation() {
+    const t = translations[currentLang];
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                fetchPrayerTimes(latitude, longitude);
+                elements.cityName.textContent = t.locationFound;
+            },
+            (error) => {
+                console.error("Error getting location:", error);
+                elements.cityName.textContent = t.locationDefault;
+                fetchPrayerTimes(41.0082, 28.9784);
             }
-        } catch (error) {
-            console.error("Fetch Error:", error);
+        );
+    } else {
+        elements.cityName.textContent = t.locationDefault;
+        fetchPrayerTimes(41.0082, 28.9784);
+    }
+}
+
+async function fetchPrayerTimes(lat, lng) {
+    try {
+        const dateStr = "18-02-2026";
+        const response = await fetch(`${API_URL}/${dateStr}?latitude=${lat}&longitude=${lng}&method=13`);
+        const data = await response.json();
+
+        if (data.code === 200) {
+            prayerTimesData = data.data.timings;
+            updatePrayerTimesUI(prayerTimesData);
+            startCountdown();
         }
+    } catch (error) {
+        console.error("Fetch Error:", error);
     }
+}
 
-    function updatePrayerTimesUI(timings) {
-        elements.prayerTimes.Imsak.textContent = timings.Imsak;
-        elements.prayerTimes.Sunrise.textContent = timings.Sunrise;
-        elements.prayerTimes.Dhuhr.textContent = timings.Dhuhr;
-        elements.prayerTimes.Asr.textContent = timings.Asr;
-        elements.prayerTimes.Maghrib.textContent = timings.Maghrib;
-        elements.prayerTimes.Isha.textContent = timings.Isha;
-    }
+function updatePrayerTimesUI(timings) {
+    elements.prayerTimes.Imsak.textContent = timings.Imsak;
+    elements.prayerTimes.Sunrise.textContent = timings.Sunrise;
+    elements.prayerTimes.Dhuhr.textContent = timings.Dhuhr;
+    elements.prayerTimes.Asr.textContent = timings.Asr;
+    elements.prayerTimes.Maghrib.textContent = timings.Maghrib;
+    elements.prayerTimes.Isha.textContent = timings.Isha;
+}
 
-    function startCountdown() {
-        if (countdownInterval) clearInterval(countdownInterval);
-        updateCountdown();
-        countdownInterval = setInterval(updateCountdown, 1000);
-    }
+function startCountdown() {
+    if (countdownInterval) clearInterval(countdownInterval);
+    updateCountdown();
+    countdownInterval = setInterval(updateCountdown, 1000);
+}
 
-    function updateCountdown() {
-        const t = translations[currentLang];
-        const now = new Date();
+function updateCountdown() {
+    const t = translations[currentLang];
+    const now = new Date();
 
-        if (now < RAMADAN_START_DATE) {
-            elements.nextEventName.textContent = t.ramadanStart;
+    if (now < RAMADAN_START_DATE) {
+        elements.nextEventName.textContent = t.ramadanStart;
 
-            const diff = RAMADAN_START_DATE - now;
+        const diff = RAMADAN_START_DATE - now;
 
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-            if (elements.days) {
-                elements.days.textContent = d.toString().padStart(2, '0');
-                elements.days.nextElementSibling.textContent = t.days;
-            }
-
-            elements.hours.textContent = h.toString().padStart(2, '0');
-            elements.hours.nextElementSibling.textContent = t.hours;
-
-            elements.minutes.textContent = m.toString().padStart(2, '0');
-            elements.minutes.nextElementSibling.textContent = t.minutes;
-
-            elements.seconds.textContent = s.toString().padStart(2, '0');
-            elements.seconds.nextElementSibling.textContent = t.seconds;
-            return;
+        if (elements.days) {
+            elements.days.textContent = d.toString().padStart(2, '0');
+            elements.days.nextElementSibling.textContent = t.days;
         }
 
-        // Note: The below logic is for when we are IN Ramadan.
-        // Since we are testing for 2026, we mostly see the above block.
-        // But for completeness, I'll update the labels here too.
+        elements.hours.textContent = h.toString().padStart(2, '0');
+        elements.hours.nextElementSibling.textContent = t.hours;
 
-        if (!prayerTimesData) return;
+        elements.minutes.textContent = m.toString().padStart(2, '0');
+        elements.minutes.nextElementSibling.textContent = t.minutes;
 
-        // ... (Logic for daily prayers would use t.imsakLeft, t.iftarLeft etc.)
+        elements.seconds.textContent = s.toString().padStart(2, '0');
+        elements.seconds.nextElementSibling.textContent = t.seconds;
+        return;
     }
 
-    // Start
-    init();
+    // Note: The below logic is for when we are IN Ramadan.
+    // Since we are testing for 2026, we mostly see the above block.
+    // But for completeness, I'll update the labels here too.
+
+    if (!prayerTimesData) return;
+
+    // ... (Logic for daily prayers would use t.imsakLeft, t.iftarLeft etc.)
+}
+
+// Start
+init();
