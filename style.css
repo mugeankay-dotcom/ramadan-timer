@@ -93,14 +93,16 @@ body.rtl .countdown-display {
 }
 
 .header-controls {
-    position: absolute;
-    top: -10px;
-    /* Move higher up */
-    right: -10px;
-    /* Move further right */
+    position: fixed;
+    /* Fixed to viewport */
+    top: 15px;
+    /* Safe distance from top */
+    right: 15px;
+    /* Safe distance from right */
     padding-right: 0;
     margin-top: 0;
-    z-index: 10;
+    z-index: 1000;
+    /* Ensure on top of everything */
 }
 
 .language-selector {
@@ -540,9 +542,9 @@ body.rtl .countdown-display {
     }
 
     .header-controls {
-        top: 5px;
-        /* Reset top for mobile safety */
-        right: 0;
+        top: 10px;
+        /* Slight adjustment for mobile status bar */
+        right: 10px;
     }
 
     .time-unit {
