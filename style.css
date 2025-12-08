@@ -199,23 +199,25 @@ body.rtl .countdown-display {
     margin: 30px 0;
 }
 
-/* UNIFIED CIRCLE SIZE: 80px */
+/* UNIFIED SIZE: 90px for Star Shape */
 .time-unit {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80px;
-    /* Standardized Size */
-    height: 80px;
-    /* Standardized Size */
-    border-radius: 50%;
-    /* Perfect Circle */
-    background: radial-gradient(circle, rgba(20, 30, 48, 0.9), rgba(36, 59, 85, 0.9));
-    border: 2px solid var(--primary-color);
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.15), inset 0 0 8px rgba(0, 0, 0, 0.8);
+    width: 90px;
+    height: 90px;
+    background: url('seljuk_star.svg') no-repeat center center;
+    background-size: contain;
+    border: none;
+    box-shadow: none;
+    /* Shadow is in SVG */
+    border-radius: 0;
+    /* Remove circle */
     position: relative;
     flex-shrink: 0;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
+    /* Extra glow */
 }
 
 /* Clock ticks for countdown as well */
@@ -275,25 +277,25 @@ body.rtl .countdown-display {
     /* Hide header inside grid area */
 }
 
-/* UNIFIED CIRCLE SIZE: 80px (Same as time-unit) */
+/* UNIFIED SIZE: 90px for Star Shape */
 .prayer-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80px;
-    /* Standardized Size */
-    height: 80px;
-    /* Standardized Size */
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(32, 58, 67, 0.95), rgba(0, 0, 0, 0.9));
-    border: 2px solid var(--primary-color);
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.8);
+    width: 90px;
+    height: 90px;
+    background: url('seljuk_star.svg') no-repeat center center;
+    background-size: contain;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
     position: relative;
     padding: 0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
     margin: 0 auto;
     flex-shrink: 0;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
 }
 
 .prayer-item:hover {
@@ -301,29 +303,11 @@ body.rtl .countdown-display {
     box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
 }
 
-/* Clock Ticks (Pseudo-element visual trick) */
-.prayer-item::before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 2px;
-    height: 10px;
-    background: var(--primary-color);
-    box-shadow: 0 0 5px var(--primary-color);
-}
-
-.prayer-item::after {
-    content: '';
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 2px;
-    height: 10px;
-    background: var(--primary-color);
-}
+/* Removed Clock Ticks for Star Design */
+/*
+.prayer-item::before { ... }
+.prayer-item::after { ... }
+*/
 
 .prayer-item:hover {
     transform: translateY(-5px);
