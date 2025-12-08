@@ -88,14 +88,17 @@ body.rtl .countdown-display {
     text-align: center;
     margin-bottom: 30px;
     position: relative;
-    padding-top: 40px;
+    padding-top: 60px;
+    /* Increased to push title down */
 }
 
 .header-controls {
     position: absolute;
-    top: 5px;
-    right: 0;
-    padding-right: 10px;
+    top: -10px;
+    /* Move higher up */
+    right: -10px;
+    /* Move further right */
+    padding-right: 0;
     margin-top: 0;
     z-index: 10;
 }
