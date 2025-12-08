@@ -324,10 +324,7 @@ body.rtl .countdown-display {
     line-height: 1;
 }
 
-text-shadow: 0px 0px 20px rgba(255, 215, 0, 0.6),
-0px 0px 40px rgba(255, 215, 0, 0.4);
-line-height: 1.2;
-}
+
 
 .location-badge {
     display: none !important;
@@ -545,17 +542,18 @@ line-height: 1.2;
 
     .time-unit,
     .prayer-item {
-        width: 88px;
-        /* Bigger crystals for premium feel (fits 3x88=264 < 360) */
-        height: 88px;
-        margin: 2px;
+        width: 80px;
+        /* Reduced to 80px to safely fit 4 items on 360px screens (4x80=320 + gaps) */
+        height: 80px;
+        margin: 1px;
         /* Tighter margin */
     }
 
     .countdown-display,
     .prayer-times-list {
-        gap: 5px;
-        /* Tighter gap to fit larger items */
+        gap: 3px;
+        /* Minimal gap to prevent wrapping */
+        padding: 0 2px;
     }
 
     .time-unit .number,

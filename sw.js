@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ramadan-timer-v27';
+const CACHE_NAME = 'ramadan-timer-v28';
 const ASSETS = [
     './',
     './index.html',
