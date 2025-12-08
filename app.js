@@ -4,7 +4,7 @@ const RAMADAN_START_DATE = new Date('2026-02-18T00:00:00'); // Estimated Start
 const translations = {
     tr: {
         title: "Hoşgeldin Ramazan 2026",
-        nextEventLabel: "Ramazan Başlangıcına Kalan Süre",
+        nextEventLabel: "18 Şubat 2026 - Ramazan Başlangıcına Kalan Süre",
         loading: "Yükleniyor...",
         hours: "Saat",
         minutes: "Dakika",
@@ -28,7 +28,7 @@ const translations = {
     },
     en: {
         title: "Welcome Ramadan 2026",
-        nextEventLabel: "Next Prayer",
+        nextEventLabel: "Feb 18, 2026 - Next Prayer",
         loading: "Loading...",
         hours: "Hours",
         minutes: "Minutes",
@@ -52,7 +52,7 @@ const translations = {
     },
     ar: {
         title: "أهلاً رمضان 2026",
-        nextEventLabel: "الصلاة القادمة",
+        nextEventLabel: "١٨ فبراير ٢٠٢٦ - الصلاة القادمة",
         loading: "جار التحميل...",
         hours: "ساعات",
         minutes: "دقيقة",
@@ -76,7 +76,7 @@ const translations = {
     },
     id: {
         title: "Selamat Datang Ramadan 2026",
-        nextEventLabel: "Waktu Berikutnya",
+        nextEventLabel: "18 Februari 2026 - Waktu Berikutnya",
         loading: "Memuat...",
         hours: "Jam",
         minutes: "Menit",
@@ -100,7 +100,7 @@ const translations = {
     },
     ur: {
         title: "خوش آمدید رمضان 2026",
-        nextEventLabel: "اگلی نماز",
+        nextEventLabel: "18 فروری 2026 - اگلی نماز",
         loading: "لوڈ ہو رہا ہے...",
         hours: "گھنٹے",
         minutes: "منٹ",
