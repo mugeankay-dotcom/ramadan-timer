@@ -192,38 +192,10 @@ body.rtl .countdown-display {
 
 .countdown-display {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    /* Spread items to edges */
     align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin: 30px 0;
-}
-
-/* UNIFIED SIZE: 90px for Star Shape */
-.time-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90px;
-    height: 90px;
-    background: url('seljuk_star.svg') no-repeat center center;
-    background-size: contain;
-    border: none;
-    box-shadow: none;
-    /* Shadow is in SVG */
-    border-radius: 0;
-    /* Remove circle */
-    position: relative;
-    flex-shrink: 0;
-    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
-    /* Extra glow */
-}
-
-/* Clock ticks for countdown as well */
-.time-unit::before {
-    content: '';
-    position: absolute;
+    width: 100%;
     top: 3px;
     width: 2px;
     height: 5px;
@@ -256,19 +228,25 @@ body.rtl .countdown-display {
 }
 
 .prayer-times-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    /* Force 3 cols to make items smaller */
-    gap: 10px;
+    display: flex;
+    /* Changed from grid to flex for alignment control */
+    justify-content: space-between;
+    /* Spread items to edges SAME AS COUNTDOWN */
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 600px;
+    /* SAME WIDTH CONSTRAINT */
+    margin: 0 auto;
+    gap: 5px;
+    /* Minimal gap, rely on space-between */
     background: transparent;
-    padding: 0;
+    padding: 0 10px;
     backdrop-filter: none;
 }
 
 @media (min-width: 600px) {
     .prayer-times-list {
-        grid-template-columns: repeat(6, 1fr);
-        /* All in one row on big screens */
+        /* Keep flex on desktop too for alignment */
     }
 }
 
@@ -277,7 +255,7 @@ body.rtl .countdown-display {
     /* Hide header inside grid area */
 }
 
-/* UNIFIED SIZE: 90px for Star Shape */
+/* UNIFIED SIZE: 90px for Crystal Shape */
 .prayer-item {
     display: flex;
     flex-direction: column;
@@ -285,7 +263,7 @@ body.rtl .countdown-display {
     justify-content: center;
     width: 90px;
     height: 90px;
-    background: url('seljuk_star.svg') no-repeat center center;
+    background: url('crystal_gem.svg') no-repeat center center;
     background-size: contain;
     border: none;
     box-shadow: none;
@@ -293,9 +271,10 @@ body.rtl .countdown-display {
     position: relative;
     padding: 0;
     transition: transform 0.3s ease;
-    margin: 0 auto;
+    margin: 0;
+    /* Let flexbox handle spacing */
     flex-shrink: 0;
-    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
 }
 
 .prayer-item:hover {
@@ -321,20 +300,23 @@ body.rtl .countdown-display {
     display: none;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
 
     .time-unit,
     .prayer-item {
-        width: 65px;
-        height: 65px;
+        width: 75px;
+        /* Slightly smaller on very small screens to fit 4/6 in row? */
+        height: 75px;
+        /* actually 6 items of 90px = 540px. Mobile is ~360px. Flex wrap will happen. */
+        /* For "Align Day/Sec with Imsak/Isha", we need them to wrap nicely */
     }
 
-    .time-unit .number,
-    .prayer-time {
-        font-size: 1.4rem;
-    }
-
-    .prayer-name {
-        font-size: 0.6rem;
+    .countdown-display,
+    .prayer-times-list {
+        justify-content: center;
+        /* On mobile, space-between might look weird if wrapping. */
+        gap: 10px;
+        /* Use gap on mobile wrapping */
+        max-width: 100%;
     }
 }

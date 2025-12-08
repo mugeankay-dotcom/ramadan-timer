@@ -1,0 +1,36 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FDB931;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#996515;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="glassSurf" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.05" />
+    </linearGradient>
+    <filter id="gemGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Octagon Shape -->
+  <polygon points="30,5 70,5 95,30 95,70 70,95 30,95 5,70 5,30" 
+           fill="rgba(15, 25, 40, 0.9)" 
+           stroke="url(#goldGem)" 
+           stroke-width="3" 
+           filter="url(#gemGlow)" />
+           
+  <!-- Inner Glass Shine -->
+  <polygon points="32,7 68,7 93,32 93,68 68,93 32,93 7,68 7,32" 
+           fill="url(#glassSurf)" 
+           stroke="none" />
+           
+  <!-- Geometric Facets (Lines for crystal look) -->
+  <path d="M5,30 L30,5 M70,5 L95,30 M95,70 L70,95 M30,95 L5,70" stroke="rgba(255,215,0,0.4)" stroke-width="1"/>
+  <rect x="25" y="25" width="50" height="50" fill="none" stroke="rgba(255,215,0,0.2)" stroke-width="1" transform="rotate(45 50 50)"/>
+</svg>
