@@ -1,8 +1,12 @@
 const API_URL = 'https://api.aladhan.com/v1/timings';
 const RAMADAN_START_DATE = new Date('2026-02-18T00:00:00'); // Estimated Start
 
-// GLOBAL BLOCK: Disable Right-Click immediately
-document.addEventListener('contextmenu', event => event.preventDefault());
+// GLOBAL BLOCK: Disable Right-Click immediately (Capture Phase)
+window.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+}, true); // true = capture phase
 
 const translations = {
     tr: {
