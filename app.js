@@ -131,6 +131,7 @@ const elements = {
     nextEventName: document.getElementById('next-event-name'),
     nextEventLabel: document.getElementById('next-event-label'),
     appTitle: document.getElementById('app-title'),
+    days: document.getElementById('days'),
     hours: document.getElementById('hours'),
     minutes: document.getElementById('minutes'),
     seconds: document.getElementById('seconds'),
@@ -284,25 +285,19 @@ function updateCountdown() {
         const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-        if (d > 0) {
-            elements.hours.textContent = d.toString().padStart(2, '0');
-            elements.hours.nextElementSibling.textContent = t.days;
-
-            elements.minutes.textContent = h.toString().padStart(2, '0');
-            elements.minutes.nextElementSibling.textContent = t.hours;
-
-            elements.seconds.textContent = m.toString().padStart(2, '0');
-            elements.seconds.nextElementSibling.textContent = t.minutes;
-        } else {
-            elements.hours.textContent = h.toString().padStart(2, '0');
-            elements.hours.nextElementSibling.textContent = t.hours;
-
-            elements.minutes.textContent = m.toString().padStart(2, '0');
-            elements.minutes.nextElementSibling.textContent = t.minutes;
-
-            elements.seconds.textContent = s.toString().padStart(2, '0');
-            elements.seconds.nextElementSibling.textContent = t.seconds;
+        if (elements.days) {
+            elements.days.textContent = d.toString().padStart(2, '0');
+            elements.days.nextElementSibling.textContent = t.days;
         }
+
+        elements.hours.textContent = h.toString().padStart(2, '0');
+        elements.hours.nextElementSibling.textContent = t.hours;
+
+        elements.minutes.textContent = m.toString().padStart(2, '0');
+        elements.minutes.nextElementSibling.textContent = t.minutes;
+
+        elements.seconds.textContent = s.toString().padStart(2, '0');
+        elements.seconds.nextElementSibling.textContent = t.seconds;
         return;
     }
 

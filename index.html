@@ -43,18 +43,21 @@
 
                 <!-- Countdown wrapper added for better structure if needed, or keeping it flat -->
                 <div class="countdown-display">
-                    <!-- Elements for hours/mins/secs will be updated by JS but need structure if missing in original -->
-                    <!-- Original code implies existence of #hours, #minutes, #seconds. 
-                          Checking app.js: elements.hours = document.getElementById('hours')
-                          But they were missing in the viewed file! I must add them back. -->
+                    <div class="time-unit">
+                        <span class="number" id="days">00</span>
+                        <span class="label">GÜN</span>
+                    </div>
+                    <div class="time-separator">:</div>
                     <div class="time-unit">
                         <span class="number" id="hours">00</span>
                         <span class="label">SAAT</span>
                     </div>
+                    <div class="time-separator">:</div>
                     <div class="time-unit">
                         <span class="number" id="minutes">00</span>
                         <span class="label">DAKİKA</span>
                     </div>
+                    <div class="time-separator">:</div>
                     <div class="time-unit">
                         <span class="number" id="seconds">00</span>
                         <span class="label">SANİYE</span>
