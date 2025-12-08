@@ -277,12 +277,28 @@ function getLocation() {
         );
     } else {
         elements.cityName.textContent = t.locationDefault;
-        updatePrayerTimesUI(prayerTimesData);
-        startCountdown();
+        // Default to Istanbul if no geolocation support or permission
+        fetchPrayerTimes(41.0082, 28.9784);
     }
-} catch (error) {
-    console.error("Fetch Error:", error);
 }
+
+async function fetchPrayerTimes(lat, lng) {
+    try {
+        const date = new Date();
+        const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+        const response = await fetch(`${API_URL}/${formattedDate}?latitude=${lat}&longitude=${lng}&method=13`); // Diyanet Method = 13
+        const data = await response.json();
+
+        if (data.code === 200) {
+            prayerTimesData = data.data.timings;
+            updatePrayerTimesUI(prayerTimesData);
+            startCountdown();
+        } else {
+            console.error('API Error:', data.status);
+        }
+    } catch (error) {
+        console.error('Fetch Error:', error);
+    }
 }
 
 function updatePrayerTimesUI(timings) {
@@ -330,13 +346,9 @@ function updateCountdown() {
         return;
     }
 
-    // Note: The below logic is for when we are IN Ramadan.
-    // Since we are testing for 2026, we mostly see the above block.
-    // But for completeness, I'll update the labels here too.
-
+    // Since we are likely testing for 2026, the above block runs.
+    // If inside Ramadan (future logic), we would use prayerTimesData here.
     if (!prayerTimesData) return;
-
-    // ... (Logic for daily prayers would use t.imsakLeft, t.iftarLeft etc.)
 }
 
 // Start
