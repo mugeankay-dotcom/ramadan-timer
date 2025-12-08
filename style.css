@@ -323,48 +323,6 @@ body.rtl .countdown-display {
     width: 2px;
     height: 10px;
     background: var(--primary-color);
-    box-shadow: 0 0 5px var(--primary-color);
-}
-
-.prayer-name {
-    font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    /* Adjusted */
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #FFD700;
-    margin-bottom: 2px;
-    letter-spacing: 0.5px;
-    z-index: 2;
-    text-shadow: none;
-}
-
-.prayer-time {
-    font-size: 1.4rem;
-    /* Adjusted for 80px */
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-    z-index: 2;
-}
-
-/* Add a clock icon feel */
-.prayer-time::before {
-    content: '🕒';
-    display: block;
-    font-size: 0.8rem;
-    /* Smaller icon */
-    margin-bottom: 0;
-    opacity: 0.7;
-    filter: grayscale(1);
-    line-height: unknown;
-    /* Reset if needed */
-}
-
-.prayer-item.active {
-    border-color: #fff;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-    background: radial-gradient(circle, rgba(255, 215, 0, 0.2), rgba(0, 0, 0, 0.9));
 }
 
 .prayer-item:hover {
