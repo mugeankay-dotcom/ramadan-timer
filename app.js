@@ -1,6 +1,9 @@
 const API_URL = 'https://api.aladhan.com/v1/timings';
 const RAMADAN_START_DATE = new Date('2026-02-18T00:00:00'); // Estimated Start
 
+// GLOBAL BLOCK: Disable Right-Click immediately
+document.addEventListener('contextmenu', event => event.preventDefault());
+
 const translations = {
     tr: {
         title: "Hoşgeldin Ramazan 2026",
@@ -183,8 +186,9 @@ function init() {
     // This fixes the delay user mentioned
     startCountdown();
 
-    // Disable Right-Click (Context Menu) for App-like feel
-    document.addEventListener('contextmenu', event => event.preventDefault());
+    // Start Countdown IMMEDIATELY (Don't wait for API)
+    // This fixes the delay user mentioned
+    startCountdown();
 }
 
 function checkPrayerReminders() {
