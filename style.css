@@ -186,137 +186,42 @@ body.rtl .countdown-display {
 }
 
 #next-event-name {
-    display: none;
-    /* Hide for now to focus on countdown */
-}
 
-.countdown-display {
-    display: flex;
-    justify-content: space-between;
-    /* Spread items to edges */
-    align-items: center;
-    width: 100%;
-    top: 3px;
-    width: 2px;
-    height: 5px;
-    background: var(--primary-color);
-}
-
-.time-unit .number {
-    font-size: 1.8rem;
-    /* Adjusted for 80px */
-    font-weight: 700;
-    color: var(--primary-color);
-    line-height: 1;
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-    z-index: 2;
-    margin-bottom: 2px;
-}
-
-.time-unit .label {
-    font-size: 0.55rem;
-    color: #fff;
-    margin-top: 2px;
-    letter-spacing: 0.5px;
-}
-
-.time-separator {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-top: -15px;
-    font-weight: bold;
-}
-
-.prayer-times-list {
-    display: flex;
-    /* Changed from grid to flex for alignment control */
-    justify-content: space-between;
-    /* Spread items to edges SAME AS COUNTDOWN */
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 600px;
-    /* SAME WIDTH CONSTRAINT */
-    margin: 0 auto;
-    gap: 5px;
-    /* Minimal gap, rely on space-between */
-    background: transparent;
-    padding: 0 10px;
-    backdrop-filter: none;
-}
-
-@media (min-width: 600px) {
-    .prayer-times-list {
-        /* Keep flex on desktop too for alignment */
-    }
-}
-
-.prayer-times-list h3 {
-    display: none;
-    /* Hide header inside grid area */
-}
-
-/* UNIFIED SIZE: 90px for Crystal Shape */
-.prayer-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90px;
-    height: 90px;
-    background: url('crystal_gem.svg') no-repeat center center;
-    background-size: contain;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-    position: relative;
-    padding: 0;
-    transition: transform 0.3s ease;
-    margin: 0;
-    /* Let flexbox handle spacing */
-    flex-shrink: 0;
-    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
-}
-
-.prayer-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-}
-
-/* Removed Clock Ticks for Star Design */
-/*
+    /* Removed Clock Ticks for Star Design */
+    /*
 .prayer-item::before { ... }
 .prayer-item::after { ... }
 */
 
-.prayer-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
-}
-
-/* Ornamental Golden Corners - Hidden for Round Design cleanliness, or adjusted */
-/* Removed corner ornaments for clean round clock look */
-
-#current-date {
-    display: none;
-}
-
-@media (max-width: 500px) {
-
-    .time-unit,
-    .prayer-item {
-        width: 75px;
-        /* Slightly smaller on very small screens to fit 4/6 in row? */
-        height: 75px;
-        /* actually 6 items of 90px = 540px. Mobile is ~360px. Flex wrap will happen. */
-        /* For "Align Day/Sec with Imsak/Isha", we need them to wrap nicely */
+    .prayer-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
     }
 
-    .countdown-display,
-    .prayer-times-list {
-        justify-content: center;
-        /* On mobile, space-between might look weird if wrapping. */
-        gap: 10px;
-        /* Use gap on mobile wrapping */
-        max-width: 100%;
+    /* Ornamental Golden Corners - Hidden for Round Design cleanliness, or adjusted */
+    /* Removed corner ornaments for clean round clock look */
+
+    #current-date {
+        display: none;
     }
-}
+
+    @media (max-width: 500px) {
+
+        .time-unit,
+        .prayer-item {
+            width: 75px;
+            /* Slightly smaller on very small screens to fit 4/6 in row? */
+            height: 75px;
+            /* actually 6 items of 90px = 540px. Mobile is ~360px. Flex wrap will happen. */
+            /* For "Align Day/Sec with Imsak/Isha", we need them to wrap nicely */
+        }
+
+        .countdown-display,
+        .prayer-times-list {
+            justify-content: center;
+            /* On mobile, space-between might look weird if wrapping. */
+            gap: 10px;
+            /* Use gap on mobile wrapping */
+            max-width: 100%;
+        }
+    }
