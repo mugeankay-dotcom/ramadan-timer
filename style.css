@@ -91,6 +91,8 @@ body.rtl .countdown-display {
     text-align: center;
     margin-bottom: 30px;
     position: relative;
+    padding-top: 40px;
+    /* Clear space for top-right controls */
 }
 
 .header-controls {
