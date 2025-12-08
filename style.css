@@ -324,28 +324,244 @@ body.rtl .countdown-display {
     line-height: 1;
 }
 
+text-shadow: 0px 0px 20px rgba(255, 215, 0, 0.6),
+0px 0px 40px rgba(255, 215, 0, 0.4);
+line-height: 1.2;
+}
+
+.location-badge {
+    display: none !important;
+}
+
+.app-title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.crescent-icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.location-badge,
+.language-selector {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.timer-card {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+}
+
+.timer-header h2 {
+    color: var(--primary-color);
+    letter-spacing: 2px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    margin-bottom: 15px;
+}
+
+#next-event-name {
+    display: none;
+}
+
+.countdown-display {
+    display: flex;
+    justify-content: center;
+    /* Center items per user request */
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 0 10px;
+    gap: 15px;
+}
+
+/* UNIFIED SIZE: 90px for Crystal Shape */
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    background: url('crystal_gem.svg') no-repeat center center;
+    background-size: contain;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    position: relative;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
+    margin: 0 5px;
+}
+
+/* Clock ticks - kept for countdown but modified if needed, simple line */
+.time-unit::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    width: 2px;
+    height: 5px;
+    background: var(--primary-color);
+    /* Maybe hide for crystal look? Keeping for now as header tick */
+}
+
+.time-unit .number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+    z-index: 2;
+    margin-bottom: 2px;
+}
+
+.time-unit .label {
+    font-size: 0.55rem;
+    color: #fff;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+}
+
+.time-separator {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-top: -15px;
+    font-weight: bold;
+}
+
+.prayer-times-list {
+    display: flex;
+    justify-content: center;
+    /* Center items per user request */
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    gap: 8px;
+    background: transparent;
+    padding: 0 10px;
+    backdrop-filter: none;
+}
+
+@media (min-width: 600px) {
+    /* Keep flex behavior consistent */
+}
+
+.prayer-times-list h3 {
+    display: none;
+}
+
+/* UNIFIED SIZE: 90px for Crystal Shape */
+.prayer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    background: url('crystal_gem.svg') no-repeat center center;
+    background-size: contain;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    position: relative;
+    padding: 0;
+    transition: transform 0.3s ease;
+    margin: 5px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
+}
+
+.prayer-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+    transform: translateY(-5px);
+}
+
+.prayer-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #FFD700;
+    margin-bottom: 0;
+    letter-spacing: 0.5px;
+    z-index: 2;
+    text-shadow: none;
+    line-height: 1.1;
+}
+
+.prayer-time {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    z-index: 2;
+    line-height: 1.1;
+}
+
+.prayer-time::before {
+    content: '🕒';
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 0;
+    opacity: 0.7;
+    filter: grayscale(1);
+    line-height: 1;
+}
+
 #current-date {
     display: none;
 }
 
 @media (max-width: 500px) {
+    .app-header {
+        padding-top: 50px;
+        /* Less padding on mobile */
+        margin-bottom: 20px;
+    }
+
+    .app-header h1 {
+        font-size: 2rem;
+        /* Smaller title on mobile */
+    }
+
+    .header-controls {
+        top: 5px;
+        /* Reset top for mobile safety */
+        right: 0;
+    }
 
     .time-unit,
     .prayer-item {
-        width: 75px;
-        height: 75px;
+        width: 88px;
+        /* Bigger crystals for premium feel (fits 3x88=264 < 360) */
+        height: 88px;
+        margin: 2px;
+        /* Tighter margin */
     }
 
     .countdown-display,
     .prayer-times-list {
-        justify-content: center;
-        gap: 10px;
-        max-width: 100%;
+        gap: 5px;
+        /* Tighter gap to fit larger items */
     }
 
     .time-unit .number,
     .prayer-time {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
+        /* Readable text */
     }
 
     .prayer-name {
