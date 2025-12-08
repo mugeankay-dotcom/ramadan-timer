@@ -13,10 +13,16 @@
 </head>
 
 <body>
-    <header>
-        <div class="header-top">
+    <div class="background-overlay"></div>
+    <header class="app-header">
+        <h1 id="app-title">Hoşgeldin Ramazan 2026</h1>
+        <div class="header-controls">
+            <div class="location-badge" id="location-display">
+                <span class="icon">📍</span>
+                <span id="city-name">Konum Bulunuyor...</span>
+            </div>
             <div class="language-selector-wrapper">
-                <select id="language-selector">
+                <select id="language-selector" class="language-selector">
                     <option value="tr">Türkçe</option>
                     <option value="en">English</option>
                     <option value="ar">العربية</option>
@@ -24,11 +30,6 @@
                     <option value="ur">اردو</option>
                 </select>
             </div>
-        </div>
-        <h1 id="app-title">Hoşgeldin Ramazan 2026</h1>
-        <div class="location-badge" id="location-display">
-            <span class="icon">📍</span>
-            <span id="city-name">Konum Bulunuyor...</span>
         </div>
     </header>
 

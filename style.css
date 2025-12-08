@@ -93,11 +93,16 @@ body.rtl .countdown-display {
     position: relative;
 }
 
-.header-top {
+.header-controls {
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+    flex-wrap: wrap;
 }
+
+/* .header-top removed as it is no longer used */
 
 .language-selector {
     background: var(--glass-bg);
@@ -122,6 +127,7 @@ body.rtl .countdown-display {
     margin-bottom: 10px;
     background: linear-gradient(to right, #FFD700, #FDB931);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 }
