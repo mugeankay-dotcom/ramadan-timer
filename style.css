@@ -206,10 +206,10 @@ body.rtl .countdown-display {
     border-radius: 50%;
     background: radial-gradient(circle, rgba(20, 30, 48, 0.9), rgba(36, 59, 85, 0.9));
     border: 2px solid var(--primary-color);
-    width: 85px;
-    /* Fixed width/height for circles */
-    height: 85px;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.15), inset 0 0 10px rgba(0, 0, 0, 0.8);
+    width: 65px;
+    /* Reduced from 85px */
+    height: 65px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.15), inset 0 0 8px rgba(0, 0, 0, 0.8);
     position: relative;
 }
 
