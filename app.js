@@ -285,7 +285,9 @@ function getLocation() {
 async function fetchPrayerTimes(lat, lng) {
     try {
         const date = new Date();
-        const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const formattedDate = `${day}-${month}-${date.getFullYear()}`;
         const response = await fetch(`${API_URL}/${formattedDate}?latitude=${lat}&longitude=${lng}&method=13`); // Diyanet Method = 13
         const data = await response.json();
 
