@@ -540,13 +540,19 @@ body.rtl .countdown-display {
         right: 0;
     }
 
-    .time-unit,
-    .prayer-item {
+    .time-unit {
         width: 80px;
-        /* Reduced to 80px to safely fit 4 items on 360px screens (4x80=320 + gaps) */
         height: 80px;
         margin: 1px;
-        /* Tighter margin */
+    }
+
+    /* Adjust Prayer Items for Mobile to be cleaner grid */
+    .prayer-item {
+        width: 30%;
+        /* 3 items per row approx */
+        height: auto;
+        padding: 10px 0;
+        margin: 2px;
     }
 
     .countdown-display,
