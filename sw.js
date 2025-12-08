@@ -1,4 +1,21 @@
-return cache.addAll(ASSETS);
+const CACHE_NAME = 'ramadan-timer-v31';
+const ASSETS = [
+    './',
+    './index.html',
+    './style.css?v=31',
+    './app.js',
+    './manifest.json',
+    './crystal_gem.svg',
+    './icon-kabe-192.png',
+    './icon-kabe-512.png',
+    './masjid_bg.png'
+];
+
+self.addEventListener('install', (e) => {
+    self.skipWaiting(); // Force new SW to take control immediately
+    e.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.addAll(ASSETS);
         })
     );
 });
