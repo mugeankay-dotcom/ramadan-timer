@@ -178,6 +178,10 @@ function init() {
         updateDate();
         checkPrayerReminders();
     }, 60000);
+
+    // Start Countdown IMMEDIATELY (Don't wait for API)
+    // This fixes the delay user mentioned
+    startCountdown();
 }
 
 function checkPrayerReminders() {
