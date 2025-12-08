@@ -14,85 +14,87 @@
 
 <body>
     <div class="background-overlay"></div>
-    <header class="app-header">
-        <h1 id="app-title">Hoşgeldin Ramazan 2026</h1>
-        <div class="header-controls">
-            <div class="location-badge" id="location-display">
-                <span class="icon">📍</span>
-                <span id="city-name">Konum Bulunuyor...</span>
-            </div>
-            <div class="language-selector-wrapper">
-                <select id="language-selector" class="language-selector">
-                    <option value="tr">Türkçe</option>
-                    <option value="en">English</option>
-                    <option value="ar">العربية</option>
-                    <option value="id">Bahasa Indonesia</option>
-                    <option value="ur">اردو</option>
-                </select>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <section class="timer-card">
-            <div class="timer-header">
-                <h2 id="next-event-label">Sıradaki Vakit</h2>
-                <p id="next-event-name">Yükleniyor...</p>
-            </div>
-
-            <!-- Countdown wrapper added for better structure if needed, or keeping it flat -->
-            <div class="countdown-display">
-                <!-- Elements for hours/mins/secs will be updated by JS but need structure if missing in original -->
-                <!-- Original code implies existence of #hours, #minutes, #seconds. 
-                      Checking app.js: elements.hours = document.getElementById('hours')
-                      But they were missing in the viewed file! I must add them back. -->
-                <div class="time-unit">
-                    <span class="number" id="hours">00</span>
-                    <span class="label">SAAT</span>
+    <div class="container">
+        <header class="app-header">
+            <h1 id="app-title">Hoşgeldin Ramazan 2026</h1>
+            <div class="header-controls">
+                <div class="location-badge" id="location-display">
+                    <span class="icon">📍</span>
+                    <span id="city-name">Konum Bulunuyor...</span>
                 </div>
-                <div class="time-unit">
-                    <span class="number" id="minutes">00</span>
-                    <span class="label">DAKİKA</span>
-                </div>
-                <div class="time-unit">
-                    <span class="number" id="seconds">00</span>
-                    <span class="label">SANİYE</span>
+                <div class="language-selector-wrapper">
+                    <select id="language-selector" class="language-selector">
+                        <option value="tr">Türkçe</option>
+                        <option value="en">English</option>
+                        <option value="ar">العربية</option>
+                        <option value="id">Bahasa Indonesia</option>
+                        <option value="ur">اردو</option>
+                    </select>
                 </div>
             </div>
+        </header>
 
-            <div class="current-date" id="current-date">
-                --/--/----
-            </div>
-        </section>
+        <main>
+            <section class="timer-card">
+                <div class="timer-header">
+                    <h2 id="next-event-label">Sıradaki Vakit</h2>
+                    <p id="next-event-name">Yükleniyor...</p>
+                </div>
 
-        <section class="prayer-times-list">
-            <h3>Bugünün Vakitleri</h3>
-            <div class="prayer-item" id="imsak-row">
-                <span class="prayer-name">İmsak</span>
-                <span class="prayer-time" id="imsak-time">--:--</span>
-            </div>
-            <div class="prayer-item" id="gunes-row">
-                <span class="prayer-name">Güneş</span>
-                <span class="prayer-time" id="gunes-time">--:--</span>
-            </div>
-            <div class="prayer-item" id="ogle-row">
-                <span class="prayer-name">Öğle</span>
-                <span class="prayer-time" id="ogle-time">--:--</span>
-            </div>
-            <div class="prayer-item" id="ikindi-row">
-                <span class="prayer-name">İkindi</span>
-                <span class="prayer-time" id="ikindi-time">--:--</span>
-            </div>
-            <div class="prayer-item" id="aksam-row">
-                <span class="prayer-name">Akşam (İftar)</span>
-                <span class="prayer-time" id="aksam-time">--:--</span>
-            </div>
-            <div class="prayer-item" id="yatsi-row">
-                <span class="prayer-name">Yatsı</span>
-                <span class="prayer-time" id="yatsi-time">--:--</span>
-            </div>
-        </section>
-    </main>
+                <!-- Countdown wrapper added for better structure if needed, or keeping it flat -->
+                <div class="countdown-display">
+                    <!-- Elements for hours/mins/secs will be updated by JS but need structure if missing in original -->
+                    <!-- Original code implies existence of #hours, #minutes, #seconds. 
+                          Checking app.js: elements.hours = document.getElementById('hours')
+                          But they were missing in the viewed file! I must add them back. -->
+                    <div class="time-unit">
+                        <span class="number" id="hours">00</span>
+                        <span class="label">SAAT</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="minutes">00</span>
+                        <span class="label">DAKİKA</span>
+                    </div>
+                    <div class="time-unit">
+                        <span class="number" id="seconds">00</span>
+                        <span class="label">SANİYE</span>
+                    </div>
+                </div>
+
+                <div class="current-date" id="current-date">
+                    --/--/----
+                </div>
+            </section>
+
+            <section class="prayer-times-list">
+                <h3>Bugünün Vakitleri</h3>
+                <div class="prayer-item" id="imsak-row">
+                    <span class="prayer-name">İmsak</span>
+                    <span class="prayer-time" id="imsak-time">--:--</span>
+                </div>
+                <div class="prayer-item" id="gunes-row">
+                    <span class="prayer-name">Güneş</span>
+                    <span class="prayer-time" id="gunes-time">--:--</span>
+                </div>
+                <div class="prayer-item" id="ogle-row">
+                    <span class="prayer-name">Öğle</span>
+                    <span class="prayer-time" id="ogle-time">--:--</span>
+                </div>
+                <div class="prayer-item" id="ikindi-row">
+                    <span class="prayer-name">İkindi</span>
+                    <span class="prayer-time" id="ikindi-time">--:--</span>
+                </div>
+                <div class="prayer-item" id="aksam-row">
+                    <span class="prayer-name">Akşam (İftar)</span>
+                    <span class="prayer-time" id="aksam-time">--:--</span>
+                </div>
+                <div class="prayer-item" id="yatsi-row">
+                    <span class="prayer-name">Yatsı</span>
+                    <span class="prayer-time" id="yatsi-time">--:--</span>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script src="app.js?v=6"></script>
     <script>
