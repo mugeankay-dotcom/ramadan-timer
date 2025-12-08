@@ -133,15 +133,7 @@ body.rtl .countdown-display {
 }
 
 .location-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--glass-bg);
-    padding: 8px 16px;
-    border-radius: 20px;
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(4px);
-    font-size: 0.9rem;
+    display: none !important;
 }
 
 /* Premium Gold Theme Updates */
