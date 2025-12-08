@@ -460,30 +460,35 @@ body.rtl .countdown-display {
 }
 
 /* UNIFIED SIZE: 90px for Crystal Shape */
+/* HYBRID DESIGN: Glass Cards for Prayer Times (v29) */
 .prayer-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 90px;
-    height: 90px;
-    background: url('crystal_gem.svg') no-repeat center center;
-    background-size: contain;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
+    /* Keep consistent width but flexible */
+    height: 75px;
+    /* Shorter height, rectangular feel */
+    background: rgba(14, 25, 36, 0.6);
+    /* Semi-transparent dark bg */
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    /* Subtle Gold Border */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    /* Modern Rounded Corners */
     position: relative;
-    padding: 0;
+    padding: 5px;
     transition: transform 0.3s ease;
     margin: 5px;
     flex-shrink: 0;
-    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
+    backdrop-filter: blur(5px);
 }
 
 .prayer-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-    transform: translateY(-5px);
+    transform: translateY(-3px);
+    border-color: rgba(255, 215, 0, 0.5);
+    background: rgba(14, 25, 36, 0.8);
 }
 
 .prayer-name {
