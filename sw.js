@@ -1,10 +1,10 @@
-const CACHE_NAME = 'ramadan-timer-v40.1';
+const CACHE_NAME = 'ramadan-timer-v41';
 const ASSETS = [
     './',
     './index.html',
-    './style.css?v=39',
-    './app.js',
-    './manifest.json?v=39',
+    './style.css?v=41',
+    './app.js?v=35',
+    './manifest.json?v=41',
     './crystal_gem.svg',
     './icon-kabe-192.png',
     './icon-kabe-512.png',

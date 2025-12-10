@@ -7,8 +7,8 @@
     <meta name="description" content="Ramazan 2026 Geri Sayım ve İmsakiye">
     <meta name="theme-color" content="#FFD700">
     <title>Ramazan 2026</title>
-    <link rel="stylesheet" href="style.css?v=40.1">
-    <link rel="manifest" href="manifest.json?v=40.1">
+    <link rel="stylesheet" href="style.css?v=41">
+    <link rel="manifest" href="manifest.json?v=41">
     <link rel="apple-touch-icon" href="icon-kabe-192.png">
     <link rel="icon" type="image/png" href="icon-kabe-512.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,9 +21,15 @@
 <body oncontextmenu="return false;">
     <div class="background-overlay"></div>
     <div class="container">
+        <!-- Menu Button (Fixed Overlay) -->
+        <button id="menu-toggle" class="menu-toggle-btn" aria-label="Menüyü Aç">
+            <span class="menu-icon">☰</span>
+        </button>
+
         <header class="app-header">
             <h1 id="app-title">Hoşgeldin Ramazan 2026</h1>
             <div class="header-controls">
+                <!-- Location & Language Selector remains here -->
                 <div class="location-badge" id="location-display">
                     <span class="icon">📍</span>
                     <span id="city-name">Konum Bulunuyor...</span>
@@ -35,82 +41,169 @@
                         <option value="ar">العربية</option>
                         <option value="id">Bahasa Indonesia</option>
                         <option value="ur">اردو</option>
+                        <option value="fr">Français</option>
                     </select>
                 </div>
             </div>
         </header>
 
-        <main>
-            <section class="timer-card">
-                <div class="timer-header">
-                    <h2 id="next-event-label">18 Şubat 2026 - Ramazan Başlangıcına Kalan Süre</h2>
-                    <p id="next-event-name">Yükleniyor...</p>
-                </div>
+        <!-- SIDEBAR NAVIGATION -->
+        <div id="sidebar-overlay" class="sidebar-overlay"></div>
+        <aside id="app-sidebar" class="app-sidebar">
+            <div class="sidebar-header">
+                <h2>Menü</h2>
+                <button id="menu-close" class="menu-close-btn">&times;</button>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="sidebar-item active" onclick="switchTab('home')">
+                    <span class="icon">🏠</span> <span class="label">Ana Sayfa</span>
+                </button>
+                <button class="sidebar-item" onclick="switchTab('prayers')">
+                    <span class="icon">🤲</span> <span class="label" id="menu-prayers-text">Dualar</span>
+                </button>
+                <button class="sidebar-item" onclick="switchTab('dhikr')">
+                    <span class="icon">📿</span> <span class="label" id="menu-dhikr-text">Zikirmatik</span>
+                </button>
+            </nav>
+        </aside>
 
-                <!-- Countdown wrapper added for better structure if needed, or keeping it flat -->
-                <div class="countdown-display">
-                    <div class="time-unit">
-                        <span class="number" id="days">00</span>
-                        <span class="label">GÜN</span>
+        <main class="content-wrapper">
+            <!-- HOME VIEW -->
+            <div id="home-view" class="view-section active">
+                <section class="timer-card">
+                    <div class="timer-header">
+                        <h2 id="next-event-label">18 Şubat 2026 - Ramazan Başlangıcına Kalan Süre</h2>
+                        <p id="next-event-name">Yükleniyor...</p>
                     </div>
-                    <div class="time-separator">:</div>
-                    <div class="time-unit">
-                        <span class="number" id="hours">00</span>
-                        <span class="label">SAAT</span>
-                    </div>
-                    <div class="time-separator">:</div>
-                    <div class="time-unit">
-                        <span class="number" id="minutes">00</span>
-                        <span class="label">DAKİKA</span>
-                    </div>
-                    <div class="time-separator">:</div>
-                    <div class="time-unit">
-                        <span class="number" id="seconds">00</span>
-                        <span class="label">SANİYE</span>
-                    </div>
-                </div>
 
-                <div class="current-date" id="current-date">
-                    --/--/----
-                </div>
-            </section>
+                    <div class="countdown-display">
+                        <div class="time-unit">
+                            <span class="number" id="days">00</span>
+                            <span class="label">GÜN</span>
+                        </div>
+                        <div class="time-separator">:</div>
+                        <div class="time-unit">
+                            <span class="number" id="hours">00</span>
+                            <span class="label">SAAT</span>
+                        </div>
+                        <div class="time-separator">:</div>
+                        <div class="time-unit">
+                            <span class="number" id="minutes">00</span>
+                            <span class="label">DAKİKA</span>
+                        </div>
+                        <div class="time-separator">:</div>
+                        <div class="time-unit">
+                            <span class="number" id="seconds">00</span>
+                            <span class="label">SANİYE</span>
+                        </div>
+                    </div>
 
-            <section class="prayer-times-list">
-                <h3>Bugünün Vakitleri</h3>
-                <div class="prayer-item" id="imsak-row">
-                    <span class="prayer-name">İmsak</span>
-                    <span class="prayer-time" id="imsak-time">--:--</span>
+                    <div class="current-date" id="current-date">
+                        --/--/----
+                    </div>
+                </section>
+
+                <section class="prayer-times-list">
+                    <h3>Bugünün Vakitleri</h3>
+
+                    <div class="prayer-item" id="imsak-row">
+                        <span class="prayer-name">İmsak</span>
+                        <span class="prayer-time" id="imsak-time">--:--</span>
+                    </div>
+                    <div class="prayer-item" id="gunes-row">
+                        <span class="prayer-name">Güneş</span>
+                        <span class="prayer-time" id="gunes-time">--:--</span>
+                    </div>
+                    <div class="prayer-item" id="ogle-row">
+                        <span class="prayer-name">Öğle</span>
+                        <span class="prayer-time" id="ogle-time">--:--</span>
+                    </div>
+                    <div class="prayer-item" id="ikindi-row">
+                        <span class="prayer-name">İkindi</span>
+                        <span class="prayer-time" id="ikindi-time">--:--</span>
+                    </div>
+                    <div class="prayer-item" id="aksam-row">
+                        <span class="prayer-name">İftar</span>
+                        <span class="prayer-time" id="aksam-time">--:--</span>
+                    </div>
+                    <div class="prayer-item" id="yatsi-row">
+                        <span class="prayer-name">Yatsı</span>
+                        <span class="prayer-time" id="yatsi-time">--:--</span>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ZIKIRMATIK VIEW -->
+            <div id="dhikr-view" class="view-section" style="display: none;">
+                <div class="dhikr-container">
+                    <div class="dhikr-header">
+                        <h3>Günlük Zikirlerim</h3>
+                        <select id="dhikr-selector" class="dhikr-selector">
+                            <option value="custom">custom</option>
+                            <option value="subhanallah">Sübhanallah (33)</option>
+                            <option value="elhamdulillah">Elhamdülillah (33)</option>
+                            <option value="allahuekber">Allahuekber (33)</option>
+                            <option value="lailaheillallah">La İlahe İllallah (99)</option>
+                        </select>
+                    </div>
+
+                    <div class="counter-display">
+                        <button id="dhikr-btn" class="dhikr-btn">
+                            <span id="dhikr-count">0</span>
+                            <span class="dhikr-label">ZİKİR</span>
+                        </button>
+                    </div>
+
+                    <div class="dhikr-controls">
+                        <button id="reset-btn" class="simple-action-btn" title="Sıfırla">
+                            <span class="btn-icon">🗑️</span>
+                            <span class="btn-text">SIFIRLA</span>
+                        </button>
+                        <button id="vibrate-btn" class="simple-action-btn active" title="Titreşim">
+                            <span class="btn-icon">📳</span>
+                            <span class="btn-text">TİTREŞİM</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="prayer-item" id="gunes-row">
-                    <span class="prayer-name">Güneş</span>
-                    <span class="prayer-time" id="gunes-time">--:--</span>
+            </div>
+            <!-- PRAYERS VIEW -->
+            <div id="prayers-view" class="view-section" style="display: none;">
+                <div class="prayers-layout">
+                    <!-- Left Side: List -->
+                    <div class="prayers-menu">
+                        <h3 class="prayers-menu-title" id="prayers-title-label">Dualar Listesi</h3>
+                        <div class="prayers-list" id="prayers-list">
+                            <!-- JS wll populate this -->
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Content (The Page) -->
+                    <div class="prayers-display">
+                        <div class="quran-page">
+                            <div class="page-content" id="prayer-display-area">
+                                <div class="placeholder-msg">
+                                    <span class="icon">📖</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="prayer-item" id="ogle-row">
-                    <span class="prayer-name">Öğle</span>
-                    <span class="prayer-time" id="ogle-time">--:--</span>
-                </div>
-                <div class="prayer-item" id="ikindi-row">
-                    <span class="prayer-name">İkindi</span>
-                    <span class="prayer-time" id="ikindi-time">--:--</span>
-                </div>
-                <div class="prayer-item" id="aksam-row">
-                    <span class="prayer-name">İftar</span>
-                    <span class="prayer-time" id="aksam-time">--:--</span>
-                </div>
-                <div class="prayer-item" id="yatsi-row">
-                    <span class="prayer-name">Yatsı</span>
-                    <span class="prayer-time" id="yatsi-time">--:--</span>
-                </div>
-            </section>
+            </div>
         </main>
     </div>
 
-    <script src="app.js?v=35"></script>
+    <script src="app.js?v=36"></script>
     <script>
+        // FORCE UPDATE: Unregister previous Service Workers to clear cache
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js')
-                .then(() => console.log('Service Worker Registered'))
-                .catch((err) => console.log('Service Worker Failed', err));
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                for (let registration of registrations) {
+                    registration.unregister()
+                        .then(function (boolean) {
+                            if (boolean) console.log('Service Worker unregistered.');
+                        });
+                }
+            });
         }
     </script>
 </body>

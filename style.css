@@ -94,6 +94,13 @@ body.rtl .countdown-display {
     background-position: center;
     background-repeat: no-repeat;
     z-index: -1;
+    transition: background-image 0.5s ease;
+    /* Smooth transition */
+}
+
+/* Specific Background for Zikirmatik */
+.dhikr-mode .background-overlay {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("dhikr_bg.png");
 }
 
 .container {
@@ -581,4 +588,718 @@ body.rtl .countdown-display {
     .prayer-name {
         font-size: 0.6rem;
     }
+}
+
+/* --- MAIN NAVIGATION (SIDEBAR) --- */
+.menu-toggle-btn {
+    position: absolute;
+    /* Changed from relative/static */
+    top: 15px;
+    left: 15px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1100;
+    transition: transform 0.2s ease;
+}
+
+.menu-toggle-btn:active {
+    transform: scale(0.9);
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1200;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background: rgba(14, 25, 36, 0.98);
+    backdrop-filter: blur(15px);
+    z-index: 1300;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+    border-right: 1px solid rgba(255, 215, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.app-sidebar.active {
+    transform: translateX(0);
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-header h2 {
+    color: var(--primary-color);
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.menu-close-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-nav {
+    padding: 20px 0;
+    flex: 1;
+}
+
+.sidebar-item {
+    width: 100%;
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 15px 25px;
+    color: var(--text-dim);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-item:hover,
+.sidebar-item.active {
+    background: rgba(255, 215, 0, 0.05);
+    color: var(--primary-color);
+}
+
+.sidebar-item.active {
+    border-left-color: var(--primary-color);
+    font-weight: 500;
+}
+
+.sidebar-item .icon {
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+/* --- ZIKIRMATIK UI --- */
+.dhikr-container {
+    background: transparent;
+    max-width: 100%;
+    height: calc(100vh - 40px);
+    /* Full height minus padding */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Center vertically */
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    padding-top: 40px;
+    /* Slight top padding */
+    box-sizing: border-box;
+}
+
+.dhikr-header {
+    margin-bottom: 30px;
+}
+
+.dhikr-header h3 {
+    color: var(--primary-color);
+    font-family: 'Cinzel', serif;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.dhikr-selector {
+    background: rgba(14, 25, 36, 0.8);
+    color: #fff;
+    border: 1px solid var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 12px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+}
+
+.counter-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+}
+
+.dhikr-btn {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #2c3e50, #000);
+    border: 4px solid var(--primary-color);
+    box-shadow:
+        0 0 20px rgba(255, 215, 0, 0.2),
+        inset 0 0 30px rgba(0, 0, 0, 0.8),
+        0 10px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.dhikr-btn:active {
+    transform: scale(0.95);
+    box-shadow:
+        0 0 10px rgba(255, 215, 0, 0.1),
+        inset 0 0 10px rgba(0, 0, 0, 0.8);
+    border-color: #d4af37;
+}
+
+/* Glass shine effect on button */
+.dhikr-btn::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 60px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: rotate(-15deg);
+    pointer-events: none;
+}
+
+#dhikr-count {
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    line-height: 1;
+    font-family: 'Outfit', sans-serif;
+}
+
+.dhikr-label {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    letter-spacing: 2px;
+    margin-top: 5px;
+    opacity: 0.8;
+}
+
+
+/* UTILITY */
+.hidden {
+    display: none !important;
+}
+
+/* --- SIMPLIFIED ZIKIRMATIK CONTROLS (vNew) --- */
+.dhikr-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.simple-action-btn {
+    width: auto;
+    /* Allow auto width for text */
+    min-width: 120px;
+    width: 90px;
+    height: 75px;
+    border-radius: 15px;
+    /* Boxy rounded corners */
+    background: rgba(14, 25, 36, 0.6);
+    /* Match prayer-item bg */
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    color: #fff;
+    font-size: 0.7rem;
+    /* Smaller text for box */
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    /* Vertical stack */
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    padding: 5px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.simple-action-btn:hover {
+    background: rgba(14, 25, 36, 0.8);
+    border-color: rgba(255, 215, 0, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+}
+
+.simple-action-btn:active {
+    transform: scale(0.95);
+}
+
+.simple-action-btn.active {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background: rgba(255, 215, 0, 0.1);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.simple-action-btn .btn-icon {
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+}
+
+#reset-btn {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+}
+
+/* --- PRAYERS SECTION (Split View) --- */
+.prayers-layout {
+    display: flex;
+    height: calc(100vh - 80px);
+    /* Full height minus header/padding approx */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Background for Prayers Mode */
+.prayers-mode .background-overlay {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("prayers_bg.png");
+}
+
+/* Left Menu */
+.prayers-menu {
+    flex: 0 0 300px;
+    background: rgba(14, 25, 36, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.prayers-menu-title {
+    padding: 20px;
+    margin: 0;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    color: var(--primary-color);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.prayers-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.prayer-menu-item {
+    padding: 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #eee;
+    font-family: 'Outfit', sans-serif;
+}
+
+.prayer-menu-item:hover {
+    background: rgba(255, 215, 0, 0.1);
+    transform: translateX(5px);
+}
+
+.prayer-menu-item.active {
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.2), transparent);
+    border-left: 3px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* Right Display (Quran Page) */
+.prayers-display {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: auto;
+    padding-bottom: 50px;
+}
+
+/* The Quran Page Design */
+.quran-page {
+    background: #fdfbf7;
+    /* Parchment / Cream */
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    /* Fill space */
+    border-radius: 5px;
+    box-shadow:
+        0 0 20px rgba(0, 0, 0, 0.5),
+        inset 0 0 60px rgba(165, 142, 100, 0.2);
+    position: relative;
+    padding: 30px;
+    /* Reduced padding */
+    color: #333;
+    /* Dark text for light bg */
+    border: 8px double #d4af37;
+    /* Gold double border */
+    outline: 2px solid #8b4513;
+    /* Brown outline */
+    outline-offset: -12px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Page Content Wrapper for Scroll */
+.page-content {
+    flex: 1;
+    overflow-y: auto;
+    /* Allow internal scroll if needed */
+    scrollbar-width: thin;
+}
+
+/* Internal Page Content */
+.prayer-page-header {
+    text-align: center;
+    margin-bottom: 20px;
+    /* Reduced */
+    border-bottom: 2px solid #d4af37;
+    padding-bottom: 5px;
+    flex-shrink: 0;
+}
+
+.page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    /* Reduced */
+    color: #8b4513;
+    /* Brown/Dark Gold */
+    margin: 0;
+}
+
+.ornament {
+    height: 15px;
+    /* Reduced */
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='10' viewBox='0 0 40 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 5 L25 10 L20 10 L15 10 Z' fill='%23d4af37'/%3E%3C/svg%3E");
+    /* Simple geometric ornament placeholder */
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.6;
+    margin-top: 5px;
+}
+
+.prayer-body {
+    padding-bottom: 20px;
+}
+
+.arabic-text.large {
+    font-family: 'Amiri', serif;
+    font-size: 1.8rem;
+    /* Reduced */
+    color: #000;
+    text-align: center;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    /* Reduced */
+    direction: rtl;
+}
+
+.section-divider {
+    text-align: center;
+    margin: 10px 0;
+    /* Reduced */
+    position: relative;
+    color: #8b4513;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.section-divider::before,
+.section-divider::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: #d4af37;
+    vertical-align: middle;
+    margin: 0 8px;
+}
+
+.reading-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    /* Reduced */
+    color: #8b4513;
+    font-style: italic;
+    line-height: 1.4;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.meaning-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    /* Reduced */
+    color: #444;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.placeholder-msg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    /* Fill container */
+    color: #8b4513;
+    opacity: 0.6;
+    font-size: 1.2rem;
+}
+
+.placeholder-msg .icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .prayers-layout {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .prayers-menu {
+        flex: none;
+        max-height: 250px;
+        /* Limit menu height on mobile */
+    }
+
+    .quran-page {
+        padding: 20px;
+        border-width: 4px;
+        outline-offset: -6px;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+    }
+
+    .arabic-text.large {
+        font-size: 1.5rem;
+    }
+}
+
+/* Animations */
+@keyframes contentAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-appear {
+    animation: contentAppear 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* OVERRIDE CONTAINER WIDTH FOR PRAYERS BOOK VIEW */
+body.prayers-mode .container {
+    max-width: 1600px !important;
+    /* Force wider container */
+    width: 98% !important;
+    padding: 10px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Center vertically if needed */
+}
+
+body.prayers-mode .prayers-layout {
+    height: 90vh;
+    /* Use most of the screen */
+}
+
+/* ULTRA COMPACT CENTERED LAYOUT */
+/* Internal Page Content */
+.prayer-page-header {
+    text-align: center;
+    margin-bottom: 10px;
+    /* Minimal */
+    border-bottom: 2px solid #d4af37;
+    padding-bottom: 5px;
+    flex-shrink: 0;
+}
+
+.page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    /* Reduced */
+    color: #8b4513;
+    margin: 0;
+}
+
+.ornament {
+    height: 10px;
+    /* Reduced */
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='10' viewBox='0 0 40 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 5 L25 10 L20 10 L15 10 Z' fill='%23d4af37'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.6;
+    margin-top: 2px;
+}
+
+.prayer-body {
+    padding-top: 5px;
+    display: flex;
+    /* Flex for centering */
+    flex-direction: column;
+    justify-content: center;
+    /* Center vertically if short */
+    flex: 1;
+    /* Take remaining space */
+    min-height: 0;
+    /* Allow shrinking */
+}
+
+/* TIGHT Arabic Layout */
+.arabic-text.large {
+    font-family: 'Amiri', serif;
+    font-size: 1.5rem;
+    /* Smaller to fit Fatiha */
+    color: #000;
+    text-align: center;
+    line-height: 1.3;
+    /* Very tight */
+    margin-bottom: 8px;
+    direction: rtl;
+    padding: 0 5px;
+}
+
+.section-divider {
+    text-align: center;
+    margin: 5px 0;
+    /* Minimal spacing */
+    color: #8b4513;
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.section-divider::before,
+.section-divider::after {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 1px;
+    background: #d4af37;
+    vertical-align: middle;
+    margin: 0 5px;
+}
+
+.reading-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    color: #8b4513;
+    font-style: italic;
+    line-height: 1.25;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.meaning-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.25;
+    text-align: center;
+}
+
+/* Remove side-panel classes if any left in HTML (already cleaned in JS) */
+.prayer-content-arabic,
+.prayer-content-meaning {
+    display: contents;
+    /* Just in case */
+}
+
+/* Placeholder */
+.placeholder-msg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #8b4513;
+    opacity: 0.6;
+    font-size: 1.2rem;
+}
+
+.placeholder-msg .icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
 }
