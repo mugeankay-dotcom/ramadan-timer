@@ -1778,3 +1778,9 @@ body.prayers-mode .prayers-layout {
 .book-item-title {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
+
+/* ROUND 14 FIX: SILVER TITLES */
+.book-item-title {
+    color: #C0C0C0 !important; /* Silver */
+    text-shadow: 0 1px 2px #000 !important; /* Black shadow for definition */
+}
