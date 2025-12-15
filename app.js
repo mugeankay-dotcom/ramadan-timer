@@ -8,257 +8,258 @@ window.addEventListener('contextmenu', (e) => {
     return false;
 }, true); // true = capture phase
 
-tr: {
-    title: "Hoşgeldin Ramazan 2026",
+const translations = {
+    tr: {
+        title: "Hoşgeldin Ramazan 2026",
         menuTitle: "Menü",
-            menuHome: "Ana Sayfa",
-                menuPrayers: "Dualar",
-                    menuDhikr: "Zikirmatik",
-                        prayersTitle: "Dualar",
-                            nextEventLabel: "18 Şubat 2026 - Ramazan Başlangıcına Kalan Süre",
-                                loading: "Yükleniyor...",
-                                    hours: "Saat",
-                                        minutes: "Dakika",
-                                            seconds: "Saniye",
-                                                days: "GÜN",
-                                                    locationFound: "Konum Algılandı",
-                                                        locationDefault: "İstanbul (Varsayılan)",
-                                                            ramadanStart: "Ramazan 2026 Başlangıcı",
-                                                                imsakLeft: "İmsak'a Kalan Süre",
-                                                                    iftarLeft: "İftar'a Kalan Süre",
-                                                                        tomorrowImsak: "Yarınki İmsak'a Kalan Süre",
-                                                                            todayPrayers: "Bugünün Vakitleri",
-                                                                                dhikrTitle: "Günlük Zikirlerim",
-                                                                                    dhikrLabel: "Zikir",
-                                                                                        historyTitle: "Zikir Geçmişi",
-                                                                                            historyEmpty: "Henüz kayıt yok.",
-                                                                                                resetBtn: "SIFIRLA",
-                                                                                                    vibrateBtn: "TİTREŞİM",
-                                                                                                        dhikrOptions: {
-        custom: "Serbest Zikir",
+        menuHome: "Ana Sayfa",
+        menuPrayers: "Dualar",
+        menuDhikr: "Zikirmatik",
+        prayersTitle: "Dualar",
+        nextEventLabel: "18 Şubat 2026 - Ramazan Başlangıcına Kalan Süre",
+        loading: "Yükleniyor...",
+        hours: "Saat",
+        minutes: "Dakika",
+        seconds: "Saniye",
+        days: "GÜN",
+        locationFound: "Konum Algılandı",
+        locationDefault: "İstanbul (Varsayılan)",
+        ramadanStart: "Ramazan 2026 Başlangıcı",
+        imsakLeft: "İmsak'a Kalan Süre",
+        iftarLeft: "İftar'a Kalan Süre",
+        tomorrowImsak: "Yarınki İmsak'a Kalan Süre",
+        todayPrayers: "Bugünün Vakitleri",
+        dhikrTitle: "Günlük Zikirlerim",
+        dhikrLabel: "Zikir",
+        historyTitle: "Zikir Geçmişi",
+        historyEmpty: "Henüz kayıt yok.",
+        resetBtn: "SIFIRLA",
+        vibrateBtn: "TİTREŞİM",
+        dhikrOptions: {
+            custom: "Serbest Zikir",
             subhanallah: "Sübhanallah (33)",
-                elhamdulillah: "Elhamdülillah (33)",
-                    allahuekber: "Allahuekber (33)",
-                        lailaheillallah: "La İlahe İllallah (99)"
-    },
-    prayers: {
-        Imsak: "İmsak",
+            elhamdulillah: "Elhamdülillah (33)",
+            allahuekber: "Allahuekber (33)",
+            lailaheillallah: "La İlahe İllallah (99)"
+        },
+        prayers: {
+            Imsak: "İmsak",
             Sunrise: "Güneş",
-                Dhuhr: "Öğle",
-                    Asr: "İkindi",
-                        Maghrib: "İftar",
-                            Isha: "Yatsı"
-    }
-},
-en: {
-    title: "Welcome Ramadan 2026",
-        menuTitle: "Menu",
-            menuHome: "Home",
-                menuPrayers: "Prayers",
-                    menuDhikr: "Tasbih",
-                        prayersTitle: "Prayers",
-                            nextEventLabel: "Feb 18, 2026 - Next Prayer",
-                                loading: "Loading...",
-                                    hours: "Hours",
-                                        minutes: "Minutes",
-                                            seconds: "Seconds",
-                                                days: "DAYS",
-                                                    locationFound: "Location Detected",
-                                                        locationDefault: "Istanbul (Default)",
-                                                            ramadanStart: "Ramadan 2026 Start",
-                                                                imsakLeft: "Time until Imsak",
-                                                                    iftarLeft: "Time until Iftar",
-                                                                        tomorrowImsak: "Time until Tomorrow's Imsak",
-                                                                            todayPrayers: "Today's Prayers",
-                                                                                dhikrTitle: "My Daily Dhikr",
-                                                                                    dhikrLabel: "Dhikr",
-                                                                                        historyTitle: "Dhikr History",
-                                                                                            historyEmpty: "No records yet.",
-                                                                                                resetBtn: "RESET",
-                                                                                                    vibrateBtn: "VIBRATE",
-                                                                                                        dhikrOptions: {
-        custom: "Free Dhikr",
-            subhanallah: "Subhanallah (33)",
-                elhamdulillah: "Alhamdulillah (33)",
-                    allahuekber: "Allahu Akbar (33)",
-                        lailaheillallah: "La Ilaha Illallah (99)"
+            Dhuhr: "Öğle",
+            Asr: "İkindi",
+            Maghrib: "İftar",
+            Isha: "Yatsı"
+        }
     },
-    prayers: {
-        Imsak: "Imsak",
+    en: {
+        title: "Welcome Ramadan 2026",
+        menuTitle: "Menu",
+        menuHome: "Home",
+        menuPrayers: "Prayers",
+        menuDhikr: "Tasbih",
+        prayersTitle: "Prayers",
+        nextEventLabel: "Feb 18, 2026 - Next Prayer",
+        loading: "Loading...",
+        hours: "Hours",
+        minutes: "Minutes",
+        seconds: "Seconds",
+        days: "DAYS",
+        locationFound: "Location Detected",
+        locationDefault: "Istanbul (Default)",
+        ramadanStart: "Ramadan 2026 Start",
+        imsakLeft: "Time until Imsak",
+        iftarLeft: "Time until Iftar",
+        tomorrowImsak: "Time until Tomorrow's Imsak",
+        todayPrayers: "Today's Prayers",
+        dhikrTitle: "My Daily Dhikr",
+        dhikrLabel: "Dhikr",
+        historyTitle: "Dhikr History",
+        historyEmpty: "No records yet.",
+        resetBtn: "RESET",
+        vibrateBtn: "VIBRATE",
+        dhikrOptions: {
+            custom: "Free Dhikr",
+            subhanallah: "Subhanallah (33)",
+            elhamdulillah: "Alhamdulillah (33)",
+            allahuekber: "Allahu Akbar (33)",
+            lailaheillallah: "La Ilaha Illallah (99)"
+        },
+        prayers: {
+            Imsak: "Imsak",
             Sunrise: "Sunrise",
-                Dhuhr: "Dhuhr",
-                    Asr: "Asr",
-                        Maghrib: "Iftar",
-                            Isha: "Isha"
-    }
-},
-ar: {
-    menuTitle: "القائمة",
+            Dhuhr: "Dhuhr",
+            Asr: "Asr",
+            Maghrib: "Iftar",
+            Isha: "Isha"
+        }
+    },
+    ar: {
+        menuTitle: "القائمة",
         menuHome: "الرئيسية",
-            menuPrayers: "أدعية",
-                menuDhikr: "السبحة",
-                    prayersTitle: "أدعية",
-                        nextEventLabel: " ١٨ فبراير ٢٠٢٦ - الصلاة القادمة",
-                            loading: "جار التحميل...",
-                                hours: "ساعات",
-                                    minutes: "دقيقة",
-                                        seconds: "ثانية",
-                                            days: "أيام",
-                                                locationFound: "تم تحديد الموقع",
-                                                    locationDefault: "إسطنبول (افتراضي)",
-                                                        ramadanStart: "بداية رمضان 2026",
-                                                            imsakLeft: "الوقت المتبقي للإمساك",
-                                                                iftarLeft: "الوقت المتبقي للإفطار",
-                                                                    tomorrowImsak: "الوقت المتبقي لإمساك الغد",
-                                                                        todayPrayers: "أوقات الصلاة اليوم",
-                                                                            dhikrTitle: "أذكاري اليومية",
-                                                                                dhikrLabel: "ذكر",
-                                                                                    historyTitle: "سجل الذكر",
-                                                                                        historyEmpty: "لا توجد سجلات بعد.",
-                                                                                            resetBtn: "إعادة تعيين",
-                                                                                                vibrateBtn: "اهتزاز",
-                                                                                                    dhikrOptions: {
-        custom: "ذكر حر",
+        menuPrayers: "أدعية",
+        menuDhikr: "السبحة",
+        prayersTitle: "أدعية",
+        nextEventLabel: " ١٨ فبراير ٢٠٢٦ - الصلاة القادمة",
+        loading: "جار التحميل...",
+        hours: "ساعات",
+        minutes: "دقيقة",
+        seconds: "ثانية",
+        days: "أيام",
+        locationFound: "تم تحديد الموقع",
+        locationDefault: "إسطنبول (افتراضي)",
+        ramadanStart: "بداية رمضان 2026",
+        imsakLeft: "الوقت المتبقي للإمساك",
+        iftarLeft: "الوقت المتبقي للإفطار",
+        tomorrowImsak: "الوقت المتبقي لإمساك الغد",
+        todayPrayers: "أوقات الصلاة اليوم",
+        dhikrTitle: "أذكاري اليومية",
+        dhikrLabel: "ذكر",
+        historyTitle: "سجل الذكر",
+        historyEmpty: "لا توجد سجلات بعد.",
+        resetBtn: "إعادة تعيين",
+        vibrateBtn: "اهتزاز",
+        dhikrOptions: {
+            custom: "ذكر حر",
             subhanallah: "سبحان الله (٣٣)",
-                elhamdulillah: "الحمد لله (٣٣)",
-                    allahuekber: "الله أكبر (٣٣)",
-                        lailaheillallah: "لا إله إلا الله (٩٩)"
-    },
-    prayers: {
-        Imsak: "الفجر (الإمساك)",
+            elhamdulillah: "الحمد لله (٣٣)",
+            allahuekber: "الله أكبر (٣٣)",
+            lailaheillallah: "لا إله إلا الله (٩٩)"
+        },
+        prayers: {
+            Imsak: "الفجر (الإمساك)",
             Sunrise: "الشروق",
-                Dhuhr: "الظهر",
-                    Asr: "العصر",
-                        Maghrib: "المغرب (الإفطار)",
-                            Isha: "العشاء"
-    }
-},
-id: {
-    title: "Selamat Datang Ramadan 2026",
-        menuTitle: "Menu",
-            menuHome: "Beranda",
-                menuPrayers: "Doa-doa",
-                    menuDhikr: "Dzikir",
-                        prayersTitle: "Doa-doa",
-                            nextEventLabel: "18 Februari 2026 - Waktu Berikutnya",
-                                loading: "Memuat...",
-                                    hours: "Jam",
-                                        minutes: "Menit",
-                                            seconds: "Detik",
-                                                days: "HARI",
-                                                    locationFound: "Lokasi Terdeteksi",
-                                                        locationDefault: "Istanbul (Default)",
-                                                            ramadanStart: "Awal Ramadan 2026",
-                                                                imsakLeft: "Waktu hingga Imsak",
-                                                                    iftarLeft: "Waktu hingga Buka Puasa",
-                                                                        tomorrowImsak: "Waktu hingga Imsak Besok",
-                                                                            todayPrayers: "Jadwal Sholat Hari Ini",
-                                                                                dhikrTitle: "Dzikir Harian Saya",
-                                                                                    dhikrLabel: "Dzikir",
-                                                                                        historyTitle: "Riwayat Dzikir",
-                                                                                            historyEmpty: "Belum ada catatan.",
-                                                                                                resetBtn: "RESET",
-                                                                                                    vibrateBtn: "GETAR",
-                                                                                                        dhikrOptions: {
-        custom: "Dzikir Bebas",
-            subhanallah: "Subhanallah (33)",
-                elhamdulillah: "Alhamdulillah (33)",
-                    allahuekber: "Allahu Akbar (33)",
-                        lailaheillallah: "La Ilaha Illallah (99)"
+            Dhuhr: "الظهر",
+            Asr: "العصر",
+            Maghrib: "المغرب (الإفطار)",
+            Isha: "العشاء"
+        }
     },
-    prayers: {
-        Imsak: "Imsak",
+    id: {
+        title: "Selamat Datang Ramadan 2026",
+        menuTitle: "Menu",
+        menuHome: "Beranda",
+        menuPrayers: "Doa-doa",
+        menuDhikr: "Dzikir",
+        prayersTitle: "Doa-doa",
+        nextEventLabel: "18 Februari 2026 - Waktu Berikutnya",
+        loading: "Memuat...",
+        hours: "Jam",
+        minutes: "Menit",
+        seconds: "Detik",
+        days: "HARI",
+        locationFound: "Lokasi Terdeteksi",
+        locationDefault: "Istanbul (Default)",
+        ramadanStart: "Awal Ramadan 2026",
+        imsakLeft: "Waktu hingga Imsak",
+        iftarLeft: "Waktu hingga Buka Puasa",
+        tomorrowImsak: "Waktu hingga Imsak Besok",
+        todayPrayers: "Jadwal Sholat Hari Ini",
+        dhikrTitle: "Dzikir Harian Saya",
+        dhikrLabel: "Dzikir",
+        historyTitle: "Riwayat Dzikir",
+        historyEmpty: "Belum ada catatan.",
+        resetBtn: "RESET",
+        vibrateBtn: "GETAR",
+        dhikrOptions: {
+            custom: "Dzikir Bebas",
+            subhanallah: "Subhanallah (33)",
+            elhamdulillah: "Alhamdulillah (33)",
+            allahuekber: "Allahu Akbar (33)",
+            lailaheillallah: "La Ilaha Illallah (99)"
+        },
+        prayers: {
+            Imsak: "Imsak",
             Sunrise: "Terbit",
-                Dhuhr: "Dzuhur",
-                    Asr: "Ashar",
-                        Maghrib: "Maghrib",
-                            Isha: "Isya"
-    }
-},
-ur: {
-    title: "خوش آمدید رمضان 2026",
+            Dhuhr: "Dzuhur",
+            Asr: "Ashar",
+            Maghrib: "Maghrib",
+            Isha: "Isya"
+        }
+    },
+    ur: {
+        title: "خوش آمدید رمضان 2026",
         menuTitle: "مینو",
-            menuHome: "ہوم",
-                menuPrayers: "دعائیں",
-                    menuDhikr: "تسبیح",
-                        prayersTitle: "دعائیں",
-                            nextEventLabel: "18 فروری 2026 - اگلی نماز",
-                                loading: "لوڈ ہو رہا ہے...",
-                                    hours: "گھنٹے",
-                                        minutes: "منٹ",
-                                            seconds: "سیکنڈ",
-                                                days: "دن",
-                                                    locationFound: "مقام کا تعین ہو گیا",
-                                                        locationDefault: "استنبول (طے شدہ)",
-                                                            ramadanStart: "رمضان 2026 کا آغاز",
-                                                                imsakLeft: "سحری کا وقت باقی ہے",
-                                                                    iftarLeft: "افطار کا وقت باقی ہے",
-                                                                        tomorrowImsak: "کل کی سحری کا وقت باقی ہے",
-                                                                            todayPrayers: "آج کے نماز کے اوقات",
-                                                                                dhikrTitle: "میرے روزانہ کے اذکار",
-                                                                                    dhikrLabel: "ذکر",
-                                                                                        historyTitle: "ذکر کی تاریخ",
-                                                                                            historyEmpty: "ابھی تک کوئی ریکارڈ نہیں ہے۔",
-                                                                                                resetBtn: "ری سیٹ",
-                                                                                                    vibrateBtn: "تھر تھراہٹ",
-                                                                                                        dhikrOptions: {
-        custom: "مفت ذکر",
+        menuHome: "ہوم",
+        menuPrayers: "دعائیں",
+        menuDhikr: "تسبیح",
+        prayersTitle: "دعائیں",
+        nextEventLabel: "18 فروری 2026 - اگلی نماز",
+        loading: "لوڈ ہو رہا ہے...",
+        hours: "گھنٹے",
+        minutes: "منٹ",
+        seconds: "سیکنڈ",
+        days: "دن",
+        locationFound: "مقام کا تعین ہو گیا",
+        locationDefault: "استنبول (طے شدہ)",
+        ramadanStart: "رمضان 2026 کا آغاز",
+        imsakLeft: "سحری کا وقت باقی ہے",
+        iftarLeft: "افطار کا وقت باقی ہے",
+        tomorrowImsak: "کل کی سحری کا وقت باقی ہے",
+        todayPrayers: "آج کے نماز کے اوقات",
+        dhikrTitle: "میرے روزانہ کے اذکار",
+        dhikrLabel: "ذکر",
+        historyTitle: "ذکر کی تاریخ",
+        historyEmpty: "ابھی تک کوئی ریکارڈ نہیں ہے۔",
+        resetBtn: "ری سیٹ",
+        vibrateBtn: "تھر تھراہٹ",
+        dhikrOptions: {
+            custom: "مفت ذکر",
             subhanallah: "سبحان اللہ (33)",
-                elhamdulillah: "الحمد للہ (33)",
-                    allahuekber: "اللہ اکبر (33)",
-                        lailaheillallah: "لا الہ الا اللہ (99)"
-    },
-    prayers: {
-        Imsak: "فجر (امساک)",
+            elhamdulillah: "الحمد للہ (33)",
+            allahuekber: "اللہ اکبر (33)",
+            lailaheillallah: "لا الہ الا اللہ (99)"
+        },
+        prayers: {
+            Imsak: "فجر (امساک)",
             Sunrise: "طلوع آفتاب",
-                Dhuhr: "ظہر",
-                    Asr: "عصر",
-                        Maghrib: "مغرب (افطار)",
-                            Isha: "عشاء"
-    }
-},
-fr: {
-    title: "Bienvenue Ramadan 2026",
-        menuTitle: "Menu",
-            menuHome: "Accueil",
-                menuPrayers: "Prières",
-                    menuDhikr: "Dhikr/Tasbih",
-                        prayersTitle: "Prières",
-                            nextEventLabel: "18 Fév 2026 - Prochaine Prière",
-                                loading: "Chargement...",
-                                    hours: "Heures",
-                                        minutes: "Minutes",
-                                            seconds: "Secondes",
-                                                days: "JOURS",
-                                                    locationFound: "Localisation Détectée",
-                                                        locationDefault: "Istanbul (Défaut)",
-                                                            ramadanStart: "Début du Ramadan 2026",
-                                                                imsakLeft: "Temps avant Imsak",
-                                                                    iftarLeft: "Temps avant Iftar",
-                                                                        tomorrowImsak: "Temps avant l'Imsak de demain",
-                                                                            todayPrayers: "Prières d'aujourd'hui",
-                                                                                dhikrTitle: "Mon Dhikr Quotidien",
-                                                                                    dhikrLabel: "Dhikr",
-                                                                                        historyTitle: "Historique du Dhikr",
-                                                                                            historyEmpty: "Aucun enregistrement.",
-                                                                                                resetBtn: "RÉINITIALISER",
-                                                                                                    vibrateBtn: "VIBRER",
-                                                                                                        dhikrOptions: {
-        custom: "Dhikr Libre",
-            subhanallah: "Subhanallah (33)",
-                elhamdulillah: "Alhamdulillah (33)",
-                    allahuekber: "Allahu Akbar (33)",
-                        lailaheillallah: "La Ilaha Illallah (99)"
+            Dhuhr: "ظہر",
+            Asr: "عصر",
+            Maghrib: "مغرب (افطار)",
+            Isha: "عشاء"
+        }
     },
-    prayers: {
-        Imsak: "Imsak",
+    fr: {
+        title: "Bienvenue Ramadan 2026",
+        menuTitle: "Menu",
+        menuHome: "Accueil",
+        menuPrayers: "Prières",
+        menuDhikr: "Dhikr/Tasbih",
+        prayersTitle: "Prières",
+        nextEventLabel: "18 Fév 2026 - Prochaine Prière",
+        loading: "Chargement...",
+        hours: "Heures",
+        minutes: "Minutes",
+        seconds: "Secondes",
+        days: "JOURS",
+        locationFound: "Localisation Détectée",
+        locationDefault: "Istanbul (Défaut)",
+        ramadanStart: "Début du Ramadan 2026",
+        imsakLeft: "Temps avant Imsak",
+        iftarLeft: "Temps avant Iftar",
+        tomorrowImsak: "Temps avant l'Imsak de demain",
+        todayPrayers: "Prières d'aujourd'hui",
+        dhikrTitle: "Mon Dhikr Quotidien",
+        dhikrLabel: "Dhikr",
+        historyTitle: "Historique du Dhikr",
+        historyEmpty: "Aucun enregistrement.",
+        resetBtn: "RÉINITIALISER",
+        vibrateBtn: "VIBRER",
+        dhikrOptions: {
+            custom: "Dhikr Libre",
+            subhanallah: "Subhanallah (33)",
+            elhamdulillah: "Alhamdulillah (33)",
+            allahuekber: "Allahu Akbar (33)",
+            lailaheillallah: "La Ilaha Illallah (99)"
+        },
+        prayers: {
+            Imsak: "Imsak",
             Sunrise: "Lever",
-                Dhuhr: "Dhuhr",
-                    Asr: "Asr",
-                        Maghrib: "Maghrib",
-                            Isha: "Isha"
+            Dhuhr: "Dhuhr",
+            Asr: "Asr",
+            Maghrib: "Maghrib",
+            Isha: "Isha"
+        }
     }
-}
 };
 
 let currentLang = 'tr';
@@ -374,7 +375,23 @@ function setLanguage(lang) {
 
     // Update Dynamic Text (Countdown labels, Date, etc.)
     updateDate();
+    // Update Dynamic Text (Countdown labels, Date, etc.)
+    updateDate();
     updateCountdown();
+
+    // Update Flag Active State (Visual)
+    document.querySelectorAll('.flag-btn').forEach(btn => {
+        btn.classList.remove('active');
+        // Simple check if onclick contains the lang code is risky, let's use data attribute or just text
+        // Better: We should probably add data-lang to the buttons in HTML for easier selection, 
+        // but for now, checking the onclick string is "okay" or we can rely on order. 
+        // ACTUALLY: I put setLanguage('tr') in HTML. 
+        // Let's match based on function call string check or add data attributes in previous step (I did add data-lang? No I added onclick).
+        // I should have added data-lang. I will rely on checking the onclick attribute content for now as it Is reliable enough here.
+        if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`setLanguage('${lang}')`)) {
+            btn.classList.add('active');
+        }
+    });
 }
 
 function updateDate() {
@@ -517,12 +534,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sidebarOverlay) sidebarOverlay.addEventListener('click', toggleSidebar);
 
         // Language Selector Listener
-        const langSelect = document.getElementById('language-selector');
-        if (langSelect) {
-            langSelect.addEventListener('change', (e) => {
-                setLanguage(e.target.value);
-            });
-        }
+        // Language Selector Listener (REMOVED - now using onclick)
+        // const langSelect = document.getElementById('language-selector');
     } catch (e) {
         alert("Hata: " + e.message);
     }

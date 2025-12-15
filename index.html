@@ -71,15 +71,31 @@
                     <span class="icon">📍</span>
                     <span id="city-name">Konum Bulunuyor...</span>
                 </div>
-                <div class="language-selector-wrapper">
-                    <select id="language-selector" class="language-selector">
-                        <option value="tr">Türkçe</option>
-                        <option value="en">English</option>
-                        <option value="ar">العربية</option>
-                        <option value="id">Bahasa Indonesia</option>
-                        <option value="ur">اردو</option>
-                        <option value="fr">Français</option>
-                    </select>
+                <div class="language-flags" id="language-flags">
+                    <button class="flag-btn active" onclick="setLanguage('tr')" aria-label="Türkçe">
+                        <img src="https://flagcdn.com/w40/tr.png" alt="TR">
+                        <span class="flag-tooltip">Türkçe</span>
+                    </button>
+                    <button class="flag-btn" onclick="setLanguage('en')" aria-label="English">
+                        <img src="https://flagcdn.com/w40/gb.png" alt="EN">
+                        <span class="flag-tooltip">English</span>
+                    </button>
+                    <button class="flag-btn" onclick="setLanguage('ar')" aria-label="العربية">
+                        <img src="https://flagcdn.com/w40/sa.png" alt="AR">
+                        <span class="flag-tooltip">العربية</span>
+                    </button>
+                    <button class="flag-btn" onclick="setLanguage('id')" aria-label="Bahasa Indonesia">
+                        <img src="https://flagcdn.com/w40/id.png" alt="ID">
+                        <span class="flag-tooltip">Indonesia</span>
+                    </button>
+                    <button class="flag-btn" onclick="setLanguage('ur')" aria-label="اردو">
+                        <img src="https://flagcdn.com/w40/pk.png" alt="UR">
+                        <span class="flag-tooltip">اردو</span>
+                    </button>
+                    <button class="flag-btn" onclick="setLanguage('fr')" aria-label="Français">
+                        <img src="https://flagcdn.com/w40/fr.png" alt="FR">
+                        <span class="flag-tooltip">Français</span>
+                    </button>
                 </div>
             </div>
         </header>
