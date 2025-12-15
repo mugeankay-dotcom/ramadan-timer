@@ -1418,3 +1418,42 @@ body.prayers-mode .prayers-layout {
 .modal-overlay {
     z-index: 9999 !important;
 }
+
+/* ROUND 2 MOBILE REFINEMENTS */
+
+/* 1. Mobile Crystals Fix (Max Width 400px) */
+@media (max-width: 400px) {
+    .time-unit {
+        width: 65px !important;
+        height: 65px !important;
+    }
+    .time-unit .number {
+        font-size: 1.2rem !important;
+        margin-top: 3px !important;
+    }
+    .time-unit .label {
+        font-size: 0.45rem !important;
+    }
+}
+
+/* 2. Back Button Bottom-Left Alignment (Override) */
+.back-to-book-btn {
+    /* Reset auto margins from previous fix */
+    margin: 30px 0 30px 20px !important; /* Top Right Bottom Left */
+    align-self: flex-start !important; /* Push to left in flex container */
+    /* Ensure it stays static at bottom */
+    position: static !important;
+}
+
+/* 3. Smaller Zikirmatik Controls */
+.control-btn {
+    width: 80px !important;
+    height: 60px !important;
+    gap: 2px !important;
+}
+.control-btn .btn-icon {
+    font-size: 1.4rem !important;
+}
+.control-btn .btn-text {
+    font-size: 0.7rem !important;
+}
