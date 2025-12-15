@@ -496,9 +496,71 @@ function updateCountdown() {
         return;
     }
 
-    // Since we are likely testing for 2026, the above block runs.
-    // If inside Ramadan (future logic), we would use prayerTimesData here.
-    if (!prayerTimesData) return;
+    // If inside Ramadan (or after start date)
+    if (prayerTimesData) {
+        // Parse Prayer Times for TODAY
+        const imsakTime = parseTime(prayerTimesData.Imsak);
+        const maghribTime = parseTime(prayerTimesData.Maghrib);
+
+        let targetTime, labelText, eventName;
+
+        if (now < imsakTime) {
+            // Case 1: Before Imsak (Sahur Time)
+            targetTime = imsakTime;
+            labelText = t.imsakLeft;
+            eventName = t.prayers.Imsak;
+        } else if (now < maghribTime) {
+            // Case 2: Fasting Period (Counting to Iftar)
+            targetTime = maghribTime;
+            labelText = t.iftarLeft;
+            eventName = t.prayers.Maghrib;
+        } else {
+            // Case 3: After Iftar (Counting to Tomorrow's Imsak)
+            // Note: We are using Today's imsak + 24h as an approximation 
+            // OR ideally fetching tomorrow's data, but for simplicity + 24h is usually close enough 
+            // for the countdown until we fetch new data at midnight/refresh.
+            // Better: Create tomorrow's imsak date object.
+            targetTime = new Date(imsakTime);
+            targetTime.setDate(targetTime.getDate() + 1);
+            labelText = t.tomorrowImsak || t.imsakLeft;
+            eventName = t.prayers.Imsak;
+        }
+
+        elements.nextEventLabel.textContent = labelText;
+        elements.nextEventName.textContent = eventName;
+
+        const diff = targetTime - now;
+
+        // Render Countdown
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        // If > 24 hours (unlikely here but safety), add days to hours or show days
+        // For purely Iftar/Sahur, days are usually 0.
+        if (elements.days) {
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            elements.days.textContent = d.toString().padStart(2, '0');
+            elements.days.nextElementSibling.textContent = t.days;
+        }
+
+        elements.hours.textContent = h.toString().padStart(2, '0');
+        elements.hours.nextElementSibling.textContent = t.hours;
+
+        elements.minutes.textContent = m.toString().padStart(2, '0');
+        elements.minutes.nextElementSibling.textContent = t.minutes;
+
+        elements.seconds.textContent = s.toString().padStart(2, '0');
+        elements.seconds.nextElementSibling.textContent = t.seconds;
+    }
+}
+
+// Helper to parse "HH:mm" to Date object for today
+function parseTime(timeStr) {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes, 0, 0);
+    return date;
 }
 
 // --- INITIALIZATION WRAPPER ---
