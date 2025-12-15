@@ -1716,3 +1716,18 @@ body.prayers-mode .prayers-layout {
     display: none !important;
     content: none !important;
 }
+
+/* ROUND 10 FIX: TRANSPARENCY & BACKGROUND VISIBILITY */
+.prayer-book-item {
+    background: rgba(255, 255, 255, 0.35) !important; /* Much more transparent */
+    backdrop-filter: blur(3px) !important; /* Reduced blur to see background better */
+    border-left: 4px solid #d4af37 !important; /* Keep the gold border */
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important; /* Softer shadow */
+}
+
+/* Ensure text remains legible */
+.book-item-title {
+    font-weight: 700 !important; /* Bolder text for contrast */
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); /* Text pop */
+}
