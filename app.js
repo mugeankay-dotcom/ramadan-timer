@@ -554,10 +554,14 @@ function switchTab(tabId) {
     const activeBtn = Array.from(document.querySelectorAll('.sidebar-item')).find(btn => btn.getAttribute('onclick').includes(tabId));
     if (activeBtn) activeBtn.classList.add('active');
 
-    // Close Sidebar on Selection (Mobile friendly)
+    // Close Sidebar on Selection (Robust)
     const sidebar = document.getElementById('app-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+
+    // Always force close if active
     if (sidebar && sidebar.classList.contains('active')) {
-        toggleSidebar();
+        sidebar.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
     }
 }
 
@@ -658,9 +662,17 @@ function handleDhikrClick() {
     // History
     addToHistory(1);
 
-    // Vibrate
-    if (localStorage.getItem('isVibrateOn') === 'true' && navigator.vibrate) {
-        navigator.vibrate(50);
+    // Vibrate (Robust)
+    if (localStorage.getItem('isVibrateOn') === 'true') {
+        try {
+            if (navigator.vibrate) {
+                navigator.vibrate(100); // Increased duration
+            } else {
+                console.log('Vibration API not supported');
+            }
+        } catch (e) {
+            console.warn('Vibration failed', e);
+        }
     }
 
     // Animation

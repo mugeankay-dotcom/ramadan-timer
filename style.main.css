@@ -1394,3 +1394,27 @@ body.prayers-mode .prayers-layout {
         justify-content: center !important;
     }
 }
+
+/* MOBILE FIXES APPENDED */
+
+/* 1. Scrolling for Zikirmatik on Mobile */
+.dhikr-container {
+    overflow-y: auto !important;
+    justify-content: flex-start !important;
+    padding-bottom: 80px !important; /* Space for bottom controls */
+}
+
+/* 2. Back Button at Bottom (Override) */
+.back-to-book-btn {
+    position: static !important;
+    margin: 30px auto !important;
+    top: auto !important;
+    left: auto !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+}
+
+/* 3. Ensure History Modal is visible on top */
+.modal-overlay {
+    z-index: 9999 !important;
+}
