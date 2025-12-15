@@ -1766,3 +1766,15 @@ body.prayers-mode .prayers-layout {
 .prayer-book-item {
     border-left: none !important; 
 }
+
+/* ROUND 13 FIX: WHITE TITLES (Gold Rejected) */
+.book-item-title {
+    color: #ffffff !important; /* Pure White */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important; /* Stronger shadow for contrast */
+    font-weight: 600 !important; /* Slightly less bold than gold to look elegant */
+}
+
+/* Adjust separator to be white/transparent */
+.book-item-title {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
