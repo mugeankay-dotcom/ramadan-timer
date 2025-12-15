@@ -502,7 +502,7 @@ function updateCountdown() {
         const imsakTime = parseTime(prayerTimesData.Imsak);
         const maghribTime = parseTime(prayerTimesData.Maghrib);
 
-        let targetTime, labelText, eventName;
+        let targetTime, labelText, eventName, isIftar = false;
 
         if (now < imsakTime) {
             // Case 1: Before Imsak (Sahur Time)
@@ -514,6 +514,7 @@ function updateCountdown() {
             targetTime = maghribTime;
             labelText = t.iftarLeft;
             eventName = t.prayers.Maghrib;
+            isIftar = true; // Mark as Iftar countdown
         } else {
             // Case 3: After Iftar (Counting to Tomorrow's Imsak)
             // Note: We are using Today's imsak + 24h as an approximation 
@@ -531,6 +532,11 @@ function updateCountdown() {
 
         const diff = targetTime - now;
 
+        // CHECK ALERT (Only for Iftar as requested)
+        if (isIftar && diff <= 0 && diff > -5000) { // Trigger window of 5 seconds
+            triggerIftarAlert();
+        }
+
         // Render Countdown
         const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -541,18 +547,52 @@ function updateCountdown() {
         if (elements.days) {
             const d = Math.floor(diff / (1000 * 60 * 60 * 24));
             elements.days.textContent = d.toString().padStart(2, '0');
-            elements.days.nextElementSibling.textContent = t.days;
+            if (elements.days.nextElementSibling) elements.days.nextElementSibling.textContent = t.days;
         }
 
-        elements.hours.textContent = h.toString().padStart(2, '0');
-        elements.hours.nextElementSibling.textContent = t.hours;
+        // Safety check for negative (passed) times
+        if (diff < 0) {
+            elements.hours.textContent = "00";
+            elements.minutes.textContent = "00";
+            elements.seconds.textContent = "00";
+        } else {
+            elements.hours.textContent = h.toString().padStart(2, '0');
+            elements.hours.nextElementSibling.textContent = t.hours;
 
-        elements.minutes.textContent = m.toString().padStart(2, '0');
-        elements.minutes.nextElementSibling.textContent = t.minutes;
+            elements.minutes.textContent = m.toString().padStart(2, '0');
+            elements.minutes.nextElementSibling.textContent = t.minutes;
 
-        elements.seconds.textContent = s.toString().padStart(2, '0');
-        elements.seconds.nextElementSibling.textContent = t.seconds;
+            elements.seconds.textContent = s.toString().padStart(2, '0');
+            elements.seconds.nextElementSibling.textContent = t.seconds;
+        }
     }
+}
+
+// ALERT LOGIC
+let alertShown = false;
+function triggerIftarAlert() {
+    if (alertShown) return;
+    alertShown = true;
+
+    // 1. Browser Notification
+    if (Notification.permission === "granted") {
+        new Notification("İftar Vakti!", {
+            body: "Allah kabul etsin. Hayırlı iftarlar!",
+            icon: "icon-kabe-192.png"
+        });
+    }
+
+    // 2. Audible/Visual Alert
+    try {
+        navigator.vibrate([1000, 500, 1000]); // Vibrate 
+    } catch (e) { }
+
+    // 3. Simple Alert Modal
+    setTimeout(() => {
+        alert("📢 İFTAR VAKTİ! \n\nAllah orucunuzu kabul etsin.");
+        // Reset flag after 1 minute so it doesn't loop instantly but allows next day
+        setTimeout(() => { alertShown = false; }, 60000);
+    }, 500);
 }
 
 // Helper to parse "HH:mm" to Date object for today
@@ -565,6 +605,10 @@ function parseTime(timeStr) {
 
 // --- INITIALIZATION WRAPPER ---
 function init() {
+    // Request Permission
+    if ('Notification' in window && Notification.permission !== "granted") {
+        Notification.requestPermission();
+    }
     getLocation();
     updateDate();
     setInterval(updateDate, 60000);
