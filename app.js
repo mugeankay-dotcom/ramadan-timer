@@ -1,5 +1,5 @@
 const API_URL = 'https://api.aladhan.com/v1/timings';
-const RAMADAN_START_DATE = new Date('2026-02-18T00:00:00'); // Estimated Start
+const RAMADAN_START_DATE = new Date('2025-12-16T00:00:00'); // TEST MODE: Starts Tomorrow!
 
 // GLOBAL BLOCK: Disable Right-Click immediately (Capture Phase)
 window.addEventListener('contextmenu', (e) => {
