@@ -1741,3 +1741,28 @@ body.prayers-mode .prayers-layout {
     letter-spacing: 0.5px !important;
     font-family: 'Cinzel', serif !important; /* Ensure font persists */
 }
+
+/* ROUND 12 FIX: MINIMALIST TEXT-ONLY VIEW */
+.prayer-book-item {
+    background: none !important; /* Remove box background */
+    backdrop-filter: none !important; /* Remove blur */
+    border: none !important; /* Remove border */
+    box-shadow: none !important; /* Remove shadow */
+    margin-bottom: 5px !important; /* Tighter spacing */
+    padding: 8px 10px !important; /* Minimal padding */
+}
+
+/* Smaller Font Size as requested */
+.book-item-title {
+    font-size: 1.1rem !important; /* Reduced from 1.3rem */
+    text-shadow: 1px 1px 3px #000 !important; /* Strong shadow for readability */
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3) !important; /* Very subtle separator */
+    padding-bottom: 5px !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+/* Remove side gold border since box is gone */
+.prayer-book-item {
+    border-left: none !important; 
+}
