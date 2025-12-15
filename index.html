@@ -7,8 +7,8 @@
     <meta name="description" content="Ramazan 2026 Geri Sayım ve İmsakiye">
     <meta name="theme-color" content="#FFD700">
     <title>Ramazan 2026</title>
-    <link rel="stylesheet" href="style.css?v=41">
-    <link rel="manifest" href="manifest.json?v=41">
+    <link rel="stylesheet" href="style.main.css?v=52">
+    <link rel="manifest" href="manifest.json?v=50">
     <link rel="apple-touch-icon" href="icon-kabe-192.png">
     <link rel="icon" type="image/png" href="icon-kabe-512.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +16,42 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Outfit:wght@300;400;500;700&display=swap"
         rel="stylesheet">
+    <style>
+        /* CRITICAL DESKTOP FIX INJECTED DIRECTLY */
+        @media (min-width: 601px) {
+            .time-unit {
+                width: 90px !important;
+                height: 90px !important;
+                padding: 8px 0 !important;
+                margin: 0 5px !important;
+                background-size: contain !important;
+                flex-shrink: 0 !important;
+            }
+
+            .time-unit .number {
+                font-size: 1.5rem !important;
+                margin-top: 5px !important;
+                margin-bottom: 0 !important;
+                line-height: 1 !important;
+            }
+
+            .time-unit .label {
+                font-size: 0.5rem !important;
+                margin-top: 0 !important;
+            }
+
+            .time-unit::before {
+                display: none !important;
+                /* Hide tick */
+            }
+
+            .countdown-display {
+                gap: 15px !important;
+                padding: 0 10px !important;
+                justify-content: center !important;
+            }
+        }
+    </style>
 </head>
 
 <body oncontextmenu="return false;">
@@ -139,7 +175,7 @@
                     <div class="dhikr-header">
                         <h3>Günlük Zikirlerim</h3>
                         <select id="dhikr-selector" class="dhikr-selector">
-                            <option value="custom">custom</option>
+                            <option value="custom">Serbest Zikir</option>
                             <option value="subhanallah">Sübhanallah (33)</option>
                             <option value="elhamdulillah">Elhamdülillah (33)</option>
                             <option value="allahuekber">Allahuekber (33)</option>
@@ -154,54 +190,69 @@
                         </button>
                     </div>
 
-                    <div class="dhikr-controls">
-                        <button id="reset-btn" class="simple-action-btn" title="Sıfırla">
+                    <div class="zikirmatik-controls">
+                        <button id="reset-dhikr-btn" class="control-btn reset-btn">
                             <span class="btn-icon">🗑️</span>
-                            <span class="btn-text">SIFIRLA</span>
+                            <span class="btn-text">Sıfırla</span>
                         </button>
-                        <button id="vibrate-btn" class="simple-action-btn active" title="Titreşim">
+                        <button id="vibrate-btn" class="control-btn vibrate-btn active" title="Titreşim">
                             <span class="btn-icon">📳</span>
-                            <span class="btn-text">TİTREŞİM</span>
+                            <span class="btn-text">Titreşim</span>
+                        </button>
+                        <button id="history-btn" class="control-btn history-btn">
+                            <span class="btn-icon">📅</span>
+                            <span class="btn-text">Geçmiş</span>
                         </button>
                     </div>
                 </div>
             </div>
             <!-- PRAYERS VIEW -->
             <div id="prayers-view" class="view-section" style="display: none;">
-                <div class="prayers-layout">
-                    <!-- Left Side: List -->
-                    <div class="prayers-menu">
-                        <h3 class="prayers-menu-title" id="prayers-title-label">Dualar Listesi</h3>
-                        <div class="prayers-list" id="prayers-list">
-                            <!-- JS wll populate this -->
-                        </div>
+                <!-- Book Shelf View -->
+                <div id="prayers-book-container" class="book-container">
+                    <div class="book-spine"></div>
+                    <div class="book-page left" id="book-page-left">
+                        <!-- Left column items -->
                     </div>
+                    <div class="book-page right" id="book-page-right">
+                        <!-- Right column items -->
+                    </div>
+                </div>
 
-                    <!-- Right Side: Content (The Page) -->
-                    <div class="prayers-display">
-                        <div class="quran-page">
-                            <div class="page-content" id="prayer-display-area">
-                                <div class="placeholder-msg">
-                                    <span class="icon">📖</span>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Full Screen Detail View -->
+                <div id="prayer-detail-view" class="prayer-detail-view" style="display: none;">
+                    <button id="back-to-book-btn" class="back-to-book-btn" onclick="closePrayerDetail()">
+                        <span class="icon">⬅️</span> Geri
+                    </button>
+                    <div id="prayer-content-full" class="prayer-content-full">
+                        <!-- Content injected here -->
                     </div>
                 </div>
             </div>
         </main>
+
+        <!-- History Modal -->
+        <div id="history-modal-overlay" class="modal-overlay">
+            <div class="history-modal-content">
+                <div class="modal-header">
+                    <h3 id="history-modal-title">Zikir Geçmişi</h3>
+                    <button id="close-history-btn" class="close-modal">&times;</button>
+                </div>
+                <ul id="history-list">
+                    <!-- Items will be injected here -->
+                </ul>
+            </div>
+        </div>
     </div>
 
-    <script src="app.js?v=36"></script>
+    <script src="app.js?v=50"></script>
     <script>
-        // FORCE UPDATE: Unregister previous Service Workers to clear cache
+        // EMERGENCY: Unregister ALL Service Workers to fix caching issues
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(function (registrations) {
                 for (let registration of registrations) {
-                    registration.unregister()
-                        .then(function (boolean) {
-                            if (boolean) console.log('Service Worker unregistered.');
-                        });
+                    registration.unregister();
+                    console.log('SW Unregistered - Forced Update');
                 }
             });
         }

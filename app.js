@@ -29,6 +29,8 @@ const translations = {
         // Zikirmatik translation
         dhikrTitle: "Günlük Zikirlerim",
         dhikrLabel: "Zikir",
+        historyTitle: "Zikir Geçmişi",
+        historyEmpty: "Henüz kayıt yok.",
         resetBtn: "SIFIRLA",
         vibrateBtn: "TİTREŞİM",
         dhikrOptions: {
@@ -66,6 +68,8 @@ const translations = {
         // Zikirmatik translation
         dhikrTitle: "My Daily Dhikr",
         dhikrLabel: "Dhikr",
+        historyTitle: "Dhikr History",
+        historyEmpty: "No records yet.",
         resetBtn: "RESET",
         vibrateBtn: "VIBRATE",
         dhikrOptions: {
@@ -103,6 +107,8 @@ const translations = {
         // Zikirmatik translation
         dhikrTitle: "أذكاري اليومية",
         dhikrLabel: "ذكر",
+        historyTitle: "سجل الذكر",
+        historyEmpty: "لا توجد سجلات بعد.",
         resetBtn: "إعادة تعيين",
         vibrateBtn: "اهتزاز",
         dhikrOptions: {
@@ -139,6 +145,8 @@ const translations = {
         todayPrayers: "Jadwal Sholat Hari Ini",
         dhikrTitle: "Dzikir Harian Saya",
         dhikrLabel: "Dzikir",
+        historyTitle: "Riwayat Dzikir",
+        historyEmpty: "Belum ada catatan.",
         resetBtn: "RESET",
         vibrateBtn: "GETAR",
         dhikrOptions: {
@@ -175,6 +183,8 @@ const translations = {
         todayPrayers: "آج کے نماز کے اوقات",
         dhikrTitle: "میرے روزانہ کے اذکار",
         dhikrLabel: "ذکر",
+        historyTitle: "ذکر کی تاریخ",
+        historyEmpty: "ابھی تک کوئی ریکارڈ نہیں ہے۔",
         resetBtn: "ری سیٹ",
         vibrateBtn: "تھر تھراہٹ",
         dhikrOptions: {
@@ -212,6 +222,8 @@ const translations = {
         todayPrayers: "Prières d'aujourd'hui",
         dhikrTitle: "Mon Dhikr Quotidien",
         dhikrLabel: "Dhikr",
+        historyTitle: "Historique du Dhikr",
+        historyEmpty: "Aucun enregistrement.",
         resetBtn: "RÉINITIALISER",
         vibrateBtn: "VIBRER",
         dhikrOptions: {
@@ -286,6 +298,12 @@ function setLanguage(lang) {
     // Update Zikirmatik Text
     if (elements.dhikrTitle) elements.dhikrTitle.textContent = t.dhikrTitle;
     if (elements.dhikrLabel) elements.dhikrLabel.textContent = t.dhikrLabel;
+
+    // Update History Modal Title
+    const historyTitle = document.getElementById('history-modal-title');
+    if (historyTitle && t.historyTitle) {
+        historyTitle.textContent = t.historyTitle;
+    }
 
     // Update Control Buttons (Text + Title)
     if (elements.resetBtn) {
@@ -503,8 +521,17 @@ function switchTab(tabId) {
     // Show selected view
     const selectedView = document.getElementById(`${tabId}-view`);
     if (selectedView) {
-        selectedView.style.display = 'block';
+        selectedView.style.display = 'flex';
         setTimeout(() => selectedView.classList.add('active'), 10); // Fade in
+
+        // Special reset for Prayers View to ensure Book is visible
+        if (tabId === 'prayers') {
+            const bookContainer = document.getElementById('prayers-book-container');
+            const detailView = document.getElementById('prayer-detail-view');
+            if (bookContainer) bookContainer.style.display = 'flex';
+            if (detailView) detailView.style.display = 'none';
+            renderPrayers(); // Ensure content is rendered
+        }
     }
 
     // Toggle Header & Background Mode
@@ -528,70 +555,88 @@ function switchTab(tabId) {
     if (activeBtn) activeBtn.classList.add('active');
 
     // Close Sidebar on Selection (Mobile friendly)
-    if (sidebar.classList.contains('active')) {
+    const sidebar = document.getElementById('app-sidebar');
+    if (sidebar && sidebar.classList.contains('active')) {
         toggleSidebar();
     }
 }
 
+// ZIKIRMATIK LOGIC
 let dhikrCount = 0;
-let isVibrateOn = true;
+let dhikrHistory = {}; // Store daily history { "YYYY-MM-DD": count }
+let isVibrateOn = true; // Default to true
 
 function initZikirmatik() {
     const btn = document.getElementById('dhikr-btn');
-    const resetBtn = document.getElementById('reset-btn');
+    const resetBtn = document.getElementById('reset-dhikr-btn');
     const vibrateBtn = document.getElementById('vibrate-btn');
-    const countDisplay = document.getElementById('dhikr-count');
-    const selector = document.getElementById('dhikr-selector');
+    const historyBtn = document.getElementById('history-btn');
+    const closeHistoryBtn = document.getElementById('close-history-btn');
+    const countDisplay = document.getElementById('dhikr-display') || document.getElementById('dhikr-count');
 
-    // Load State
-    if (localStorage.getItem('dhikrCount')) {
-        dhikrCount = parseInt(localStorage.getItem('dhikrCount'));
-        countDisplay.textContent = dhikrCount;
+    // Load Session Count
+    const savedCount = localStorage.getItem('dhikrCount');
+    if (savedCount) {
+        dhikrCount = parseInt(savedCount, 10);
+        if (countDisplay) countDisplay.textContent = dhikrCount;
     }
+
+    // Load History
+    const savedHistory = localStorage.getItem('dhikrHistory');
+    if (savedHistory) {
+        try {
+            dhikrHistory = JSON.parse(savedHistory);
+        } catch (e) {
+            console.error("History parse error", e);
+            dhikrHistory = {};
+        }
+    }
+    // Load Vibrate State
     if (localStorage.getItem('isVibrateOn')) {
         isVibrateOn = localStorage.getItem('isVibrateOn') === 'true';
-        updateVibrateBtnUI();
+        if (vibrateBtn) updateVibrateBtnUI();
     }
 
-    // Counter Click
-    btn.addEventListener('click', () => {
-        dhikrCount++;
-        countDisplay.textContent = dhikrCount;
+    // Event Listeners
+    if (btn) btn.addEventListener('click', handleDhikrClick);
 
-        // Vibrate
-        if (isVibrateOn && navigator.vibrate) {
-            navigator.vibrate(30); // Short tick
-        }
-
-        // Animation Effect (JS triggered class or pure CSS active)
-        // CSS :active handles mostly, but we can add pop effect
-
-        saveDhikrState();
-    });
-
-    // Reset Click
-    resetBtn.addEventListener('click', () => {
-        if (confirm('Sayaç sıfırlansın mı?')) {
-            dhikrCount = 0;
-            countDisplay.textContent = dhikrCount;
-            saveDhikrState();
-        }
-    });
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            if (confirm(translations[currentLang].resetConfirm || "Sıfırlamak istediğinize emin misiniz?")) {
+                dhikrCount = 0;
+                if (countDisplay) countDisplay.textContent = dhikrCount;
+                saveDhikrState();
+            }
+        });
+    }
 
     // Vibrate Toggle
-    vibrateBtn.addEventListener('click', () => {
-        isVibrateOn = !isVibrateOn;
-        updateVibrateBtnUI();
-        saveDhikrState();
+    if (vibrateBtn) {
+        vibrateBtn.addEventListener('click', () => {
+            isVibrateOn = !isVibrateOn;
+            updateVibrateBtnUI();
+            saveDhikrState();
+        });
+    }
+
+    // History Modal Listeners
+    if (historyBtn) historyBtn.addEventListener('click', openHistoryModal);
+    if (closeHistoryBtn) closeHistoryBtn.addEventListener('click', closeHistoryModal);
+
+    // Close modal on outside click
+    const historyOverlay = document.getElementById('history-modal-overlay');
+    if (historyOverlay) historyOverlay.addEventListener('click', (e) => {
+        if (e.target === historyOverlay) closeHistoryModal();
     });
 
     function updateVibrateBtnUI() {
+        if (!vibrateBtn) return;
         if (isVibrateOn) {
             vibrateBtn.classList.add('active');
-            vibrateBtn.innerHTML = '<span class="btn-icon">📳</span>';
+            vibrateBtn.innerHTML = '<span class="btn-icon">📳</span><span class="btn-text">TİTREŞİM</span>';
         } else {
             vibrateBtn.classList.remove('active');
-            vibrateBtn.innerHTML = '<span class="btn-icon">📴</span>';
+            vibrateBtn.innerHTML = '<span class="btn-icon">📴</span><span class="btn-text">TİTREŞİM</span>';
         }
     }
 
@@ -599,6 +644,79 @@ function initZikirmatik() {
         localStorage.setItem('dhikrCount', dhikrCount);
         localStorage.setItem('isVibrateOn', isVibrateOn);
     }
+}
+
+// Helper Functions (Must be defined!)
+function handleDhikrClick() {
+    dhikrCount++;
+    const display = document.getElementById('dhikr-display') || document.getElementById('dhikr-count');
+    if (display) display.textContent = dhikrCount;
+
+    // Save
+    localStorage.setItem('dhikrCount', dhikrCount);
+
+    // History
+    addToHistory(1);
+
+    // Vibrate
+    if (localStorage.getItem('isVibrateOn') === 'true' && navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+
+    // Animation
+    const btn = document.getElementById('dhikr-btn');
+    if (btn) {
+        btn.classList.add('clicked');
+        setTimeout(() => btn.classList.remove('clicked'), 100);
+    }
+}
+
+function addToHistory(amount) {
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+    if (!dhikrHistory[today]) {
+        dhikrHistory[today] = 0;
+    }
+    dhikrHistory[today] += amount;
+    localStorage.setItem('dhikrHistory', JSON.stringify(dhikrHistory));
+}
+
+function openHistoryModal() {
+    renderHistoryList();
+    const overlay = document.getElementById('history-modal-overlay');
+    if (overlay) overlay.classList.add('active');
+}
+
+function closeHistoryModal() {
+    const overlay = document.getElementById('history-modal-overlay');
+    if (overlay) overlay.classList.remove('active');
+}
+
+function renderHistoryList() {
+    const listContainer = document.getElementById('history-list');
+    if (!listContainer) return;
+
+    listContainer.innerHTML = '';
+
+    const sortedDates = Object.keys(dhikrHistory).sort((a, b) => new Date(b) - new Date(a));
+
+    if (sortedDates.length === 0) {
+        const emptyMsg = translations[currentLang].historyEmpty || "Henüz kayıt yok.";
+        listContainer.innerHTML = `<li class="empty-msg">${emptyMsg}</li>`;
+        return;
+    }
+
+    sortedDates.forEach(date => {
+        const count = dhikrHistory[date];
+        const li = document.createElement('li');
+        const dateObj = new Date(date);
+        const dateStr = dateObj.toLocaleDateString('tr-TR');
+
+        li.innerHTML = `
+            <span class="history-date">${dateStr}</span>
+            <span class="history-count">${count}</span>
+        `;
+        listContainer.appendChild(li);
+    });
 }
 
 // --- PRAYERS (DUALAR) LOGIC ---
@@ -643,7 +761,7 @@ const prayersData = [
         title: "Nazar Duası (Kalem 51-52)",
         arabic: "وَإِن يَكَادُ الَّذِينَ كَفَرُوا لَيُزْلِقُونَكَ بِأَبْصَارِهِمْ لَمَّا سَمِعُوا الذِّكْرَ وَيَقُولُونَ إِنَّهُ لَمَجْنُونٌ<br>وَمَا هُوَ إِلَّا ذِكْرٌ لِّلْعَالَمِينَ",
         reading: "Ve in yekâdüllezîne keferû leyüzlikûneke biebsârihim lemmâ semiûz zikra ve yekûlûne innehû lemecnûn. Ve mâ hüve illâ zikrun lil âlemîn.",
-        meaning: "O inkâr edenler Zikr'i (Kur'an'ı) işittikleri zaman, seni neredeyse gözleriyle devireceklerdi. 'O, gerçekten bir delidir' diyorlar. Oysa o (Kur'an), âlemler için ancak bir öğüttür."
+        meaning: "O inkâr edenler Zikr'i (Kur'an'ı) işittikleri zaman, seni neredeyse gözleriyle devireceklerdi. 'O, gerçekten bir delidir' diyorlar. Oysa o (Kur'an), âlemlerin için ancak bir öğüttür."
     },
     {
         id: "yemek",
@@ -662,36 +780,55 @@ const prayersData = [
 ];
 
 function renderPrayers() {
-    const listContainer = document.getElementById('prayers-list');
-    if (!listContainer) return;
+    const leftPage = document.getElementById('book-page-left');
+    const rightPage = document.getElementById('book-page-right');
 
-    listContainer.innerHTML = '';
+    // Check if new containers exist, if not, wait or return (safety)
+    if (!leftPage || !rightPage) return;
 
-    prayersData.forEach(dua => {
+    leftPage.innerHTML = '';
+    rightPage.innerHTML = '';
+
+    // Split data into two columns
+    const midPoint = Math.ceil(prayersData.length / 2);
+
+    prayersData.forEach((dua, index) => {
         const item = document.createElement('div');
-        item.className = 'prayer-menu-item';
+        item.className = 'prayer-book-item';
         item.onclick = () => displayPrayer(dua.id);
         item.innerHTML = `
-            <span class="icon">📜</span>
-            <span class="label">${dua.title}</span>
+            <span class="book-item-number">${index + 1}.</span>
+            <span class="book-item-title">${dua.title}</span>
         `;
-        listContainer.appendChild(item);
+
+        if (index < midPoint) {
+            leftPage.appendChild(item);
+        } else {
+            rightPage.appendChild(item);
+        }
     });
 }
 
-function displayPrayer(id, doScroll = true) {
-    const displayArea = document.getElementById('prayer-display-area');
+function displayPrayer(id) {
+    const bookContainer = document.getElementById('prayers-book-container');
+    const detailView = document.getElementById('prayer-detail-view');
+    const displayArea = document.getElementById('prayer-content-full');
     const dua = prayersData.find(p => p.id === id);
+
     if (!dua || !displayArea) return;
 
-    // Highlight active menu item
-    document.querySelectorAll('.prayer-menu-item').forEach(el => el.classList.remove('active'));
-    // Find the clicked item - simplified approach:
-    // (A more robust way would be to pass 'this' or store reference, but this is fine)
+    // Toggle Views
+    bookContainer.style.display = 'none';
+    detailView.style.display = 'flex'; // Full screen flex
+
+    // Animate fade in
+    setTimeout(() => {
+        detailView.classList.add('active');
+    }, 10);
 
     // Render Content
-    const readingLabel = currentLang === 'tr' ? 'Okunuşu:' : (currentLang === 'en' ? 'Transliteration:' : 'Reading:');
-    const meaningLabel = currentLang === 'tr' ? 'Anlamı:' : (currentLang === 'en' ? 'Meaning:' : (currentLang === 'fr' ? 'Sens:' : 'Meaning:'));
+    const readingLabel = currentLang === 'tr' ? 'Okunuşu:' : 'Reading:';
+    const meaningLabel = currentLang === 'tr' ? 'Anlamı:' : 'Meaning:';
 
     displayArea.innerHTML = `
         <div class="prayer-page-header fade-appear">
@@ -713,13 +850,24 @@ function displayPrayer(id, doScroll = true) {
         </div>
     `;
 
-    // Auto scroll to top of display on mobile
-    if (doScroll && window.innerWidth < 768) {
-        document.querySelector('.prayers-display').scrollIntoView({ behavior: 'smooth' });
+    // Scroll to top
+    displayArea.scrollTop = 0;
+}
+
+function closePrayerDetail() {
+    const bookContainer = document.getElementById('prayers-book-container');
+    const detailView = document.getElementById('prayer-detail-view');
+
+    if (detailView) {
+        detailView.classList.remove('active');
+        setTimeout(() => {
+            detailView.style.display = 'none';
+            if (bookContainer) bookContainer.style.display = 'flex';
+        }, 300); // Wait for transition
     }
 }
 
-// Initial Render call inside init or DOMContentLoaded (added manually above already?)
+// Initial Render
 document.addEventListener('DOMContentLoaded', () => {
     // ... Existing logic ...
     renderPrayers();
