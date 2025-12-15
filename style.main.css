@@ -1731,3 +1731,13 @@ body.prayers-mode .prayers-layout {
     font-weight: 700 !important; /* Bolder text for contrast */
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); /* Text pop */
 }
+
+/* ROUND 11 FIX: GOLD TITLES & VISIBILITY */
+.book-item-title {
+    color: #FFD700 !important; /* Bright Gold */
+    font-size: 1.3rem !important; /* Larger */
+    font-weight: 800 !important; /* Extra Bold */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important; /* Strong dark shadow for contrast */
+    letter-spacing: 0.5px !important;
+    font-family: 'Cinzel', serif !important; /* Ensure font persists */
+}
