@@ -1,0 +1,28 @@
+/* Patch CSS to fix issues without touching corrupted style.main.css */
+
+/* USER REQUEST 2025-12-15: Center Date/Label and Match Title Color */
+.timer-header {
+    text-align: center !important;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#next-event-label {
+    text-align: center !important;
+    color: #FFD700 !important;
+    /* Gold to match Hoşgeldin Ramazan */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    margin-bottom: 10px !important;
+}
+
+#next-event-name {
+    text-align: center !important;
+    width: 100%;
+}
+
+.countdown-display {
+    justify-content: center !important;
+}
