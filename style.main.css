@@ -1627,3 +1627,36 @@ body.prayers-mode .prayers-layout {
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 
+
+/* ROUND 5 REFINEMENTS: COMPACT & ELEGANT */
+
+/* 1. Typography & Font */
+.book-item-title {
+    font-family: 'Cinzel', serif !important; /* Elegant font */
+    font-size: 1.1rem !important; /* Smaller size */
+    font-weight: 600 !important;
+    color: #4a3b2a !important; /* Dark Brown */
+}
+
+/* 2. Compact Sizing */
+.prayer-book-item {
+    padding: 15px 20px !important; /* Reduced padding */
+    margin-bottom: 12px !important; /* Reduced margin */
+    border-radius: 12px !important; /* Sharper corners */
+    min-height: auto !important;
+    
+    /* 4. Chic Factor: Gold Left Border */
+    border-left: 4px solid #d4af37 !important;
+}
+
+/* 3. Remove Arrow/Icon */
+.prayer-book-item::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Adjust Number styling to match */
+.book-item-number {
+    font-size: 1.1rem !important; /* Match title size */
+    margin-right: 15px !important;
+}
