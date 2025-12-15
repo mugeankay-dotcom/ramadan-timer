@@ -1689,3 +1689,14 @@ body.prayers-mode .prayers-layout {
     margin-bottom: 8px !important; /* Reduced from 12px */
     padding: 12px 15px !important; /* Slightly tighter padding */
 }
+
+/* ROUND 7 FIX: VISIBLE SYMBOLS */
+
+.book-item-title::before {
+    content: '?' !important; /* Safer 'Sparkle' symbol */
+    font-family: Arial, sans-serif !important; /* Force standard font for symbol */
+    color: #d4af37 !important;
+    margin-right: 8px !important;
+    font-size: 1.2rem !important; /* Slightly larger */
+    display: inline-block !important;
+}
