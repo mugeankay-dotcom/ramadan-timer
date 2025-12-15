@@ -379,19 +379,10 @@ function setLanguage(lang) {
     updateDate();
     updateCountdown();
 
-    // Update Flag Active State (Visual)
-    document.querySelectorAll('.flag-btn').forEach(btn => {
-        btn.classList.remove('active');
-        // Simple check if onclick contains the lang code is risky, let's use data attribute or just text
-        // Better: We should probably add data-lang to the buttons in HTML for easier selection, 
-        // but for now, checking the onclick string is "okay" or we can rely on order. 
-        // ACTUALLY: I put setLanguage('tr') in HTML. 
-        // Let's match based on function call string check or add data attributes in previous step (I did add data-lang? No I added onclick).
-        // I should have added data-lang. I will rely on checking the onclick attribute content for now as it Is reliable enough here.
-        if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`setLanguage('${lang}')`)) {
-            btn.classList.add('active');
-        }
-    });
+    // Sync Dropdown (if user changed it via code or stored pref)
+    if (elements.languageSelector) {
+        elements.languageSelector.value = lang;
+    }
 }
 
 function updateDate() {
@@ -534,8 +525,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sidebarOverlay) sidebarOverlay.addEventListener('click', toggleSidebar);
 
         // Language Selector Listener
-        // Language Selector Listener (REMOVED - now using onclick)
-        // const langSelect = document.getElementById('language-selector');
+        const langSelect = document.getElementById('language-selector');
+        if (langSelect) {
+            langSelect.addEventListener('change', (e) => {
+                setLanguage(e.target.value);
+            });
+        }
     } catch (e) {
         alert("Hata: " + e.message);
     }
