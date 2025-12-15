@@ -784,10 +784,10 @@ const prayersData = [
     },
     {
         id: "rabbena",
-        title: "Rabbena Atina",
-        arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
-        reading: "Rabbenâ âtinâ fiddünyâ haseneten ve fil âhireti haseneten ve kınâ azâbennâr.",
-        meaning: "Rabbimiz! Bize dünyada da iyilik ver, ahirette de iyilik ver ve bizi ateş azabından koru."
+        title: "Rabbena Duaları",
+        arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ<br><br>رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ",
+        reading: "<strong>Rabbena Atina:</strong><br>Rabbenâ âtinâ fiddünyâ haseneten ve fil âhireti haseneten ve kınâ azâbennâr.<br><br><strong>Rabbenağfirli:</strong><br>Rabbenâğfirlî ve li-vâlideyye ve lil-mü'minîne yevme yekûmül hisâb.",
+        meaning: "<strong>Rabbena Atina:</strong><br>Rabbimiz! Bize dünyada da iyilik ver, ahirette de iyilik ver ve bizi ateş azabından koru.<br><br><strong>Rabbenağfirli:</strong><br>Rabbimiz! Beni, anamı-babamı ve bütün mü'minleri hesap gününde (herkesin sorguya çekileceği günde) bağışla."
     },
 ];
 
