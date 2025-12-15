@@ -809,8 +809,10 @@ function renderPrayers() {
         item.className = 'prayer-book-item';
         item.onclick = () => displayPrayer(dua.id);
         item.innerHTML = `
-            <span class="book-item-number">${index + 1}.</span>
-            <span class="book-item-title">${dua.title}</span>
+            <span class="book-item-title" style="display: flex; align-items: center;">
+                <span style="font-family: Arial, sans-serif; font-size: 2rem; color: #d4af37; margin-right: 12px; line-height: 0.7;">•</span>
+                ${dua.title}
+            </span>
         `;
 
         if (index < midPoint) {

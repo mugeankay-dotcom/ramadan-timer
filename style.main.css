@@ -1710,3 +1710,9 @@ body.prayers-mode .prayers-layout {
     line-height: 0.8 !important; /* Center vertically */
     color: #d4af37 !important;
 }
+
+/* ROUND 9 FIX: CLEANUP FOR JS INJECTION */
+.book-item-title::before {
+    display: none !important;
+    content: none !important;
+}
