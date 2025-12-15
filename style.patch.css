@@ -1,5 +1,12 @@
 /* Patch CSS to fix issues without touching corrupted style.main.css */
 
+/* FORCE MAIN TITLE GOLD */
+#app-title,
+h1 {
+    color: #FFD700 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
 /* USER REQUEST 2025-12-15: Center Date/Label and Match Title Color */
 .timer-header {
     text-align: center !important;
