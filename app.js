@@ -614,14 +614,8 @@ function initZikirmatik() {
         });
     }
 
-    // Vibrate Toggle
-    if (vibrateBtn) {
-        vibrateBtn.addEventListener('click', () => {
-            isVibrateOn = !isVibrateOn;
-            updateVibrateBtnUI();
-            saveDhikrState();
-        });
-    }
+    // Vibrate Toggle (REMOVED UI, but kept logic default ON)
+    // if (vibrateBtn) { ... }
 
     // History Modal Listeners
     if (historyBtn) historyBtn.addEventListener('click', openHistoryModal);
@@ -721,7 +715,8 @@ function renderHistoryList() {
         const count = dhikrHistory[date];
         const li = document.createElement('li');
         const dateObj = new Date(date);
-        const dateStr = dateObj.toLocaleDateString('tr-TR');
+        const locale = currentLang === 'tr' ? 'tr-TR' : currentLang;
+        const dateStr = dateObj.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' });
 
         li.innerHTML = `
             <span class="history-date">${dateStr}</span>
@@ -986,6 +981,72 @@ function displayPrayer(id) {
                 title: "Surah Yasin (Full)",
                 meaning: "<i>(English translation for full Surah Yasin is coming soon in the next update.)</i>"
             }
+        },
+        fr: {
+            fatiha: {
+                title: "Sourate Al-Fatiha",
+                meaning: "Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux.<br>Louange à Allah, Seigneur de l'univers.<br>Le Tout Miséricordieux, le Très Miséricordieux.<br>Maître du Jour de la Rétribution.<br>C'est Toi Seul que nous adorons, et Toi Seul dont nous implorons l'aide.<br>Guide-nous sur la voie droite,<br>La voie de ceux que Tu as comblés de bienfaits, non celle de ceux qui ont encouru Ta colère, ni celle des égarés."
+            },
+            ayetelkursi: {
+                title: "Ayat al-Kursi",
+                meaning: "Allah! Point de divinité à part Lui, le Vivant, Celui qui subsiste par lui-même. Ni somnolence ni sommeil ne Le saisissent. À Lui appartient tout ce qui est dans les cieux et sur la terre. Qui peut intercéder auprès de Lui sans Sa permission? Il connaît leur passé et leur futur. Et, de Sa science, ils n'embrassent que ce qu'Il veut. Son Trône déborde les cieux et la terre, dont la garde ne Lui coûte aucune peine. Et Il est le Très Haut, le Très Grand."
+            },
+            fil: {
+                title: "Sourate Al-Fil",
+                meaning: "N'as-tu pas vu comment ton Seigneur a agi envers les gens de l'Éléphant?<br>N'a-t-Il pas rendu leur ruse complètement vaine?<br>Et envoyé sur eux des oiseaux par volées,<br>qui leur lançaient des pierres d'argile?<br>Et Il les a rendus semblables à une paille mâchée."
+            },
+            kureys: {
+                title: "Sourate Quraish",
+                meaning: "À cause du pacte des Quraysh,<br>De leur pacte [concernant] les voyages d'hiver et d'été.<br>Qu'ils adorent donc le Seigneur de cette Maison (la Kaaba),<br>Qui les a nourris contre la faim et rassurés de la crainte!"
+            },
+            maun: {
+                title: "Sourate Al-Ma'un",
+                meaning: "Vois-tu celui qui traite de mensonge la Rétribution?<br>C'est bien lui qui repousse l'orphelin,<br>Et qui n'encourage point à nourrir le pauvre.<br>Malheur donc, à ceux qui prient<br>tout en négligeant (et retardant) leur Salat,<br>Qui sont pleins d'ostentation,<br>Et refusent l'ustensile (l'aide)."
+            },
+            kevser: {
+                title: "Sourate Al-Kawthar",
+                meaning: "Nous t'avons certes, accordé l'Abondance.<br>Accomplis la Salat pour ton Seigneur et sacrifie.<br>Celui qui te hait sera certes, sans postérité."
+            },
+            kafirun: {
+                title: "Sourate Al-Kafirun",
+                meaning: "Dis: «Ô vous les infidèles!<br>Je n'adore pas ce que vous adorez.<br>Et vous n'êtes pas adorateurs de ce que j'adore.<br>Je ne suis pas adorateur de ce que vous adorez.<br>Et vous n'êtes pas adorateurs de ce que j'adore.<br>À vous votre religion, et à moi ma religion.»"
+            },
+            nasr: {
+                title: "Sourate An-Nasr",
+                meaning: "Lorsque vient le secours d'Allah ainsi que la victoire,<br>Et que tu vois les gens entrer en foule dans la religion d'Allah,<br>Alors, par la louange, célèbre la gloire de ton Seigneur et implore Son pardon. Car c'est Lui qui accueille toujours le repentir."
+            },
+            tebbet: {
+                title: "Sourate Al-Masad",
+                meaning: "Que périssent les deux mains d'Abû-Lahab et que lui-même périsse.<br>Sa fortune ne lui sert à rien, ni ce qu'il a acquis.<br>Il sera brûlé dans un Feu plein de flammes,<br>De même sa femme, la porteuse de bois,<br>À son cou, une corde de fibres."
+            },
+            ihlas: {
+                title: "Sourate Al-Ikhlas",
+                meaning: "Dis: «Il est Allah, Unique.<br>Allah, Le Seul à être imploré pour ce que nous désirons.<br>Il n'a jamais engendré, n'a pas été engendré non plus.<br>Et nul n'est égal à Lui.»"
+            },
+            felak: {
+                title: "Sourate Al-Falaq",
+                meaning: "Dis: «Je cherche protection auprès du Seigneur de l'aube naissante,<br>Contre le mal des êtres qu'Il a créés,<br>Contre le mal de l'obscurité quand elle s'approfondit,<br>Contre le mal de celles qui soufflent (les sorcières) sur les nœuds,<br>Et contre le mal de l'envieux quand il envie.»"
+            },
+            nas: {
+                title: "Sourate An-Nas",
+                meaning: "Dis: «Je cherche protection auprès du Seigneur des hommes.<br>Le Souverain des hommes,<br>Dieu des hommes,<br>Contre le mal du mauvais conseiller, furtif,<br>Qui souffle le mal dans les poitrines des hommes,<br>Qu'il (le conseiller) soit un djinn, ou un être humain.»"
+            },
+            nazar: {
+                title: "Prière de Protection (Nazar)",
+                meaning: "Peu s'en faut que ceux qui mécroient ne te transpercent par leurs regards, quand ils entendent le Coran, ils disent: «Il est certes fou!» Et ce n'est qu'un Rappel, adressé aux mondes. (Al-Qalam 51-52)"
+            },
+            yemek: {
+                title: "Prière Après le Repas",
+                meaning: "Louange à Allah qui nous a nourris, nous a abreuvés et nous a fait Musulmans."
+            },
+            rabbena: {
+                title: "Prières Rabbana",
+                meaning: "<strong>Rabbana Atina:</strong><br>Seigneur! Accorde-nous belle part ici-bas, et belle part aussi dans l'au-delà; et protège-nous du châtiment du Feu!<br><br><strong>Rabbeneğfirli:</strong><br>Ô notre Seigneur! Pardonne-moi, ainsi qu'à mes père et mère et aux croyants, le jour de la reddition des comptes."
+            },
+            yasin: {
+                title: "Sourate Yasin",
+                meaning: "<i>(La traduction française de la sourate Yasin sera bientôt disponible.)</i>"
+            }
         }
     };
 
@@ -994,14 +1055,13 @@ function displayPrayer(id) {
 
     // Apply Translation if available and not Turkish
     if (currentLang !== 'tr') {
-        // Default to English if specific lang not available yet
-        const targetLang = prayerTranslations[currentLang] ? currentLang : 'en';
+        const targetLang = prayerTranslations[currentLang] ? currentLang : 'en'; // Default to EN if lang missing
 
         if (prayerTranslations[targetLang] && prayerTranslations[targetLang][dua.id]) {
             displayTitle = prayerTranslations[targetLang][dua.id].title;
             displayMeaning = prayerTranslations[targetLang][dua.id].meaning;
-        } else if (targetLang === 'en' && prayerTranslations['en'][dua.id]) {
-            // Fallback to English if e.g. 'fr' is selected but not defined, use 'en'
+        } else if (targetLang !== 'en' && prayerTranslations['en'] && prayerTranslations['en'][dua.id]) {
+            // Second fallback to English
             displayTitle = prayerTranslations['en'][dua.id].title;
             displayMeaning = prayerTranslations['en'][dua.id].meaning;
         }
