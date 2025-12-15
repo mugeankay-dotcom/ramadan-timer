@@ -1539,3 +1539,91 @@ body.prayers-mode .prayers-layout {
     padding-bottom: 100px !important; /* More space at bottom */
 }
 
+
+/* ROUND 4 REDESIGN: L2 (LARGE FEED) + THEME B (MODERN GLASS) */
+
+/* Reset Book Container for Feed Layout */
+.book-container {
+    display: flex !important;
+    flex-direction: column !important; /* Single Column */
+    background: transparent !important; /* No container styling */
+    border: none !important;
+    box-shadow: none !important;
+    padding: 10px !important;
+    overflow-y: auto !important; /* Scroll entire feed */
+    height: calc(100vh - 120px) !important;
+    gap: 20px !important;
+}
+
+/* Unwrap Pages */
+.book-page {
+    display: contents !important; /* Treat children as direct children of container */
+    padding: 0 !important;
+    border: none !important;
+}
+
+.book-spine {
+    display: none !important;
+}
+
+/* Feed Card Style (Glassmorphism) */
+.prayer-book-item {
+    width: 100% !important;
+    max-width: 600px !important;
+    margin: 0 auto 20px auto !important; /* Center and add bottom spacing */
+    
+    /* Modern Glass Theme B */
+    background: rgba(255, 255, 255, 0.75) !important; /* Milky transparency */
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    border-radius: 20px !important;
+    
+    padding: 30px 20px !important; /* Generous padding */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.prayer-book-item:hover {
+    transform: scale(1.02) !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Typography for Feed */
+.book-item-number {
+    font-size: 1.5rem !important;
+    color: #8b4513 !important; /* Keep classic brown for contrast */
+    opacity: 0.5 !important;
+    margin-right: 20px !important;
+}
+
+.book-item-title {
+    font-size: 1.3rem !important; /* Larger for feed */
+    color: #333 !important; /* Dark grey for readability */
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    flex: 1 !important;
+}
+
+/* Add an arrow icon to cards */
+.prayer-book-item::after {
+    content: '?';
+    font-size: 1.2rem;
+    color: #8b4513;
+    opacity: 0.6;
+    margin-left: 10px;
+}
+
+/* Adjust Back Button for Glass Theme compatibility */
+.back-to-book-btn {
+    /* Ensure it contrasts well with detail view */
+    background: rgba(255, 255, 255, 0.8) !important; /* Light Glass */
+    color: #333 !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
