@@ -919,9 +919,97 @@ function displayPrayer(id) {
             `;
     }
 
+    // --- TRANSLATION LOGIC (Added 2025-12-15) ---
+    const prayerTranslations = {
+        en: {
+            fatiha: {
+                title: "Surah Al-Fatiha",
+                meaning: "In the name of Allah, the Most Merciful, the Most Kind.<br>All praise is for Allah, the Lord of all worlds.<br>The Most Merciful, the Most Kind.<br>Master of the Day of Judgment.<br>You alone we worship, and You alone we ask for help.<br>Guide us on the straight path,<br>The path of those You have blessed, not of those who earned Your anger, nor those who went astray."
+            },
+            ayetelkursi: {
+                title: "Ayatul Kursi",
+                meaning: "Allah – there is no deity except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great."
+            },
+            fil: {
+                title: "Surah Al-Fil",
+                meaning: "Have you not considered, [O Muhammad], how your Lord dealt with the companions of the elephant?<br>Did He not make their plan into misguidance?<br>And He sent against them birds in flocks,<br>Striking them with stones of hard clay,<br>And He made them like eaten straw."
+            },
+            kureys: {
+                title: "Surah Quraysh",
+                meaning: "For the accustomed security of the Quraysh -<br>Their accustomed security [in] the caravan of winter and summer -<br>Let them worship the Lord of this House,<br>Who has fed them, [saving them] from hunger and made them safe, [saving them] from fear."
+            },
+            maun: {
+                title: "Surah Al-Ma'un",
+                meaning: "Have you seen him who denies the Recompense?<br>That is he who repulses the orphan,<br>And urges not the feeding of the poor.<br>So woe unto those performers of Salah (prayers),<br>Who delay their prayer from their stated fixed times,<br>Those who do good deeds only to be seen,<br>And refuse small kindnesses."
+            },
+            kevser: {
+                title: "Surah Al-Kawthar",
+                meaning: "Indeed, We have granted you, [O Muhammad], the Abundance.<br>So pray to your Lord and sacrifice [to Him alone].<br>Indeed, the one who hates you is truly cut off."
+            },
+            kafirun: {
+                title: "Surah Al-Kafirun",
+                meaning: "Say, “O disbelievers,<br>I do not worship what you worship.<br>Nor are you worshippers of what I worship.<br>Nor will I be a worshipper of what you worship.<br>Nor will you be worshippers of what I worship.<br>For you is your religion, and for me is my religion.”"
+            },
+            nasr: {
+                title: "Surah An-Nasr",
+                meaning: "When comes the Help of Allah and the victory,<br>And you see that the people enter Allah's religion in crowds,<br>So glorify the Praises of your Lord, and ask for His Forgiveness. Verily, He is the One Who accepts the repentance."
+            },
+            tebbet: {
+                title: "Surah Al-Masad",
+                meaning: "Perish the two hands of Abu Lahab, and perish he!<br>His wealth and his children will not benefit him!<br>He will be burnt in a Fire of blazing flames!<br>And his wife, too, who carries wood,<br>In her neck is a twisted rope of palm fibre."
+            },
+            ihlas: {
+                title: "Surah Al-Ikhlas",
+                meaning: "Say, “He is God, the One.<br>God, the Absolute.<br>He begets not, nor was He begotten.<br>And there is nothing comparable to Him.”"
+            },
+            felak: {
+                title: "Surah Al-Falaq",
+                meaning: "Say: I seek refuge with the Lord of the daybreak,<br>From the evil of what He has created;<br>And from the evil of the darkening (night) as it comes with its darkness;<br>And from the evil of the witchcrafts when they blow in the knots,<br>And from the evil of the envier when he envies."
+            },
+            nas: {
+                title: "Surah An-Nas",
+                meaning: "Say, “I seek refuge in the Lord of mankind,<br>The King of mankind,<br>The God of mankind,<br>From the evil of the whispering deceiver,<br>Who whispers in the hearts of mankind,<br>From among jinn and humans.”"
+            },
+            nazar: {
+                title: "Prayer for Protection (Nazar)",
+                meaning: "And indeed, those who disbelieve would almost make you slip with their eyes when they hear the message, and they say, 'Indeed, he is mad.' But it is not except a reminder to the worlds. (Al-Qalam 51-52)"
+            },
+            yemek: {
+                title: "Prayer After Eating",
+                meaning: "Praise be to Allah, who has fed us and given us drink and made us Muslims."
+            },
+            rabbena: {
+                title: "Rabbana Prayers",
+                meaning: "<strong>Rabbana Atina:</strong><br>Our Lord, give us in this world [that which is] good and in the Hereafter [that which is] good and protect us from the punishment of the Fire.<br><br><strong>Rabbeneğfirli:</strong><br>Our Lord, forgive me and my parents and the believers the Day the account is established."
+            },
+            yasin: {
+                title: "Surah Yasin (Full)",
+                meaning: "<i>(English translation for full Surah Yasin is coming soon in the next update.)</i>"
+            }
+        }
+    };
+
+    let displayTitle = dua.title;
+    let displayMeaning = dua.meaning;
+
+    // Apply Translation if available and not Turkish
+    if (currentLang !== 'tr') {
+        // Default to English if specific lang not available yet
+        const targetLang = prayerTranslations[currentLang] ? currentLang : 'en';
+
+        if (prayerTranslations[targetLang] && prayerTranslations[targetLang][dua.id]) {
+            displayTitle = prayerTranslations[targetLang][dua.id].title;
+            displayMeaning = prayerTranslations[targetLang][dua.id].meaning;
+        } else if (targetLang === 'en' && prayerTranslations['en'][dua.id]) {
+            // Fallback to English if e.g. 'fr' is selected but not defined, use 'en'
+            displayTitle = prayerTranslations['en'][dua.id].title;
+            displayMeaning = prayerTranslations['en'][dua.id].meaning;
+        }
+    }
+
     displayArea.innerHTML = `
             <div class="prayer-page-header fade-appear">
-                <h2 class="page-title">${dua.title}</h2>
+                <h2 class="page-title">${displayTitle}</h2>
                 <div class="ornament"></div>
                 ${audioHTML}
             </div>
@@ -936,7 +1024,7 @@ function displayPrayer(id) {
             <div class="section-divider">
                 <span>${meaningLabel}</span>
             </div>
-            <p class="meaning-text">${dua.meaning}</p>
+            <p class="meaning-text">${displayMeaning}</p>
         </div>
     `;
 
