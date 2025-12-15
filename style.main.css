@@ -1660,3 +1660,32 @@ body.prayers-mode .prayers-layout {
     font-size: 1.1rem !important; /* Match title size */
     margin-right: 15px !important;
 }
+
+/* ROUND 6 REFINEMENTS: SYMBOLS, ITALIC, TIGHTER */
+
+/* 1. Remove Numbers */
+.book-item-number {
+    display: none !important;
+}
+
+/* 2. Add Fancy Symbol */
+.book-item-title::before {
+    content: '?'; /* Diamond/Flower Symbol */
+    color: #d4af37 !important;
+    margin-right: 12px;
+    font-size: 0.9rem;
+    font-style: normal !important; /* Keep symbol upright */
+    vertical-align: middle;
+}
+
+/* 3. Italic Font */
+.book-item-title {
+    font-style: italic !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* 4. Tighter Spacing */
+.prayer-book-item {
+    margin-bottom: 8px !important; /* Reduced from 12px */
+    padding: 12px 15px !important; /* Slightly tighter padding */
+}
