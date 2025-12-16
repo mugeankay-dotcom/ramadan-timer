@@ -386,9 +386,7 @@ h1 {
 }
 
 /* Fix Flexbox Cell rendering in table */
-.date-cell {
-    /* override default td display if needed, but table-cell usually ignores flex inside unless div wrapper */
-}
+/* .date-cell rule removed (empty) */
 
 /* Actually the JS puts divs inside the td. Let's style the divs */
 .day-index {

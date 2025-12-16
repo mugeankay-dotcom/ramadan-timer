@@ -389,6 +389,7 @@ const elements = {
 
 function setLanguage(lang) {
     currentLang = lang;
+    document.documentElement.lang = lang; // Fix: Update HTML lang for correct capitalization (i vs İ)
     const t = translations[lang];
 
     // Update Static Text
