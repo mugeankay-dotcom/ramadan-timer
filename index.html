@@ -7,8 +7,8 @@
     <meta name="description" content="Ramazan 2026 Geri Sayım ve İmsakiye">
     <meta name="theme-color" content="#FFD700">
     <title>Ramazan 2026</title>
-    <link rel="stylesheet" href="style.main.css?v=62">
-    <link rel="stylesheet" href="style.patch.css?v=1">
+    <link rel="stylesheet" href="style.main.css?v=63">
+    <link rel="stylesheet" href="style.patch.css?v=2">
     <link rel="manifest" href="manifest.json?v=50">
     <link rel="apple-touch-icon" href="icon-kabe-192.png">
     <link rel="icon" type="image/png" href="icon-kabe-512.png">
@@ -242,45 +242,47 @@
                     </button>
                 </div>
             </div>
-    </div>
 
-    <!-- QIBLA VIEW -->
-    <div id="qibla-view" class="view-section" style="display: none;">
-        <div class="qibla-container">
-            <div class="qibla-header">
-                <h2 id="qibla-title">Kıble Bulucu</h2>
-                <p id="qibla-status">Cihazı düz tutun ve kalibre edin.</p>
-            </div>
 
-            <div class="compass-ring">
-                <div class="compass-face" id="compass-face">
-                    <div class="compass-letters">
-                        <span class="dir-n">N</span>
-                        <span class="dir-e">E</span>
-                        <span class="dir-s">S</span>
-                        <span class="dir-w">W</span>
+            <!-- QIBLA VIEW -->
+            <div id="qibla-view" class="view-section" style="display: none;">
+                <div class="qibla-container">
+                    <div class="qibla-header">
+                        <h2 id="qibla-title">Kıble Bulucu</h2>
+                        <p id="qibla-status">Cihazı düz tutun ve kalibre edin.</p>
                     </div>
-                    <div class="kaaba-pointer" id="kaaba-pointer">
-                        🕋
+
+                    <div class="compass-ring">
+                        <div class="compass-face" id="compass-face">
+                            <div class="compass-letters">
+                                <span class="dir-n">N</span>
+                                <span class="dir-e">E</span>
+                                <span class="dir-s">S</span>
+                                <span class="dir-w">W</span>
+                            </div>
+                            <div class="kaaba-pointer" id="kaaba-pointer">
+                                🕋
+                            </div>
+                        </div>
+                        <div class="compass-needle"></div>
                     </div>
-                </div>
-                <div class="compass-needle"></div>
-            </div>
 
-            <div class="qibla-info">
-                <div class="info-box">
-                    <span class="label">Kabe Açısı</span>
-                    <span class="value" id="qibla-angle">--°</span>
-                </div>
-                <div class="info-box">
-                    <span class="label">Pusula</span>
-                    <span class="value" id="compass-heading">--°</span>
+                    <div class="qibla-info">
+                        <div class="info-box">
+                            <span class="label">Kabe Açısı</span>
+                            <span class="value" id="qibla-angle">--°</span>
+                        </div>
+                        <div class="info-box">
+                            <span class="label">Pusula</span>
+                            <span class="value" id="compass-heading">--°</span>
+                        </div>
+                    </div>
+
+                    <button id="start-compass-btn" class="start-compass-btn" onclick="startCompass()">PUSULAYI
+                        BAŞLAT</button>
+                    <p class="compass-note">*GPS ve Manyetik Sensör gereklidir.</p>
                 </div>
             </div>
-
-            <button id="start-compass-btn" class="start-compass-btn" onclick="startCompass()">PUSULAYI BAŞLAT</button>
-            <p class="compass-note">*GPS ve Manyetik Sensör gereklidir.</p>
-        </div>
     </div>
 
 

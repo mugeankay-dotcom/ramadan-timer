@@ -58,7 +58,13 @@ const translations = {
         menuQibla: "Kıble",
         qiblaTitle: "Kıble Bulucu",
         qiblaStatus: "Cihazı düz tutun ve kalibre edin.",
-        startCompass: "PUSULAYI BAŞLAT"
+        startCompass: "PUSULAYI BAŞLAT",
+        imsakiyeBtn: "2026 RAMAZAN İMSAKİYESİ",
+        daySuffix: ".gün",
+        imsakiyeTitle: "Ramazan 2026 İmsakiyesi",
+        imsakiyeHeaders: ["Trh", "İms", "Gün", "Öğl", "İkn", "İft", "Yat"],
+        monthsShort: ["Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"],
+        daysShort: ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"]
     },
     en: {
         title: "Welcome Ramadan 2026",
@@ -104,7 +110,13 @@ const translations = {
         menuQibla: "Qibla",
         qiblaTitle: "Qibla Finder",
         qiblaStatus: "Keep device flat and calibrate.",
-        startCompass: "START COMPASS"
+        startCompass: "START COMPASS",
+        imsakiyeBtn: "2026 RAMADAN CALENDAR",
+        imsakiyeTitle: "Ramadan 2026 Calendar",
+        imsakiyeHeaders: ["Date", "Fajr", "Sun", "Dhu", "Asr", "Mag", "Ish"],
+        monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        daySuffix: ". day"
     },
     ar: {
         menuTitle: "القائمة",
@@ -149,7 +161,13 @@ const translations = {
         menuQibla: "القبلة",
         qiblaTitle: "اتجاه القبلة",
         qiblaStatus: "حافظ على وضع الجهاز مسطحًا وقم بالمعايرة.",
-        startCompass: "بدء البوصلة"
+        startCompass: "بدء البوصلة",
+        imsakiyeBtn: "إمساكية رمضان ٢٠٢٦",
+        daySuffix: ". يوم",
+        imsakiyeTitle: "إمساكية رمضان ٢٠٢٦",
+        imsakiyeHeaders: ["تاريخ", "فجر", "شروق", "ظهر", "عصر", "مغرب", "عشاء"],
+        monthsShort: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
+        daysShort: ["أحد", "إثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"]
     },
     id: {
         title: "Selamat Datang Ramadan 2026",
@@ -195,7 +213,13 @@ const translations = {
         },
         qiblaTitle: "Pencari Kiblat",
         qiblaStatus: "Jaga perangkat tetap datar.",
-        startCompass: "MULAI KOMPAS"
+        startCompass: "MULAI KOMPAS",
+        imsakiyeBtn: "JADWAL IMSAKIYAH 2026",
+        daySuffix: ". hari",
+        imsakiyeTitle: "Jadwal Imsakiyah 2026",
+        imsakiyeHeaders: ["Tgl", "Ims", "Trb", "Dzh", "Ash", "Mag", "Isy"],
+        monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
+        daysShort: ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"]
     },
     ur: {
         title: "خوش آمدید رمضان 2026",
@@ -241,7 +265,13 @@ const translations = {
         menuQibla: "قبلہ",
         qiblaTitle: "قبلہ رخ",
         qiblaStatus: "ڈیوائس کو ہموار رکھیں",
-        startCompass: "کمپاس شروع کریں"
+        startCompass: "کمپاس شروع کریں",
+        imsakiyeBtn: "رمضان 2026 کیلنڈر",
+        daySuffix: ". دن",
+        imsakiyeTitle: "رمضان 2026 کیلنڈر",
+        imsakiyeHeaders: ["تاریخ", "فجر", "طلوع", "ظہر", "عصر", "مغرب", "عشاء"],
+        monthsShort: ["جنوری", "فروری", "مارچ", "اپریل", "مئی", "جون", "جولائی", "اگست", "ستمبر", "اکتوبر", "نومبر", "دسمبر"],
+        daysShort: ["اتوار", "پیر", "منگل", "بدھ", "جمعرات", "جمعہ", "ہفتہ"]
     },
     fr: {
         title: "Bienvenue Ramadan 2026",
@@ -287,7 +317,13 @@ const translations = {
         menuQibla: "Qibla",
         qiblaTitle: "Boussole Qibla",
         qiblaStatus: "Gardez l'appareil à plat.",
-        startCompass: "DÉMARRER LA BOUSSOLE"
+        startCompass: "DÉMARRER LA BOUSSOLE",
+        imsakiyeBtn: "CALENDRIER RAMADAN 2026",
+        daySuffix: ". jour",
+        imsakiyeTitle: "Calendrier Ramadan 2026",
+        imsakiyeHeaders: ["Date", "Fajr", "Lev", "Dhu", "Asr", "Mag", "Ish"],
+        monthsShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"],
+        daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"]
     }
 };
 
@@ -413,6 +449,30 @@ function setLanguage(lang) {
         prayersTitleLabel.textContent = t.prayersTitle;
     }
 
+    // Update Imsakiye Button (New)
+    const imsakiyeBtnEl = document.getElementById('imsakiye-btn');
+    if (imsakiyeBtnEl && t.imsakiyeBtn) {
+        const txtSpan = imsakiyeBtnEl.querySelector('.text');
+        if (txtSpan) txtSpan.textContent = t.imsakiyeBtn;
+        else imsakiyeBtnEl.textContent = t.imsakiyeBtn;
+    }
+
+    // Update Imsakiye Modal Title & Headers
+    const imsakiyeModalTitle = document.querySelector('#imsakiye-modal .modal-header h3');
+    if (imsakiyeModalTitle && t.imsakiyeTitle) {
+        imsakiyeModalTitle.textContent = t.imsakiyeTitle;
+    }
+
+    // Update Table Headers
+    if (t.imsakiyeHeaders) {
+        const ths = document.querySelectorAll('#imsakiye-table thead th');
+        if (ths.length > 0) {
+            t.imsakiyeHeaders.forEach((headerText, index) => {
+                if (ths[index]) ths[index].textContent = headerText;
+            });
+        }
+    }
+
     // Update Dynamic Text (Countdown labels, Date, etc.)
     updateDate();
     // Update Dynamic Text (Countdown labels, Date, etc.)
@@ -422,6 +482,16 @@ function setLanguage(lang) {
     // Sync Dropdown (if user changed it via code or stored pref)
     if (elements.languageSelector) {
         elements.languageSelector.value = lang;
+    }
+
+    // IMSAKIYE FIX: Clear table so it re-renders in new language
+    const imsakiyeBody = document.getElementById('imsakiye-body');
+    if (imsakiyeBody) imsakiyeBody.innerHTML = '';
+
+    // If modal is open, refresh immediately
+    const imsakiyeModal = document.getElementById('imsakiye-modal');
+    if (imsakiyeModal && imsakiyeModal.classList.contains('active')) {
+        fetchRamadanCalendar();
     }
 }
 
@@ -582,6 +652,14 @@ function updateCountdown() {
             isIftar = true; // Mark as Iftar countdown
         } else {
             // Case 3: After Iftar (Counting to Tomorrow's Imsak)
+
+            // CHECK FOR IFTAR ALERT (Fix 2026)
+            // Check if we are within 1 minute after Maghrib
+            const timeSinceIftar = now - maghribTime;
+            if (timeSinceIftar >= 0 && timeSinceIftar < 60000) { // 1 minute window
+                triggerIftarAlert();
+            }
+
             // Note: We are using Today's imsak + 24h as an approximation 
             // OR ideally fetching tomorrow's data, but for simplicity + 24h is usually close enough 
             // for the countdown until we fetch new data at midnight/refresh.
@@ -597,10 +675,7 @@ function updateCountdown() {
 
         const diff = targetTime - now;
 
-        // CHECK ALERT (Only for Iftar as requested)
-        if (isIftar && diff <= 0 && diff > -5000) { // Trigger window of 5 seconds
-            triggerIftarAlert();
-        }
+        // Render Countdown
 
         // Render Countdown
         const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -802,8 +877,9 @@ function renderImsakiyeTable(data) {
 
     tableBody.innerHTML = '';
 
-    const days = ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"];
-    const months = ["Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"];
+    const t = translations[currentLang];
+    const days = t.daysShort || ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"];
+    const months = t.monthsShort || ["Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"];
 
     data.forEach((dayData, index) => {
         const timings = dayData.timings;
@@ -819,9 +895,11 @@ function renderImsakiyeTable(data) {
 
         // Compact Row Structure:
         // Col 1: Index + Date + Day
+        // Using translations based on current language
+        const suffix = translations[currentLang].daySuffix || ".gün";
         row.innerHTML = `
             <td class="date-cell">
-                <div class="day-index">${index + 1}</div>
+                <div class="day-index">${index + 1}<span class="day-suffix">${suffix}</span></div>
                 <div class="day-date">${formattedDate}</div>
                 <div class="day-name">${dayName}</div>
             </td>
