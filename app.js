@@ -4,6 +4,7 @@ const API_URL = 'https://api.aladhan.com/v1/timings';
 let currentUserLat = 41.0082;
 let currentUserLng = 28.9784;
 const RAMADAN_START_DATE = new Date('2025-12-16T00:00:00'); // TEST MODE: Starts Today!
+let prayerTimesData = null; // Global variable to store fetched data
 
 // GLOBAL BLOCK: Disable Right-Click immediately (Capture Phase)
 window.addEventListener('contextmenu', (e) => {
