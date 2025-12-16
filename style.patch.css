@@ -222,7 +222,7 @@ h1 {
     /* Gold Text */
     font-family: 'Cinzel', serif;
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 300;
     letter-spacing: 1px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -597,137 +597,143 @@ option {
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin: 25px 0 15px 0;
-    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2) !important;
-    border-right: 1px solid #d4af37;
-}
+    /* --- SIDEBAR FIXES (Overlap & Brightness) --- */
 
-/* Sidebar Text Color Fix for Light Background */
-.sidebar-header h2 {
-    color: #8b6c00 !important;
-    /* Dark Gold/Brown */
-    text-shadow: none !important;
-}
+    /* Fix Overlap: Sidebar must be higher than Toggle Button */
+    .app-sidebar {
+        z-index: 10001 !important;
+        /* User Requested: "Background daha parlak olsun" -> Light Premium Gold/Cream */
+        background: linear-gradient(135deg, #FFFDF5 0%, #F3E5AB 100%) !important;
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2) !important;
+        border-right: 1px solid #d4af37 !important;
+    }
 
-.sidebar-item {
-    color: #4a4a4a !important;
-    /* Dark Grey for readability */
-    font-weight: 500;
-}
+    /* Sidebar Text Color Fix for Light Background */
+    .sidebar-header h2 {
+        color: #8b6c00 !important;
+        /* Dark Gold/Brown */
+        text-shadow: none !important;
+    }
 
-.sidebar-item:hover,
-.sidebar-item.active {
-    background: rgba(212, 175, 55, 0.2) !important;
-    color: #000 !important;
-}
+    .sidebar-item {
+        color: #4a4a4a !important;
+        /* Dark Grey for readability */
+        font-weight: 500;
+    }
 
-.sidebar-item .icon svg {
-    width: 24px;
-    height: 24px;
-    fill: currentColor;
-    /* Inherit text color */
-    transition: all 0.3s ease;
-}
+    .sidebar-item:hover,
+    .sidebar-item.active {
+        background: rgba(212, 175, 55, 0.2) !important;
+        color: #000 !important;
+    }
 
-/* Ensure Overlay covers the toggle button */
-.sidebar-overlay {
-    z-index: 10000 !important;
-}
+    .sidebar-item .icon svg {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+        /* Inherit text color */
+        transition: all 0.3s ease;
+    }
 
-/* Close Button - Darker for visibility on light bg */
-.menu-close-btn {
-    font-size: 2.5rem !important;
-    color: #8b6c00 !important;
-    opacity: 1 !important;
-}
+    /* Ensure Overlay covers the toggle button */
+    .sidebar-overlay {
+        z-index: 10000 !important;
+    }
 
-.qibla-divider span {
-    color: #ffd700;
-    font-size: 0.8rem;
-    font-weight: 300;
-    letter-spacing: 1px;
-}
+    /* Close Button - Darker for visibility on light bg */
+    .menu-close-btn {
+        font-size: 2.5rem !important;
+        color: #8b6c00 !important;
+        opacity: 1 !important;
+    }
 
-/* Secondary Section Container */
-.qibla-secondary-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 0.85;
-    /* Slightly faded */
-    transform: scale(0.9);
-    /* Overall smaller */
-    transition: opacity 0.3s;
-}
+    .qibla-divider span {
+        color: #ffd700;
+        font-size: 0.8rem;
+        font-weight: 300;
+        letter-spacing: 1px;
+    }
 
-.qibla-secondary-section:hover {
-    opacity: 1;
-}
+    /* Secondary Section Container */
+    .qibla-secondary-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0.85;
+        /* Slightly faded */
+        transform: scale(0.9);
+        /* Overall smaller */
+        transition: opacity 0.3s;
+    }
 
-/* Secondary Status Text */
-.status-secondary {
-    font-size: 0.8rem !important;
-    margin-bottom: 10px !important;
-    color: #ccc !important;
-}
+    .qibla-secondary-section:hover {
+        opacity: 1;
+    }
 
-/* Smaller Compass Ring */
-.small-compass {
-    width: 220px !important;
-    /* Reduced from default */
-    height: 220px !important;
-    margin: 10px auto !important;
-    border: 2px solid rgba(255, 215, 0, 0.3) !important;
-    /* Thinner border (was likely thicker default) */
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.1) !important;
-    /* Visual Glow */
-}
+    /* Secondary Status Text */
+    .status-secondary {
+        font-size: 0.8rem !important;
+        margin-bottom: 10px !important;
+        color: #ccc !important;
+    }
 
-/* Transparent Compass Face */
-/* "ortası daha bulanık olsun kabe resmi görünsün" */
-.transparent-face {
-    background: rgba(255, 255, 255, 0.05) !important;
-    /* Very transparent */
-    backdrop-filter: blur(2px) !important;
-    /* Slight blur */
-    border: 1px solid rgba(255, 215, 0, 0.1);
-}
+    /* Smaller Compass Ring */
+    .small-compass {
+        width: 220px !important;
+        /* Reduced from default */
+        height: 220px !important;
+        margin: 10px auto !important;
+        border: 2px solid rgba(255, 215, 0, 0.3) !important;
+        /* Thinner border (was likely thicker default) */
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.1) !important;
+        /* Visual Glow */
+    }
 
-.transparent-face .kaaba-pointer {
-    font-size: 3rem !important;
-    /* Make Kaaba icon clearly visible */
-    opacity: 1 !important;
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.9));
-    /* Centered by default flex/grid in main css */
-}
+    /* Transparent Compass Face */
+    /* "ortası daha bulanık olsun kabe resmi görünsün" */
+    .transparent-face {
+        background: rgba(255, 255, 255, 0.05) !important;
+        /* Very transparent */
+        backdrop-filter: blur(2px) !important;
+        /* Slight blur */
+        border: 1px solid rgba(255, 215, 0, 0.1);
+    }
 
-/* Secondary Start Button */
-.secondary-btn {
-    padding: 10px 25px !important;
-    font-size: 0.9rem !important;
-    border: 1px solid rgba(255, 215, 0, 0.6) !important;
-    /* More visible border */
-    background: rgba(255, 215, 0, 0.1) !important;
-    /* Slight background */
-    color: #ffd700 !important;
-    margin-top: 15px !important;
-    border-radius: 20px !important;
-    transition: all 0.3s ease !important;
-}
+    .transparent-face .kaaba-pointer {
+        font-size: 3rem !important;
+        /* Make Kaaba icon clearly visible */
+        opacity: 1 !important;
+        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.9));
+        /* Centered by default flex/grid in main css */
+    }
 
-.secondary-btn:hover {
-    background: rgba(255, 215, 0, 0.2) !important;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3) !important;
-}
+    /* Secondary Start Button */
+    .secondary-btn {
+        padding: 10px 25px !important;
+        font-size: 0.9rem !important;
+        border: 1px solid rgba(255, 215, 0, 0.6) !important;
+        /* More visible border */
+        background: rgba(255, 215, 0, 0.1) !important;
+        /* Slight background */
+        color: #ffd700 !important;
+        margin-top: 15px !important;
+        border-radius: 20px !important;
+        transition: all 0.3s ease !important;
+    }
 
-/* Mini Info */
-.mini-info {
-    flex-direction: row !important;
-    gap: 15px !important;
-    margin-top: 5px !important;
-}
+    .secondary-btn:hover {
+        background: rgba(255, 215, 0, 0.2) !important;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.3) !important;
+    }
 
-.mini-info .value {
-    font-size: 0.9rem !important;
-    color: #aaa !important;
-}
+    /* Mini Info */
+    .mini-info {
+        flex-direction: row !important;
+        gap: 15px !important;
+        margin-top: 5px !important;
+    }
+
+    .mini-info .value {
+        font-size: 0.9rem !important;
+        color: #aaa !important;
+    }
