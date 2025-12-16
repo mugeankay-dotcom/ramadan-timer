@@ -982,9 +982,21 @@ function renderImsakiyeTable(data) {
 
 
 // Sidebar Toggle Function (Global)
+// Sidebar Toggle Function (Global)
 function toggleSidebar() {
-    document.getElementById('app-sidebar').classList.toggle('active');
-    document.getElementById('sidebar-overlay').classList.toggle('active');
+    const sidebar = document.getElementById('app-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    const menuToggle = document.getElementById('menu-toggle');
+
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+
+    // Toggle menu button visibility to prevent overlap
+    if (sidebar.classList.contains('active')) {
+        if (menuToggle) menuToggle.style.display = 'none';
+    } else {
+        if (menuToggle) menuToggle.style.display = 'flex';
+    }
 }
 
 function switchTab(tabId) {

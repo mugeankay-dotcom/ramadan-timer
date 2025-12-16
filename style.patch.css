@@ -598,32 +598,46 @@ option {
     justify-content: center;
     width: 100%;
     margin: 25px 0 15px 0;
-    opacity: 0.5;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2) !important;
+    border-right: 1px solid #d4af37;
 }
 
-/* --- SIDEBAR FIXES (Overlap & Brightness) --- */
-
-/* Fix Overlap: Sidebar must be higher than Toggle Button (z-9999) */
-.app-sidebar {
-    z-index: 10001 !important;
-    /* Higher than toggle btn */
-    background: rgba(25, 35, 45, 0.98) !important;
-    /* Brighter/Lighter Dark Blue */
-    /* Optional: Add gradient for more "shine" */
-    background: linear-gradient(160deg, #1e2a38 0%, #111 100%) !important;
-    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5) !important;
+/* Sidebar Text Color Fix for Light Background */
+.sidebar-header h2 {
+    color: #8b6c00 !important;
+    /* Dark Gold/Brown */
+    text-shadow: none !important;
 }
 
-/* Ensure Overlay covers the toggle button too */
+.sidebar-item {
+    color: #4a4a4a !important;
+    /* Dark Grey for readability */
+    font-weight: 500;
+}
+
+.sidebar-item:hover,
+.sidebar-item.active {
+    background: rgba(212, 175, 55, 0.2) !important;
+    color: #000 !important;
+}
+
+.sidebar-item .icon svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    /* Inherit text color */
+    transition: all 0.3s ease;
+}
+
+/* Ensure Overlay covers the toggle button */
 .sidebar-overlay {
     z-index: 10000 !important;
 }
 
-/* Ensure Close Button is visible */
+/* Close Button - Darker for visibility on light bg */
 .menu-close-btn {
     font-size: 2.5rem !important;
-    /* Make it bigger/easier to hit */
-    color: #FFD700 !important;
+    color: #8b6c00 !important;
     opacity: 1 !important;
 }
 
