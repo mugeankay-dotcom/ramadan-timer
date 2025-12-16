@@ -1577,15 +1577,14 @@ function startCompass() {
                 if (response === 'granted') {
                     window.addEventListener('deviceorientation', handleOrientation, true);
                     compassActive = true;
-                    alert("Pusula Başlatıldı (iOS)");
-                    document.getElementById('qibla-status').textContent = "Kalibre ediliyor... (Cihazı 8 çizin)";
+                    document.getElementById('qibla-status').textContent = translations[currentLang].qiblaStatus || "Cihazı düz tutun ve kalibre edin.";
                 } else {
-                    alert("İzin Reddedildi: " + response);
+                    alert("Pusula için izin gerekiyor.");
                 }
             })
             .catch(error => {
-                alert("İzin Hatası: " + error);
                 console.error(error);
+                alert("Pusula Hatası: " + error);
             });
     } else {
         // Android / Standard
@@ -1593,8 +1592,9 @@ function startCompass() {
             window.addEventListener('deviceorientationabsolute', handleOrientation, true);
             window.addEventListener('deviceorientation', handleOrientation, true);
             compassActive = true;
-            document.getElementById('qibla-status').textContent = "Pusula Aktif (Android/Std)";
+            document.getElementById('qibla-status').textContent = translations[currentLang].qiblaStatus || "Cihazı düz tutun ve kalibre edin.";
         } catch (e) {
+            console.error(e);
             alert("Pusula Hatası: " + e);
         }
     }
