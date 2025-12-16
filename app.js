@@ -3,7 +3,7 @@ const API_URL = 'https://api.aladhan.com/v1/timings';
 // Default Coordinates (Istanbul)
 let currentUserLat = 41.0082;
 let currentUserLng = 28.9784;
-const RAMADAN_START_DATE = new Date('2026-02-18T00:00:00'); // Real Date
+const RAMADAN_START_DATE = new Date('2025-12-16T00:00:00'); // TEST MODE: Starts Today!
 
 // GLOBAL BLOCK: Disable Right-Click immediately (Capture Phase)
 window.addEventListener('contextmenu', (e) => {
