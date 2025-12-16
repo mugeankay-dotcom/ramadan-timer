@@ -59,6 +59,7 @@ const translations = {
         qiblaTitle: "Kıble Bulucu",
         qiblaStatus: "Cihazı düz tutun ve kalibre edin.",
         qiblaInstructions: "Cihazınızı 8 şeklinde hareket ettirerek kalibre edin. Kırmızı ibre Kuzeyi, Kabe simgesi Kıble yönünü gösterir.",
+        googleQiblaBtn: "Haritada Göster (Google)",
         startCompass: "PUSULAYI BAŞLAT",
         imsakiyeBtn: "2026 RAMAZAN İMSAKİYESİ",
         daySuffix: ".gün",
@@ -112,6 +113,7 @@ const translations = {
         qiblaTitle: "Qibla Finder",
         qiblaStatus: "Keep device flat and calibrate.",
         qiblaInstructions: "Calibrate by moving your device in a figure 8 motion. The red needle points North, the Kaaba icon points to Qibla.",
+        googleQiblaBtn: "Show on Map (Google)",
         startCompass: "START COMPASS",
         imsakiyeBtn: "2026 RAMADAN CALENDAR",
         imsakiyeTitle: "Ramadan 2026 Calendar",
@@ -164,6 +166,7 @@ const translations = {
         qiblaTitle: "اتجاه القبلة",
         qiblaStatus: "حافظ على وضع الجهاز مسطحًا وقم بالمعايرة.",
         qiblaInstructions: "قم بمعايرة جهازك بتحريكه على شكل رقم 8. الإبرة الحمراء تشير إلى الشمال، ورمز الكعبة يشير إلى القبلة.",
+        googleQiblaBtn: "إظهار على الخريطة (Google)",
         startCompass: "بدء البوصلة",
         imsakiyeBtn: "إمساكية رمضان ٢٠٢٦",
         daySuffix: ". يوم",
@@ -217,6 +220,7 @@ const translations = {
         qiblaTitle: "Pencari Kiblat",
         qiblaStatus: "Jaga perangkat tetap datar.",
         qiblaInstructions: "Kalibrasi dengan menggerakkan perangkat Anda membentuk angka 8. Jarum merah menunjuk ke Utara, ikon Ka'bah menunjuk ke Kiblat.",
+        googleQiblaBtn: "Tampilkan di Peta (Google)",
         startCompass: "MULAI KOMPAS",
         imsakiyeBtn: "JADWAL IMSAKIYAH 2026",
         daySuffix: ". hari",
@@ -270,6 +274,7 @@ const translations = {
         qiblaTitle: "قبلہ رخ",
         qiblaStatus: "ڈیوائس کو ہموار رکھیں",
         qiblaInstructions: "اپنے آلے کو 8 کی شکل میں گھما کر کیلیبریٹ کریں۔ سرخ سوئی شمال کی طرف اشارہ کرتی ہے، کعبہ کا نشان قبلہ کی طرف۔",
+        googleQiblaBtn: "نقشے پر دکھائیں (Google)",
         startCompass: "کمپاس شروع کریں",
         imsakiyeBtn: "رمضان 2026 کیلنڈر",
         daySuffix: ". دن",
@@ -323,6 +328,7 @@ const translations = {
         qiblaTitle: "Boussole Qibla",
         qiblaStatus: "Gardez l'appareil à plat.",
         qiblaInstructions: "Calibrez en déplaçant votre appareil en forme de 8. L'aiguille rouge indique le Nord, l'icône de la Kaaba indique la Qibla.",
+        googleQiblaBtn: "Afficher sur la carte (Google)",
         startCompass: "DÉMARRER LA BOUSSOLE",
         imsakiyeBtn: "CALENDRIER RAMADAN 2026",
         daySuffix: ". jour",
@@ -504,6 +510,12 @@ function setLanguage(lang) {
     const qiblaInstructionEl = document.getElementById('qibla-instructions');
     if (qiblaInstructionEl && t.qiblaInstructions) {
         qiblaInstructionEl.textContent = t.qiblaInstructions;
+    }
+
+    // Update Google Qibla Button
+    const googleQiblaBtn = document.getElementById('google-qibla-btn');
+    if (googleQiblaBtn && t.googleQiblaBtn) {
+        googleQiblaBtn.textContent = t.googleQiblaBtn;
     }
 }
 
