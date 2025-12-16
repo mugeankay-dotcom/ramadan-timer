@@ -23,8 +23,10 @@ h1 {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     width: 100%;
     margin-bottom: 10px !important;
-    text-transform: uppercase !important;
-    /* Preserved as requested */
+    margin-bottom: 10px !important;
+    text-transform: none !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px;
 }
 
 #next-event-name {
@@ -476,6 +478,8 @@ h1 {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     text-transform: capitalize !important;
     /* Force Title Case */
+    font-variant: normal !important;
+    font-family: 'Cinzel', serif !important;
 }
 
 .imsakiye-inline-btn:hover {
@@ -794,3 +798,17 @@ option {
     font-size: 0.9rem !important;
     color: #aaa !important;
 }
+/* FIX: Countdown Labels (Gün/Saat...) Title Case */
+.time-unit .label {
+    text-transform: capitalize !important;
+    font-family: 'Outfit', sans-serif !important;
+    letter-spacing: 1px;
+}
+
+/* FIX: Prayer Names (Ýmsak/Güneþ...) Title Case */
+.prayer-name {
+    text-transform: capitalize !important;
+    font-family: 'Cinzel', serif !important;
+    letter-spacing: 0.5px;
+}
+
