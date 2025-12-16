@@ -639,33 +639,47 @@ option {
     /* Reduced from default */
     height: 220px !important;
     margin: 10px auto !important;
+    border: 2px solid rgba(255, 215, 0, 0.3) !important;
+    /* Thinner border (was likely thicker default) */
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.1) !important;
+    /* Visual Glow */
 }
 
 /* Transparent Compass Face */
 /* "ortası daha bulanık olsun kabe resmi görünsün" */
 .transparent-face {
-    background: rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
     /* Very transparent */
-    backdrop-filter: blur(3px) !important;
+    backdrop-filter: blur(2px) !important;
     /* Slight blur */
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .transparent-face .kaaba-pointer {
-    font-size: 2.5rem !important;
+    font-size: 3rem !important;
     /* Make Kaaba icon clearly visible */
     opacity: 1 !important;
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.8));
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.9));
     /* Centered by default flex/grid in main css */
 }
 
 /* Secondary Start Button */
 .secondary-btn {
-    padding: 8px 20px !important;
-    font-size: 0.8rem !important;
-    border: 1px solid rgba(255, 215, 0, 0.3) !important;
-    background: transparent !important;
-    margin-top: 10px !important;
+    padding: 10px 25px !important;
+    font-size: 0.9rem !important;
+    border: 1px solid rgba(255, 215, 0, 0.6) !important;
+    /* More visible border */
+    background: rgba(255, 215, 0, 0.1) !important;
+    /* Slight background */
+    color: #ffd700 !important;
+    margin-top: 15px !important;
+    border-radius: 20px !important;
+    transition: all 0.3s ease !important;
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 215, 0, 0.2) !important;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3) !important;
 }
 
 /* Mini Info */
