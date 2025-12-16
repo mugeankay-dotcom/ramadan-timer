@@ -643,9 +643,10 @@ option {
     color: #ddd !important;
     /* Off-white */
     font-weight: 500;
-    font-family: 'Cinzel', serif !important;
-    /* Consistent premium font */
-    letter-spacing: 1px;
+    font-family: 'Outfit', sans-serif !important;
+    /* Clean Sans Serif for readable Title Case */
+    letter-spacing: 0.5px;
+    text-transform: none !important;
 }
 
 /* Hover State */
