@@ -1,0 +1,120 @@
+/* --- FINAL LAYOUT RESTORATION --- */
+
+/* GLOBAL MOBILE RESET */
+@media (max-width: 600px) {
+
+    body,
+    html {
+        overflow-x: hidden;
+        /* Prevent horizontal scroll on body */
+        max-width: 100vw;
+    }
+
+    .view-section {
+        width: 100%;
+        max-width: 100vw;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+}
+
+/* 1. QIBLA CENTERING (Absolute Force) */
+#qibla-view {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 80vh !important;
+    text-align: center !important;
+}
+
+.qibla-container {
+    width: 100%;
+    max-width: 350px;
+    /* Limit width */
+    margin: 0 auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#compass-face {
+    margin: 0 auto;
+    /* Ensure compass face is centered */
+}
+
+/* 2. IMSAKIYE MODAL (Clean & Scrollable) */
+#imsakiye-modal {
+    display: flex;
+    /* Hidden by default via JS, but when active use flex */
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.imsakiye-modal-content {
+    width: 95vw !important;
+    /* Almost full width on mobile */
+    max-width: 500px;
+    max-height: 85vh;
+    border-radius: 12px;
+    overflow: hidden;
+    /* Hide outer overflow */
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    background: #2e8b57;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.imsakiye-table-container {
+    flex-grow: 1;
+    overflow: auto;
+    /* Scrollable content */
+    width: 100%;
+    background: white;
+    padding-bottom: 20px;
+}
+
+#imsakiye-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* SMART MOBILE TABLE */
+@media (max-width: 480px) {
+    #imsakiye-table {
+        min-width: 500px;
+        /* Force scroll if needed */
+    }
+
+    #imsakiye-table th,
+    #imsakiye-table td {
+        padding: 6px 3px;
+        font-size: 0.75rem;
+        /* Smaller text */
+        text-align: center;
+    }
+
+    /* Make Date column tighter */
+    #imsakiye-table th:nth-child(2),
+    #imsakiye-table td:nth-child(2) {
+        max-width: 70px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
