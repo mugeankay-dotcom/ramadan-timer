@@ -1564,24 +1564,32 @@ function initQibla() {
 
 function startCompass() {
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-        // iOS 13+ requires permission
+        // iOS 13+
         DeviceOrientationEvent.requestPermission()
             .then(response => {
                 if (response === 'granted') {
                     window.addEventListener('deviceorientation', handleOrientation, true);
                     compassActive = true;
+                    alert("Pusula Başlatıldı (iOS)");
                     document.getElementById('qibla-status').textContent = "Kalibre ediliyor... (Cihazı 8 çizin)";
                 } else {
-                    alert("Pusula için izin gerekiyor.");
+                    alert("İzin Reddedildi: " + response);
                 }
             })
-            .catch(console.error);
+            .catch(error => {
+                alert("İzin Hatası: " + error);
+                console.error(error);
+            });
     } else {
-        // Android / Non-iOS 13+
-        window.addEventListener('deviceorientationabsolute', handleOrientation, true); // Android specific often better
-        window.addEventListener('deviceorientation', handleOrientation, true);
-        compassActive = true;
-        document.getElementById('qibla-status').textContent = "Pusula Aktif.";
+        // Android / Standard
+        try {
+            window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+            window.addEventListener('deviceorientation', handleOrientation, true);
+            compassActive = true;
+            document.getElementById('qibla-status').textContent = "Pusula Aktif (Android/Std)";
+        } catch (e) {
+            alert("Pusula Hatası: " + e);
+        }
     }
 }
 
