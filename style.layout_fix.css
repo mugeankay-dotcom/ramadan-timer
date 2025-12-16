@@ -1,0 +1,77 @@
+/* --- LAYOUT FIXES (Imsakiye & Qibla) --- */
+
+/* 1. IMSAKIYE MODAL FIXES */
+#imsakiye-modal {
+    padding: 10px;
+    /* Ensure padding on small screens so it doesn't touch edges */
+    align-items: center;
+    /* Center modal vertically if flex */
+}
+
+.imsakiye-modal-content {
+    width: 100%;
+    max-width: 800px;
+    /* Max width for desktop */
+    max-height: 90vh;
+    /* Prevent overflowing screen height */
+    overflow-y: auto;
+    /* Allow header/footer to stay, scroll content */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.imsakiye-table-container {
+    width: 100%;
+    overflow-x: auto;
+    /* Key for "messy" tables on mobile */
+    -webkit-overflow-scrolling: touch;
+    margin-top: 10px;
+}
+
+#imsakiye-table {
+    width: 100%;
+    min-width: 600px;
+    /* Ensure it retains structure and triggers scroll */
+    font-size: 0.85rem;
+    /* Slightly smaller text */
+}
+
+#imsakiye-table th,
+#imsakiye-table td {
+    padding: 6px;
+    /* Reduce padding for mobile */
+}
+
+/* 2. QIBLA CENTERING FIX */
+#qibla-view {
+    display: flex !important;
+    /* Ensure flex is used if not already */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    min-height: 60vh;
+}
+
+.qibla-container {
+    margin: 0 auto;
+    /* Auto margins for block centering */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#compass {
+    margin: 20px auto;
+    /* Force center compass */
+    display: block;
+}
+
+.qibla-status {
+    text-align: center;
+    margin: 10px 0;
+    width: 100%;
+}
