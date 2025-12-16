@@ -1,54 +1,50 @@
-/* --- COMPACT IMSAKIYE REDESIGN (Mobile First) --- */
+/* --- ULTRA COMPACT IMSAKIYE (Mobile Optimized) --- */
 
-/* Reset table Width */
 #imsakiye-table {
     width: 100% !important;
-    min-width: 0 !important;
-    /* Allow shrinking */
     table-layout: fixed !important;
-    /* Strict columns */
     border-collapse: collapse;
 }
 
-/* Headers */
 #imsakiye-table th {
     background: #1e5b39;
-    /* Deep Green */
     color: white;
-    font-size: 0.7rem;
-    /* ~11px */
-    padding: 6px 2px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border: 1px solid #144028;
-}
-
-#imsakiye-table th.compact-date-header {
-    width: 18%;
-    /* Reserve slightly more for date */
-}
-
-/* Cells */
-#imsakiye-table td {
-    font-size: 0.75rem;
-    /* ~12px */
+    font-size: 0.65rem;
+    /* ~10.4px */
     padding: 4px 1px;
+    text-transform: uppercase;
+    border: 1px solid #144028;
+    overflow: hidden;
+    text-overflow: clip;
+    /* Clip logic */
+}
+
+/* Date Header Width */
+#imsakiye-table th.compact-date-header {
+    width: 16%;
+}
+
+#imsakiye-table td {
+    font-size: 0.65rem;
+    /* ~10.4px */
+    padding: 3px 0;
+    /* Minimal vertical padding */
     text-align: center;
-    border: 1px solid #e0e0e0;
-    color: #333;
-    font-family: 'Outfit', sans-serif;
+    border: 1px solid #ddd;
+    color: #222;
     vertical-align: middle;
 }
 
 /* Specific Columns */
 .time-cell {
     font-weight: 500;
+    letter-spacing: -0.5px;
+    /* Condense numbers */
 }
 
 .time-cell.iftar {
     background-color: #fff9c4;
-    /* Light Yellow */
-    font-weight: 700;
+    font-weight: 800;
     color: #2e7d32;
     border: 1px solid #fbc02d;
 }
@@ -57,50 +53,40 @@
     font-weight: 700;
 }
 
-/* Date Column Internal Layout */
+/* Date Column */
 .date-cell {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    line-height: 1.1;
+    line-height: 1;
     padding: 2px 0;
 }
 
 .day-index {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     color: #888;
-    margin-bottom: 2px;
-    font-weight: bold;
+    margin-bottom: 1px;
 }
 
 .day-date {
     font-weight: 700;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     color: #2e8b57;
 }
 
 .day-name {
-    font-size: 0.65rem;
-    color: #555;
+    font-size: 0.55rem;
+    color: #444;
     text-transform: uppercase;
 }
 
-/* Zebra Striping */
-#imsakiye-table tr:nth-child(even) {
-    background-color: #f9fbf9;
-}
+/* Mobile Tweaks for VERY narrow screens */
+@media (max-width: 360px) {
 
-/* Mobile Tweaks */
-@media (max-width: 380px) {
-    #imsakiye-table th {
-        font-size: 0.6rem;
-        /* 10px */
-        padding: 4px 1px;
-    }
-
+    #imsakiye-table th,
     #imsakiye-table td {
-        font-size: 0.65rem;
-        /* 10-11px */
+        font-size: 0.6rem;
+        /* ~9.6px */
     }
 }
