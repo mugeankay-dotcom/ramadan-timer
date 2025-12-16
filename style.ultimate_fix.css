@@ -1,0 +1,81 @@
+/* --- ULTIMATE MOBILE FIX --- */
+
+/* PREVENT BODY SCROLL */
+html,
+body {
+    max-width: 100vw !important;
+    width: 100vw !important;
+    overflow-x: hidden !important;
+    position: relative;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* IMSAKIYE MODAL: Ensure it fits and scrolls internally */
+#imsakiye-modal {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    display: none;
+    /* JS toggles flex */
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.85);
+    /* Dark background */
+    align-items: center;
+    justify-content: center;
+}
+
+#imsakiye-modal.active {
+    display: flex !important;
+}
+
+.imsakiye-modal-content {
+    background: #fff;
+    width: 95% !important;
+    max-width: 500px;
+    max-height: 85vh;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* No scroll on modal box itself */
+}
+
+.imsakiye-table-container {
+    width: 100% !important;
+    overflow-x: auto !important;
+    /* SCROLL HERE */
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+}
+
+#imsakiye-table {
+    width: 100%;
+    min-width: 450px !important;
+    /* Force min width to trigger scroll on small phones */
+    border-collapse: collapse;
+}
+
+/* QIBLA: ABSOLUTE CENTERING */
+#qibla-view {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    min-height: 60vh;
+}
+
+.qibla-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#compass {
+    margin: 20px auto !important;
+}

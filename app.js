@@ -776,20 +776,14 @@ async function fetchRamadanCalendar() {
         if (marData.code === 200) combinedData = combinedData.concat(marData.data);
 
         // Filter for Ramadan Range (approx Feb 18 - Mar 19)
-        // Adjust these dates as per official calendar for 2026
-        const ramadanStart = new Date('2026-02-18');
-        const ramadanEnd = new Date('2026-03-19');
+        const startStr = '2026-02-18';
+        const endStr = '2026-03-19';
 
         const ramadanData = combinedData.filter(item => {
-            const d = new Date(item.date.readable); // "18 Feb 2026" works in Date parser usually
-            // aladhan returns "DD MMM YYYY" which is parseable
-            // Let's rely on readable timestamp or reconstruct
-            const [day, monthStr, year] = item.date.readable.split(' ');
-            // Map month name to index? AlAdhan uses English shortnames.
-            // Easier: use item.date.gregorian.date "DD-MM-YYYY"
+            // Robust parsing: DD-MM-YYYY -> YYYY-MM-DD
             const [gDay, gMonth, gYear] = item.date.gregorian.date.split('-');
-            const dateObj = new Date(`${gYear}-${gMonth}-${gDay}`);
-            return dateObj >= ramadanStart && dateObj <= ramadanEnd;
+            const dateStr = `${gYear}-${gMonth}-${gDay}`;
+            return dateStr >= startStr && dateStr <= endStr;
         });
 
         renderImsakiyeTable(ramadanData);
@@ -808,8 +802,8 @@ function renderImsakiyeTable(data) {
 
     tableBody.innerHTML = '';
 
-    const days = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
-    const months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+    const days = ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"];
+    const months = ["Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"];
 
     data.forEach((dayData, index) => {
         const timings = dayData.timings;
@@ -823,18 +817,20 @@ function renderImsakiyeTable(data) {
 
         const row = document.createElement('tr');
 
-        // Highlight today if relevant (unlikely for 2026 preview but good practice)
-        // For preview, maybe just simple list
-
+        // Compact Row Structure:
+        // Col 1: Index + Date + Day
         row.innerHTML = `
-            <td><span style="font-weight:bold; color:#2e8b57;">${index + 1}</span> <br><span style="font-size:0.7em; color:#666;">${dayName}</span></td>
-            <td>${formattedDate}</td>
-            <td style="font-weight:700; color:#333;">${timings.Imsak.split(' ')[0]}</td>
-            <td>${timings.Sunrise.split(' ')[0]}</td>
-            <td>${timings.Dhuhr.split(' ')[0]}</td>
-            <td>${timings.Asr.split(' ')[0]}</td>
-            <td style="font-weight:700; color:#d4af37; background:#fff8e1;">${timings.Maghrib.split(' ')[0]}</td>
-            <td>${timings.Isha.split(' ')[0]}</td>
+            <td class="date-cell">
+                <div class="day-index">${index + 1}</div>
+                <div class="day-date">${formattedDate}</div>
+                <div class="day-name">${dayName}</div>
+            </td>
+            <td class="time-cell imsak">${timings.Imsak.split(' ')[0]}</td>
+            <td class="time-cell gunes">${timings.Sunrise.split(' ')[0]}</td>
+            <td class="time-cell ogle">${timings.Dhuhr.split(' ')[0]}</td>
+            <td class="time-cell ikindi">${timings.Asr.split(' ')[0]}</td>
+            <td class="time-cell iftar">${timings.Maghrib.split(' ')[0]}</td>
+            <td class="time-cell yatsi">${timings.Isha.split(' ')[0]}</td>
         `;
 
         tableBody.appendChild(row);
