@@ -249,47 +249,50 @@
                 <div class="qibla-container">
                     <div class="qibla-header">
                         <h2 id="qibla-title">Kıble Bulucu</h2>
-                        <p id="qibla-status">Cihazı düz tutun ve kalibre edin.</p>
                     </div>
 
-                    <div class="compass-ring">
-                        <div class="compass-face" id="compass-face">
-                            <div class="compass-letters">
-                                <span class="dir-n">N</span>
-                                <span class="dir-e">E</span>
-                                <span class="dir-s">S</span>
-                                <span class="dir-w">W</span>
-                            </div>
-                            <div class="kaaba-pointer" id="kaaba-pointer">
-                                🕋
-                            </div>
-                        </div>
-                        <div class="compass-needle"></div>
-                    </div>
-
-                    <div class="qibla-info">
-                        <div class="info-box">
-                            <span class="label">Kabe Açısı</span>
-                            <span class="value" id="qibla-angle">--°</span>
-                        </div>
-                        <div class="info-box">
-                            <span class="label">Pusula</span>
-                            <span class="value" id="compass-heading">--°</span>
-                        </div>
-                    </div>
-
-                    <button id="start-compass-btn" class="start-compass-btn" onclick="startCompass()">PUSULAYI
-                        BAŞLAT</button>
-                    <p class="compass-note" id="qibla-note">*GPS ve Manyetik Sensör gereklidir.</p>
-                    <p class="compass-instructions" id="qibla-instructions"
-                        style="color: #aaa; font-size: 0.8rem; margin-top: 10px; max-width: 80%; line-height: 1.4;">
-                        Cihazınızı 8 şeklinde hareket ettirerek kalibre edin. Kırmızı ibre Kuzeyi, Kabe simgesi Kıble
-                        yönünü gösterir.
-                    </p>
+                    <!-- 1. Option: Google Qibla (Primary) -->
                     <a id="google-qibla-btn" href="https://qiblafinder.withgoogle.com/" target="_blank"
                         class="google-qibla-btn">
                         Haritada Göster (Google)
                     </a>
+
+                    <div class="qibla-divider">
+                        <span id="qibla-alt-text">--- veya ---</span>
+                    </div>
+
+                    <!-- 2. Option: Compass (Secondary) -->
+                    <div class="qibla-secondary-section">
+                        <p id="qibla-status" class="status-secondary">Cihazı düz tutun ve kalibre edin.</p>
+
+                        <div class="compass-ring small-compass">
+                            <div class="compass-face transparent-face" id="compass-face">
+                                <div class="compass-letters">
+                                    <span class="dir-n">N</span>
+                                    <span class="dir-e">E</span>
+                                    <span class="dir-s">S</span>
+                                    <span class="dir-w">W</span>
+                                </div>
+                                <div class="kaaba-pointer" id="kaaba-pointer">
+                                    🕋
+                                </div>
+                            </div>
+                            <div class="compass-needle"></div>
+                        </div>
+
+                        <button id="start-compass-btn" class="start-compass-btn secondary-btn"
+                            onclick="startCompass()">PUSULAYI BAŞLAT</button>
+
+                        <div class="qibla-info mini-info">
+                            <span class="value" id="qibla-angle">--°</span> |
+                            <span class="value" id="compass-heading">--°</span>
+                        </div>
+                    </div>
+
+                    <p class="compass-instructions" id="qibla-instructions"
+                        style="color: #aaa; font-size: 0.75rem; margin-top: 10px; max-width: 80%; line-height: 1.4; opacity: 0.6;">
+                        *Sensör kalibrasyonu gerekebilir. 8 çizin.
+                    </p>
                 </div>
             </div>
     </div>

@@ -590,3 +590,92 @@ option {
     opacity: 0.7;
     margin-bottom: 5px;
 }
+
+/* --- NEW QIBLA LAYOUT STYLES --- */
+
+/* Divider with text */
+.qibla-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 25px 0 15px 0;
+    opacity: 0.5;
+}
+
+.qibla-divider span {
+    color: #ffd700;
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Secondary Section Container */
+.qibla-secondary-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.85;
+    /* Slightly faded */
+    transform: scale(0.9);
+    /* Overall smaller */
+    transition: opacity 0.3s;
+}
+
+.qibla-secondary-section:hover {
+    opacity: 1;
+}
+
+/* Secondary Status Text */
+.status-secondary {
+    font-size: 0.8rem !important;
+    margin-bottom: 10px !important;
+    color: #ccc !important;
+}
+
+/* Smaller Compass Ring */
+.small-compass {
+    width: 220px !important;
+    /* Reduced from default */
+    height: 220px !important;
+    margin: 10px auto !important;
+}
+
+/* Transparent Compass Face */
+/* "ortası daha bulanık olsun kabe resmi görünsün" */
+.transparent-face {
+    background: rgba(255, 255, 255, 0.1) !important;
+    /* Very transparent */
+    backdrop-filter: blur(3px) !important;
+    /* Slight blur */
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.transparent-face .kaaba-pointer {
+    font-size: 2.5rem !important;
+    /* Make Kaaba icon clearly visible */
+    opacity: 1 !important;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.8));
+    /* Centered by default flex/grid in main css */
+}
+
+/* Secondary Start Button */
+.secondary-btn {
+    padding: 8px 20px !important;
+    font-size: 0.8rem !important;
+    border: 1px solid rgba(255, 215, 0, 0.3) !important;
+    background: transparent !important;
+    margin-top: 10px !important;
+}
+
+/* Mini Info */
+.mini-info {
+    flex-direction: row !important;
+    gap: 15px !important;
+    margin-top: 5px !important;
+}
+
+.mini-info .value {
+    font-size: 0.9rem !important;
+    color: #aaa !important;
+}
