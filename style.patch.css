@@ -612,11 +612,13 @@ option {
 #app-sidebar {
     z-index: 10001 !important;
     /* User Requested: "Koyu ama daha silik olsun" -> Dark Faded Glass */
-    background: rgba(15, 20, 25, 0.75) !important;
-    /* Increased transparency from 0.9 to 0.75 */
+    background: rgba(15, 20, 25, 0.5) !important;
+    /* User Requested: "50% opacity" */
     backdrop-filter: blur(10px);
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5) !important;
     border-right: 1px solid rgba(255, 215, 0, 0.2) !important;
+    font-family: 'Cinzel', serif !important;
+    /* "Yazıların formlarını değiştir" */
 }
 
 /* Revert Text Color to Light (Gold/White) */
@@ -630,6 +632,9 @@ option {
     color: #ddd !important;
     /* Off-white */
     font-weight: 500;
+    font-family: 'Cinzel', serif !important;
+    /* Consistent premium font */
+    letter-spacing: 1px;
 }
 
 /* Hover State */
