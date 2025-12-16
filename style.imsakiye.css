@@ -1,0 +1,95 @@
+/* IMSAKIYE FLOAT BUTTON */
+.imsakiye-float-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #FFD700 0%, #d4af37 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.imsakiye-float-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+}
+
+.imsakiye-float-btn .icon {
+    font-size: 1.2rem;
+}
+
+/* IMSAKIYE MODAL */
+.imsakiye-modal-content {
+    background: #fff;
+    padding: 25px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    position: relative;
+    /* Glass Effect if desired, but solid is better for table readability */
+}
+
+.imsakiye-table-container {
+    overflow-y: auto;
+    margin-top: 15px;
+    flex: 1;
+}
+
+#imsakiye-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Outfit', sans-serif;
+}
+
+#imsakiye-table th {
+    position: sticky;
+    top: 0;
+    background: #FFD700;
+    color: #fff;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    border-radius: 8px 8px 0 0;
+    /* Rounded top corners for header row visual */
+}
+
+#imsakiye-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+#imsakiye-table tr:last-child td {
+    border-bottom: none;
+}
+
+#imsakiye-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Highlight Today's Row */
+#imsakiye-table tr.highlight-today {
+    background-color: rgba(212, 175, 55, 0.15);
+    border-left: 4px solid #d4af37;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+    font-style: italic;
+}

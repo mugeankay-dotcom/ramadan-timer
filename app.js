@@ -1,4 +1,8 @@
+console.log('App.js loaded');
 const API_URL = 'https://api.aladhan.com/v1/timings';
+// Default Coordinates (Istanbul)
+let currentUserLat = 41.0082;
+let currentUserLng = 28.9784;
 const RAMADAN_START_DATE = new Date('2025-12-16T00:00:00'); // TEST MODE: Starts Tomorrow!
 
 // GLOBAL BLOCK: Disable Right-Click immediately (Capture Phase)
@@ -440,6 +444,9 @@ function getLocation() {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
+                // Update Global Vars
+                currentUserLat = latitude;
+                currentUserLng = longitude;
                 fetchPrayerTimes(latitude, longitude);
                 elements.cityName.textContent = t.locationFound;
             },
@@ -641,7 +648,7 @@ function triggerIftarAlert() {
         setTimeout(() => { alertShown = false; }, 60000);
     }, 1000); // Wait 1 sec for audio to start
 }
-}
+
 
 // Helper to parse "HH:mm" to Date object for today
 function parseTime(timeStr) {
@@ -665,7 +672,10 @@ function init() {
 document.addEventListener('DOMContentLoaded', () => {
     try {
         init();
+        init();
+        console.log('Main init called');
         initZikirmatik();
+        initQibla(); // Moved here from redundant listener
         renderPrayers();
 
         // Sidebar Logic
@@ -674,7 +684,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const menuToggleBtn = document.getElementById('menu-toggle');
         const menuCloseBtn = document.getElementById('menu-close');
 
-        if (menuToggleBtn) menuToggleBtn.addEventListener('click', toggleSidebar);
+        if (menuToggleBtn) {
+            menuToggleBtn.addEventListener('click', toggleSidebar);
+            console.log('Menu Toggle Listener Attached');
+        } else {
+            console.error('Menu Toggle Button NOT FOUND');
+        }
         if (menuCloseBtn) menuCloseBtn.addEventListener('click', toggleSidebar);
         if (sidebarOverlay) sidebarOverlay.addEventListener('click', toggleSidebar);
 
@@ -689,6 +704,121 @@ document.addEventListener('DOMContentLoaded', () => {
         alert("Hata: " + e.message);
     }
 });
+
+// --- IMSAKIYE 2026 LOGIC ---
+const IMSAKIYE_BTN = document.getElementById('imsakiye-btn');
+const IMSAKIYE_MODAL = document.getElementById('imsakiye-modal');
+const CLOSE_IMSAKIYE_BTN = document.getElementById('close-imsakiye-btn');
+
+if (IMSAKIYE_BTN) IMSAKIYE_BTN.addEventListener('click', openImsakiyeModal);
+if (CLOSE_IMSAKIYE_BTN) CLOSE_IMSAKIYE_BTN.addEventListener('click', closeImsakiyeModal);
+if (IMSAKIYE_MODAL) IMSAKIYE_MODAL.addEventListener('click', (e) => {
+    if (e.target === IMSAKIYE_MODAL) closeImsakiyeModal();
+});
+
+function openImsakiyeModal() {
+    if (IMSAKIYE_MODAL) IMSAKIYE_MODAL.classList.add('active');
+    fetchRamadanCalendar();
+}
+
+function closeImsakiyeModal() {
+    if (IMSAKIYE_MODAL) IMSAKIYE_MODAL.classList.remove('active');
+}
+
+async function fetchRamadanCalendar() {
+    const tableBody = document.getElementById('imsakiye-body');
+    const loadingSpinner = document.getElementById('imsakiye-loading');
+
+    if (!tableBody) return;
+
+    // Check if already populated to avoid re-fetching
+    if (tableBody.children.length > 0) return;
+
+    if (loadingSpinner) loadingSpinner.style.display = 'block';
+
+    try {
+        // Fetch Feb 2026 and March 2026
+        // Ramadan 2026 starts approx Feb 18 and ends March 19
+
+        // Use cached global coordinates
+        const lat = currentUserLat;
+        const lng = currentUserLng;
+
+        const [febData, marData] = await Promise.all([
+            fetch(`https://api.aladhan.com/v1/calendar/2026/2?latitude=${lat}&longitude=${lng}&method=13`).then(res => res.json()),
+            fetch(`https://api.aladhan.com/v1/calendar/2026/3?latitude=${lat}&longitude=${lng}&method=13`).then(res => res.json())
+        ]);
+
+        let combinedData = [];
+        if (febData.code === 200) combinedData = combinedData.concat(febData.data);
+        if (marData.code === 200) combinedData = combinedData.concat(marData.data);
+
+        // Filter for Ramadan Range (approx Feb 18 - Mar 19)
+        // Adjust these dates as per official calendar for 2026
+        const ramadanStart = new Date('2026-02-18');
+        const ramadanEnd = new Date('2026-03-19');
+
+        const ramadanData = combinedData.filter(item => {
+            const d = new Date(item.date.readable); // "18 Feb 2026" works in Date parser usually
+            // aladhan returns "DD MMM YYYY" which is parseable
+            // Let's rely on readable timestamp or reconstruct
+            const [day, monthStr, year] = item.date.readable.split(' ');
+            // Map month name to index? AlAdhan uses English shortnames.
+            // Easier: use item.date.gregorian.date "DD-MM-YYYY"
+            const [gDay, gMonth, gYear] = item.date.gregorian.date.split('-');
+            const dateObj = new Date(`${gYear}-${gMonth}-${gDay}`);
+            return dateObj >= ramadanStart && dateObj <= ramadanEnd;
+        });
+
+        renderImsakiyeTable(ramadanData);
+
+    } catch (error) {
+        console.error("Calendar Fetch Error:", error);
+        tableBody.innerHTML = `<tr><td colspan="4" style="color:red; text-align:center;">Liste yüklenemedi. İnternet bağlantınızı kontrol edin.</td></tr>`;
+    } finally {
+        if (loadingSpinner) loadingSpinner.style.display = 'none';
+    }
+}
+
+function renderImsakiyeTable(data) {
+    const tableBody = document.getElementById('imsakiye-body');
+    if (!tableBody) return;
+
+    tableBody.innerHTML = '';
+
+    const days = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
+    const months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+
+    data.forEach((dayData, index) => {
+        const timings = dayData.timings;
+        // Parse Date
+        const [gDay, gMonth, gYear] = dayData.date.gregorian.date.split('-');
+        const dateObj = new Date(Number(gYear), Number(gMonth) - 1, Number(gDay)); // Month is 0-indexed
+
+        const dayName = days[dateObj.getDay()];
+        const monthName = months[dateObj.getMonth()];
+        const formattedDate = `${Number(gDay)} ${monthName}`;
+
+        const row = document.createElement('tr');
+
+        // Highlight today if relevant (unlikely for 2026 preview but good practice)
+        // For preview, maybe just simple list
+
+        row.innerHTML = `
+            <td><span style="font-weight:bold; color:#2e8b57;">${index + 1}</span> <br><span style="font-size:0.7em; color:#666;">${dayName}</span></td>
+            <td>${formattedDate}</td>
+            <td style="font-weight:700; color:#333;">${timings.Imsak.split(' ')[0]}</td>
+            <td>${timings.Sunrise.split(' ')[0]}</td>
+            <td>${timings.Dhuhr.split(' ')[0]}</td>
+            <td>${timings.Asr.split(' ')[0]}</td>
+            <td style="font-weight:700; color:#d4af37; background:#fff8e1;">${timings.Maghrib.split(' ')[0]}</td>
+            <td>${timings.Isha.split(' ')[0]}</td>
+        `;
+
+        tableBody.appendChild(row);
+    });
+}
+
 
 // Sidebar Toggle Function (Global)
 function toggleSidebar() {
@@ -1300,11 +1430,12 @@ function closePrayerDetail() {
 }
 
 // Initial Render
-document.addEventListener('DOMContentLoaded', () => {
-    init(); // Master Init
-    initQibla(); // Qibla Init
-    renderPrayers();
-});
+// Redundant Qibla Init Removed
+// document.addEventListener('DOMContentLoaded', () => {
+//     init(); // Master Init
+//     initQibla(); // Qibla Init
+//     renderPrayers();
+// });
 
 /* --- QIBLA FINDER LOGIC --- */
 

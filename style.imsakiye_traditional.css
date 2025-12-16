@@ -1,0 +1,90 @@
+/* --- IMSAKIYE INLINE BUTTON (Relocated) --- */
+.imsakiye-inline-btn {
+    width: 100%;
+    margin-top: 15px;
+    /* Spacing from prayer grid */
+    padding: 15px;
+    background: linear-gradient(135deg, #1a2530 0%, #0e1924 100%);
+    /* Match dark theme or similar to prayer card */
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+    color: #d4af37;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imsakiye-inline-btn:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: #d4af37;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.2);
+    color: #fff;
+}
+
+/* Override previous float button styles if needed or just remove them */
+
+/* --- TRADITIONAL IMSAKIYE TABLE STYLING --- */
+.imsakiye-table-container {
+    overflow-x: auto;
+    /* Allow horizontal scroll on mobile */
+    -webkit-overflow-scrolling: touch;
+    border: 2px solid #d4af37;
+    /* Frame */
+    border-radius: 8px;
+}
+
+#imsakiye-table {
+    min-width: 600px;
+    /* Force scroll on small screens */
+    border-collapse: collapse;
+}
+
+#imsakiye-table th {
+    background: #2e8b57;
+    /* Traditional Green */
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    border: 1px solid #1e5b39;
+    padding: 8px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+#imsakiye-table td {
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 8px;
+    font-size: 0.9rem;
+    color: #333;
+    font-family: 'Outfit', sans-serif;
+}
+
+#imsakiye-table tr:nth-child(even) {
+    background-color: #f2fcf5;
+    /* Light green tint */
+}
+
+#imsakiye-table tr.highlight-today {
+    background-color: #fffacd;
+    /* Light yellow */
+    font-weight: bold;
+    border: 2px solid #d4af37;
+}
+
+/* Headers sticky fix for horizontal scroll contexts might be tricky, 
+   but standard overflow usually handles it if container has height. request didn't specify sticky. */
+/* Let's keep sticky top */
+#imsakiye-table th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}

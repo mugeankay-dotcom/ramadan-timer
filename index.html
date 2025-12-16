@@ -174,6 +174,11 @@
                         <span class="prayer-time" id="yatsi-time">--:--</span>
                     </div>
                 </section>
+
+                <!-- IMSAKIYE BUTTON (Relocated) -->
+                <button id="imsakiye-btn" class="imsakiye-inline-btn">
+                    <span class="text">2026 RAMAZAN İMSAKİYESİ</span>
+                </button>
             </div>
 
             <!-- ZIKIRMATIK VIEW -->
@@ -275,6 +280,38 @@
 
             <button id="start-compass-btn" class="start-compass-btn" onclick="startCompass()">PUSULAYI BAŞLAT</button>
             <p class="compass-note">*GPS ve Manyetik Sensör gereklidir.</p>
+        </div>
+    </div>
+
+
+
+    <!-- IMSAKIYE MODAL -->
+    <div id="imsakiye-modal" class="modal-overlay">
+        <div class="imsakiye-modal-content">
+            <div class="modal-header">
+                <h3>Ramazan 2026 İmsakiyesi</h3>
+                <button id="close-imsakiye-btn" class="close-modal">&times;</button>
+            </div>
+            <div class="imsakiye-table-container">
+                <table id="imsakiye-table">
+                    <thead>
+                        <tr>
+                            <th>Gün</th>
+                            <th>Tarih</th>
+                            <th>İmsak</th>
+                            <th>Güneş</th>
+                            <th>Öğle</th>
+                            <th>İkindi</th>
+                            <th>İftar</th>
+                            <th>Yatsı</th>
+                        </tr>
+                    </thead>
+                    <tbody id="imsakiye-body">
+                        <!-- Data will be injected here -->
+                    </tbody>
+                </table>
+                <div id="imsakiye-loading" class="loading-spinner">Yükleniyor...</div>
+            </div>
         </div>
     </div>
 
