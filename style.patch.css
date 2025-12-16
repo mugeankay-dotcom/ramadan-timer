@@ -638,9 +638,17 @@ option {
     /* Gold */
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
     text-transform: none !important;
+    font-variant: normal !important;
+    font-style: normal !important;
     /* Force proper casing for "Menü" */
     font-family: 'Playfair Display', serif !important;
     letter-spacing: 0.5px;
+}
+
+#menu-sidebar-title {
+    text-transform: none !important;
+    font-family: 'Playfair Display', serif !important;
+    font-variant: normal !important;
 }
 
 .sidebar-item {
