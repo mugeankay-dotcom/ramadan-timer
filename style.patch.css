@@ -643,8 +643,8 @@ option {
     color: #ddd !important;
     /* Off-white */
     font-weight: 500;
-    font-family: 'Outfit', sans-serif !important;
-    /* Clean Sans Serif for readable Title Case */
+    font-family: 'Playfair Display', serif !important;
+    /* Premium Serif with true Lowercase */
     letter-spacing: 0.5px;
     text-transform: none !important;
 }
