@@ -601,6 +601,32 @@ option {
     opacity: 0.5;
 }
 
+/* --- SIDEBAR FIXES (Overlap & Brightness) --- */
+
+/* Fix Overlap: Sidebar must be higher than Toggle Button (z-9999) */
+.app-sidebar {
+    z-index: 10001 !important;
+    /* Higher than toggle btn */
+    background: rgba(25, 35, 45, 0.98) !important;
+    /* Brighter/Lighter Dark Blue */
+    /* Optional: Add gradient for more "shine" */
+    background: linear-gradient(160deg, #1e2a38 0%, #111 100%) !important;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Ensure Overlay covers the toggle button too */
+.sidebar-overlay {
+    z-index: 10000 !important;
+}
+
+/* Ensure Close Button is visible */
+.menu-close-btn {
+    font-size: 2.5rem !important;
+    /* Make it bigger/easier to hit */
+    color: #FFD700 !important;
+    opacity: 1 !important;
+}
+
 .qibla-divider span {
     color: #ffd700;
     font-size: 0.8rem;
