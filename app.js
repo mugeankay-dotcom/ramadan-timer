@@ -39,7 +39,9 @@ const translations = {
         historyTitle: "Zikir Geçmişi",
         historyEmpty: "Henüz kayıt yok.",
         resetBtn: "SIFIRLA",
+        resetBtn: "SIFIRLA",
         vibrateBtn: "TİTREŞİM",
+        historyBtn: "GEÇMİŞ",
         dhikrOptions: {
             custom: "Serbest Zikir",
             subhanallah: "Sübhanallah (33)",
@@ -94,7 +96,9 @@ const translations = {
         historyTitle: "Dhikr History",
         historyEmpty: "No records yet.",
         resetBtn: "RESET",
+        resetBtn: "RESET",
         vibrateBtn: "VIBRATE",
+        historyBtn: "HISTORY",
         dhikrOptions: {
             custom: "Free Dhikr",
             subhanallah: "Subhanallah (33)",
@@ -148,7 +152,9 @@ const translations = {
         historyTitle: "سجل الذكر",
         historyEmpty: "لا توجد سجلات بعد.",
         resetBtn: "إعادة تعيين",
+        resetBtn: "إعادة تعيين",
         vibrateBtn: "اهتزاز",
+        historyBtn: "السجل",
         dhikrOptions: {
             custom: "ذكر حر",
             subhanallah: "سبحان الله (٣٣)",
@@ -204,7 +210,9 @@ const translations = {
         historyTitle: "Riwayat Dzikir",
         historyEmpty: "Belum ada catatan.",
         resetBtn: "RESET",
+        resetBtn: "RESET",
         vibrateBtn: "GETAR",
+        historyBtn: "RIWAYAT",
         dhikrOptions: {
             custom: "Dzikir Bebas",
             subhanallah: "Subhanallah (33)",
@@ -258,7 +266,9 @@ const translations = {
         historyTitle: "ذکر کی تاریخ",
         historyEmpty: "ابھی تک کوئی ریکارڈ نہیں ہے۔",
         resetBtn: "ری سیٹ",
+        resetBtn: "ری سیٹ",
         vibrateBtn: "تھر تھراہٹ",
+        historyBtn: "تاریخ",
         dhikrOptions: {
             custom: "مفت ذکر",
             subhanallah: "سبحان اللہ (33)",
@@ -313,7 +323,9 @@ const translations = {
         historyTitle: "Historique du Dhikr",
         historyEmpty: "Aucun enregistrement.",
         resetBtn: "RÉINITIALISER",
+        resetBtn: "RÉINITIALISER",
         vibrateBtn: "VIBRER",
+        historyBtn: "HISTORIQUE",
         dhikrOptions: {
             custom: "Dhikr Libre",
             subhanallah: "Subhanallah (33)",
@@ -363,7 +375,7 @@ const elements = {
     // Zikirmatik Elements
     dhikrTitle: document.querySelector('.dhikr-header h3'),
     dhikrLabel: document.querySelector('.dhikr-label'),
-    resetBtn: document.getElementById('reset-btn'),
+    resetBtn: document.getElementById('reset-dhikr-btn'), // FIX: Updated ID from reset-btn to reset-dhikr-btn
     vibrateBtn: document.getElementById('vibrate-btn'),
     dhikrSelector: document.getElementById('dhikr-selector'),
 
@@ -435,6 +447,15 @@ function setLanguage(lang) {
         const txt = elements.vibrateBtn.querySelector('.btn-text');
         if (txt) txt.textContent = t.vibrateBtn;
     }
+
+    // Update History Button (New)
+    const historyBtn = document.getElementById('history-btn');
+    if (historyBtn && t.historyBtn) {
+        historyBtn.setAttribute('title', t.historyBtn);
+        const txt = historyBtn.querySelector('.btn-text');
+        if (txt) txt.textContent = t.historyBtn;
+    }
+
 
     // Update Selector Options
     if (elements.dhikrSelector) {
