@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#FFD700">
     <title>Ramazan 2026</title>
     <link rel="stylesheet" href="style.main.css?v=63">
-    <link rel="stylesheet" href="style.patch.css?v=8">
+    <link rel="stylesheet" href="style.patch.css?v=9">
     <link rel="manifest" href="manifest.json?v=50">
     <link rel="apple-touch-icon" href="icon-kabe-192.png">
     <link rel="icon" type="image/png" href="icon-kabe-512.png">
@@ -103,31 +103,32 @@
                 </button>
                 <button class="sidebar-item" onclick="switchTab('prayers')">
                     <span class="icon">
-                        <!-- Prayers Icon (Material Design: Hands Pray) -->
-                        <svg viewbox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <!-- Prayers Icon (Cupped Hands / Dua) -->
+                        <svg viewBox="0 0 512 512" width="24" height="24" fill="currentColor">
                             <path
-                                d="M16 11V3c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v8c0 1.1-.9 2-2 2H2v2h2v10c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2V15h2v-2h-2zm-4 12H6V3h6v20z" />
+                                d="M112 243.3v80.2c0 43.1 27 81.3 64 96.6V266.3c0-15.6-11-29.4-26.3-30.7c-21.3-1.8-37.7 15.6-37.7 37v-29.3zM272 191.9c-17.6 0-32 14.4-32 32v80c0 8.8-7.2 16-16 16s-16-7.2-16-16v-76.6c0-17.4 4.7-34.5 13.7-49.4l77.8-129.6c9.1-15.2 4.2-34.8-11-43.9s-32.7-4.3-42.3 9.2l-.8.5L128 190c-10.4 15.6-16 34-16 53v80.2c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V168c0-13.3-10.7-24-24-24S16 154.7 16 168V323.3c0 62.9 44.5 115.6 104 128V480c0 17.7 14.3 32 32 32H360c17.7 0 32-14.3 32-32V451.3c59.5-12.4 104-65.1 104-128V168c0-13.3-10.7-24-24-24s-24 10.7-24 24v155.3c-8.8 0-16 7.2-16 16h-16c-8.8 0-16-7.2-16-16V243.3c0-19-5.6-37.4-16-53L367.6 14.4l-.8-.5c-9.6-13.5-27.1-18.2-42.3-9.2s-20.1 28.7-11 43.9l77.8 129.6c9 14.9 13.7 32 13.7 49.4v76.6c0 8.8-7.2 16-16 16s-16-7.2-16-16v-80c0-17.7-14.3-32.1-32-32.1h-0.1z" />
                         </svg>
                     </span>
                     <span class="label" id="menu-prayers-text">Dualar</span>
                 </button>
                 <button class="sidebar-item" onclick="switchTab('dhikr')">
                     <span class="icon">
-                        <!-- Dhikr Icon (Simple Beads Circle) -->
-                        <svg viewbox="0 0 24 24" width="24" height="24" fill="currentColor">
-                            <!-- Main Circle -->
-                            <path
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                                opacity="0.5" />
-                            <!-- Beads dots -->
-                            <circle cx="12" cy="4.5" r="2" />
-                            <circle cx="17.5" cy="6.5" r="2" />
-                            <circle cx="19.5" cy="12" r="2" />
-                            <circle cx="17.5" cy="17.5" r="2" />
-                            <circle cx="12" cy="19.5" r="2" />
-                            <circle cx="6.5" cy="17.5" r="2" />
-                            <circle cx="4.5" cy="12" r="2" />
-                            <circle cx="6.5" cy="6.5" r="2" />
+                        <!-- Dhikr Icon (Hanging Beads / Not Circular) -->
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <!-- U-shape String -->
+                            <path d="M7 4v5a5 5 0 0 0 10 0V4" />
+                            <!-- Beads on the string -->
+                            <circle cx="7" cy="4" r="1.5" fill="currentColor" stroke="none" />
+                            <circle cx="17" cy="4" r="1.5" fill="currentColor" stroke="none" />
+                            <circle cx="7" cy="9" r="1.5" fill="currentColor" stroke="none" />
+                            <circle cx="17" cy="9" r="1.5" fill="currentColor" stroke="none" />
+                            <circle cx="9" cy="12" r="1.5" fill="currentColor" stroke="none" />
+                            <circle cx="15" cy="12" r="1.5" fill="currentColor" stroke="none" />
+                            <circle cx="12" cy="13.5" r="1.5" fill="currentColor" stroke="none" />
+                            <!-- Tassel at bottom -->
+                            <line x1="12" y1="13.5" x2="12" y2="18" />
+                            <circle cx="12" cy="19" r="1" fill="currentColor" stroke="none" />
                         </svg>
                     </span>
                     <span class="label" id="menu-dhikr-text">Zikirmatik</span>
