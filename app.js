@@ -787,6 +787,13 @@ document.addEventListener('DOMContentLoaded', () => {
         initQibla(); // Moved here from redundant listener
         renderPrayers();
 
+        // Qibla Button Listener (Robust Fix)
+        const startCompassBtn = document.getElementById('start-compass-btn');
+        if (startCompassBtn) {
+            startCompassBtn.addEventListener('click', startCompass);
+            console.log('Compass Button Listener Attached');
+        }
+
         // Sidebar Logic
         const sidebar = document.getElementById('app-sidebar');
         const sidebarOverlay = document.getElementById('sidebar-overlay');
