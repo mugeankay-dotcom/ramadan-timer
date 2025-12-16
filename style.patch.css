@@ -493,17 +493,23 @@ option {
 
 
 /* FIX: 1. Imsakiye Button Transparent with Gold Border */
+/* Fix: Imsakiye Button Transparent with Gold Border - MODIFIED 2025-12-16 Style Update */
 .imsakiye-inline-btn {
-    background: rgba(0, 0, 0, 0) !important;
-    /* Transparent */
+    background: rgba(255, 255, 255, 0.05) !important;
+    /* Subtle tint for blur visibility */
     color: #FFD700 !important;
-    /* Gold text */
-    border: 3px solid #FFD700 !important;
-    /* Strong Gold Border */
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2) !important;
-    font-weight: 800 !important;
-    backdrop-filter: blur(2px);
+    border: none !important;
+    /* "Çizgiyi kaldır" */
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.1) !important;
+    /* Reduced glow */
+    font-weight: 300 !important;
+    /* "Fontları ufalt" -> thinner weight helps too */
+    font-size: 0.9rem !important;
+    /* "Fontları ufalt" */
+    backdrop-filter: blur(5px) !important;
+    /* "Hafif blur yap" */
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .imsakiye-inline-btn:hover {
