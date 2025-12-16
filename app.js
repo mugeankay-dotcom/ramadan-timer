@@ -15,7 +15,7 @@ window.addEventListener('contextmenu', (e) => {
 
 const translations = {
     tr: {
-        title: "Hoşgeldin Ramazan 2026",
+        title: "HOŞGELDİN RAMAZAN 2026",
         menuTitle: "Menü",
         menuHome: "Ana Sayfa",
         menuPrayers: "Dualar",
