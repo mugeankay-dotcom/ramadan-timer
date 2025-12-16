@@ -1,0 +1,40 @@
+<!-- QIBLA VIEW -->
+<div id="qibla-view" class="view-section" style="display: none;">
+    <div class="qibla-container">
+        <div class="qibla-header">
+            <h2 id="qibla-title">Kıble Bulucu</h2>
+            <p id="qibla-status">Cihazı düz tutun ve kalibre edin.</p>
+        </div>
+
+        <div class="compass-ring">
+            <div class="compass-face" id="compass-face">
+                <div class="compass-letters">
+                    <span class="dir-n">N</span>
+                    <span class="dir-e">E</span>
+                    <span class="dir-s">S</span>
+                    <span class="dir-w">W</span>
+                </div>
+                <div class="kaaba-pointer" id="kaaba-pointer">
+                    🕋
+                </div>
+            </div>
+            <div class="compass-needle"></div>
+        </div>
+
+        <div class="qibla-info">
+            <div class="info-box">
+                <span class="label">Kabe Açısı</span>
+                <span class="value" id="qibla-angle">--°</span>
+            </div>
+            <div class="info-box">
+                <span class="label">Pusula</span>
+                <span class="value" id="compass-heading">--°</span>
+            </div>
+        </div>
+
+        <button id="start-compass-btn" class="start-compass-btn">PUSULAYI BAŞLAT</button>
+        <p class="compass-note">*GPS ve Manyetik Sensör gereklidir.</p>
+    </div>
+</div>
+
+<audio id="adhan-audio" src="https://www.islamcan.com/audio/adhan/azan1.mp3" preload="auto"></audio>

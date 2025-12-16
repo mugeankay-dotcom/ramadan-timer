@@ -49,7 +49,11 @@ const translations = {
             Asr: "İkindi",
             Maghrib: "İftar",
             Isha: "Yatsı"
-        }
+        },
+        menuQibla: "Kıble",
+        qiblaTitle: "Kıble Bulucu",
+        qiblaStatus: "Cihazı düz tutun ve kalibre edin.",
+        startCompass: "PUSULAYI BAŞLAT"
     },
     en: {
         title: "Welcome Ramadan 2026",
@@ -91,7 +95,11 @@ const translations = {
             Asr: "Asr",
             Maghrib: "Iftar",
             Isha: "Isha"
-        }
+        },
+        menuQibla: "Qibla",
+        qiblaTitle: "Qibla Finder",
+        qiblaStatus: "Keep device flat and calibrate.",
+        startCompass: "START COMPASS"
     },
     ar: {
         menuTitle: "القائمة",
@@ -132,7 +140,11 @@ const translations = {
             Asr: "العصر",
             Maghrib: "المغرب (الإفطار)",
             Isha: "العشاء"
-        }
+        },
+        menuQibla: "القبلة",
+        qiblaTitle: "اتجاه القبلة",
+        qiblaStatus: "حافظ على وضع الجهاز مسطحًا وقم بالمعايرة.",
+        startCompass: "بدء البوصلة"
     },
     id: {
         title: "Selamat Datang Ramadan 2026",
@@ -140,6 +152,7 @@ const translations = {
         menuHome: "Beranda",
         menuPrayers: "Doa-doa",
         menuDhikr: "Dzikir",
+        menuQibla: "Kiblat",
         prayersTitle: "Doa-doa",
         nextEventLabel: "18 Februari 2026 - Waktu Berikutnya",
         loading: "Memuat...",
@@ -174,7 +187,10 @@ const translations = {
             Asr: "Ashar",
             Maghrib: "Maghrib",
             Isha: "Isya"
-        }
+        },
+        qiblaTitle: "Pencari Kiblat",
+        qiblaStatus: "Jaga perangkat tetap datar.",
+        startCompass: "MULAI KOMPAS"
     },
     ur: {
         title: "خوش آمدید رمضان 2026",
@@ -216,7 +232,11 @@ const translations = {
             Asr: "عصر",
             Maghrib: "مغرب (افطار)",
             Isha: "عشاء"
-        }
+        },
+        menuQibla: "قبلہ",
+        qiblaTitle: "قبلہ رخ",
+        qiblaStatus: "ڈیوائس کو ہموار رکھیں",
+        startCompass: "کمپاس شروع کریں"
     },
     fr: {
         title: "Bienvenue Ramadan 2026",
@@ -258,7 +278,11 @@ const translations = {
             Asr: "Asr",
             Maghrib: "Maghrib",
             Isha: "Isha"
-        }
+        },
+        menuQibla: "Qibla",
+        qiblaTitle: "Boussole Qibla",
+        qiblaStatus: "Gardez l'appareil à plat.",
+        startCompass: "DÉMARRER LA BOUSSOLE"
     }
 };
 
@@ -321,7 +345,18 @@ function setLanguage(lang) {
     document.getElementById('menu-sidebar-title').textContent = t.menuTitle || "Menu";
     document.getElementById('menu-home-text').textContent = t.menuHome || "Home";
     document.getElementById('menu-prayers-text').textContent = t.menuPrayers || "Prayers";
+    document.getElementById('menu-prayers-text').textContent = t.menuPrayers || "Prayers";
     document.getElementById('menu-dhikr-text').textContent = t.menuDhikr || "Dhikr";
+    const menuQibla = document.getElementById('menu-qibla-text');
+    if (menuQibla) menuQibla.textContent = t.menuQibla || "Qibla";
+
+    // Update Qibla View
+    const qiblaTitle = document.getElementById('qibla-title');
+    const qiblaStatus = document.getElementById('qibla-status');
+    const startCompassBtn = document.getElementById('start-compass-btn');
+    if (qiblaTitle) qiblaTitle.textContent = t.qiblaTitle || "Qibla Finder";
+    if (qiblaStatus) qiblaStatus.textContent = t.qiblaStatus || "Status";
+    if (startCompassBtn) startCompassBtn.textContent = t.startCompass || "START";
 
     // Update History Modal Title
     const historyTitle = document.getElementById('history-modal-title');
@@ -582,17 +617,30 @@ function triggerIftarAlert() {
         });
     }
 
-    // 2. Audible/Visual Alert
+    // 2. Play Adhan Audio (New Request)
+    const audio = document.getElementById('adhan-audio');
+    if (audio) {
+        audio.currentTime = 0;
+        audio.play().catch(e => console.log("Audio play failed (interaction needed):", e));
+    }
+
+    // 3. Audible/Visual Alert
     try {
         navigator.vibrate([1000, 500, 1000]); // Vibrate 
     } catch (e) { }
 
-    // 3. Simple Alert Modal
+    // 4. Simple Alert Modal
     setTimeout(() => {
-        alert("📢 İFTAR VAKTİ! \n\nAllah orucunuzu kabul etsin.");
+        // Stop audio when alert is closed (user interacts)
+        alert("📢 İFTAR VAKTİ! \n\nAllah orucunuzu kabul etsin (Ezan Okunuyor).");
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
         // Reset flag after 1 minute so it doesn't loop instantly but allows next day
         setTimeout(() => { alertShown = false; }, 60000);
-    }, 500);
+    }, 1000); // Wait 1 sec for audio to start
+}
 }
 
 // Helper to parse "HH:mm" to Date object for today
@@ -684,6 +732,8 @@ function switchTab(tabId) {
     } else if (tabId === 'prayers') {
         header.classList.add('hidden');
         document.body.classList.add('prayers-mode');
+    } else if (tabId === 'qibla') {
+        header.classList.add('hidden');
     }
 
     // Update Sidebar Active State
@@ -1251,6 +1301,117 @@ function closePrayerDetail() {
 
 // Initial Render
 document.addEventListener('DOMContentLoaded', () => {
-    // ... Existing logic ...
+    init(); // Master Init
+    initQibla(); // Qibla Init
     renderPrayers();
 });
+
+/* --- QIBLA FINDER LOGIC --- */
+
+let qiblaBearing = 0;
+let compassActive = false;
+
+function initQibla() {
+    // If we have location, pre-calculate Qibla
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            qiblaBearing = calculateQibla(pos.coords.latitude, pos.coords.longitude);
+            document.getElementById('qibla-angle').textContent = Math.round(qiblaBearing) + "°";
+        }, (err) => {
+            console.log("Qibla Location Error", err);
+        });
+    }
+}
+
+function startCompass() {
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        // iOS 13+ requires permission
+        DeviceOrientationEvent.requestPermission()
+            .then(response => {
+                if (response === 'granted') {
+                    window.addEventListener('deviceorientation', handleOrientation, true);
+                    compassActive = true;
+                    document.getElementById('qibla-status').textContent = "Kalibre ediliyor... (Cihazı 8 çizin)";
+                } else {
+                    alert("Pusula için izin gerekiyor.");
+                }
+            })
+            .catch(console.error);
+    } else {
+        // Android / Non-iOS 13+
+        window.addEventListener('deviceorientationabsolute', handleOrientation, true); // Android specific often better
+        window.addEventListener('deviceorientation', handleOrientation, true);
+        compassActive = true;
+        document.getElementById('qibla-status').textContent = "Pusula Aktif.";
+    }
+}
+
+function handleOrientation(e) {
+    if (!compassActive) return;
+
+    let compassHeading = 0;
+
+    // Calculate Compass Heading (North)
+    if (e.webkitCompassHeading) {
+        // iOS
+        compassHeading = e.webkitCompassHeading;
+    } else if (e.alpha) {
+        // Android (alpha is z-axis rotation, usually requires diff logic to get North, but basic approx:)
+        // Best practice for Android is 'deviceorientationabsolute' and alpha, but 'alpha' varies by device/browser.
+        // Simple fallback:
+        compassHeading = 360 - e.alpha;
+    }
+
+    // Update UI Values
+    document.getElementById('compass-heading').textContent = Math.round(compassHeading) + "°";
+
+    // Rotate the Compass Face so North matches North
+    // If heading is 90 (East), we rotate face -90 degrees so 'N' points left (North).
+    const face = document.getElementById('compass-face');
+    if (face) {
+        face.style.transform = `rotate(${-compassHeading}deg)`;
+    }
+
+    // Position the Kaaba Pointer relative to North
+    // The Compass Face is N at Top (0 deg).
+    // If Qibla is 150 deg, we want the Kaaba icon at 150 deg on the circle.
+    // CSS Rotation will rotate the whole face relative to phone. 
+
+    // We want the Kaaba Icon to stay at the correct bearing relative to North.
+    // Since the FACE rotates to match North, the Kaaba Icon (which is inside the Face) just needs 
+    // to be placed at the Qibla Angle relative to the Face's North.
+    const kaabaPointer = document.getElementById('kaaba-pointer');
+    if (kaabaPointer) {
+        // Radius is 140px (half of 280). 
+        // We can just rotate the icon element itself from center?
+        // No, let's just rotate the icon container.
+
+        // Actually simpler:
+        // The Face rotates so N is accurate.
+        // We just need the Kaaba pointer to be at X degrees on that face.
+        // So we rotate the Kaaba pointer to X degrees relative to the face container.
+        kaabaPointer.style.transform = `translate(-50%, -50%) rotate(${qiblaBearing}deg) translate(0, -110px) rotate(${-qiblaBearing}deg)`;
+        // Explanation:
+        // 1. Center anchor.
+        // 2. Rotate to bearing angle.
+        // 3. Push out to radius (110px).
+        // 4. Counter-rotate to keep icon upright (optional).
+    }
+}
+
+function calculateQibla(lat, lng) {
+    const kaabaLat = 21.422487;
+    const kaabaLng = 39.826206;
+
+    const phiK = kaabaLat * Math.PI / 180.0;
+    const lambdaK = kaabaLng * Math.PI / 180.0;
+    const phi = lat * Math.PI / 180.0;
+    const lambda = lng * Math.PI / 180.0;
+
+    const y = Math.sin(lambdaK - lambda);
+    const x = Math.cos(phi) * Math.tan(phiK) - Math.sin(phi) * Math.cos(lambdaK - lambda);
+
+    let bearing = Math.atan2(y, x) * 180.0 / Math.PI;
+
+    return (bearing + 360) % 360;
+}

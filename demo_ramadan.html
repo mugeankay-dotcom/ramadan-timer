@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramazan 2026 - DEMO MODE</title>
+    <link rel="stylesheet" href="style.main.css?v=55">
+    <link rel="stylesheet" href="style.patch.css?v=1">
+    <!-- Inline styles for demo controls -->
+    <style>
+        #demo-controls {
+            position: fixed;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px;
+            z-index: 10000;
+            border: 2px solid red;
+            border-radius: 8px;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        #demo-controls button {
+            padding: 8px;
+            cursor: pointer;
+            background: #FFD700;
+            border: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<!-- Basic Body Structure from index.html -->
+
+<body oncontextmenu="return false;">
+    <div id="demo-controls">
+        <strong style="color:white">DEMO CONTROLS</strong>
+        <button onclick="setSimulatedDate('2025-12-15')">1. Normal (Bugün)</button>
+        <button onclick="setSimulatedDate('2026-02-18')">2. Ramazan Başladı (18 Şubat)</button>
+        <button onclick="setSimulatedDate('2026-02-20')">3. Ramazan Ortası (20 Şubat)</button>
+        <div style="color:white; font-size:12px" id="simulated-status">Tarih: Gerçek</div>
+    </div>
+
+    <!-- Original Content -->
+    <div class="background-overlay"></div>
+    <div class="container">
+        <button id="menu-toggle" class="menu-toggle-btn">☰</button>
+        <header class="app-header">
+            <h1 id="app-title">Hoşgeldin Ramazan 2026</h1>
+            <div class="header-controls">
+                <div class="language-selector-wrapper">
+                    <select id="language-selector" class="language-selector">
+                        <option value="tr">Türkçe</option>
+                        <option value="en">English</option>
+                        <option value="ar">العربية</option>
+                        <option value="fr">Français</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-wrapper">
+            <div id="home-view" class="view-section active">
+                <section class="timer-card">
+                    <div class="timer-header">
+                        <h2 id="next-event-label">...</h2>
+                        <p id="next-event-name">...</p>
+                    </div>
+                    <div class="countdown-display">
+                        <div class="time-unit"><span class="number" id="days">00</span><span class="label">GÜN</span>
+                        </div>
+                        <div class="time-separator">:</div>
+                        <div class="time-unit"><span class="number" id="hours">00</span><span class="label">SAAT</span>
+                        </div>
+                        <div class="time-separator">:</div>
+                        <div class="time-unit"><span class="number" id="minutes">00</span><span
+                                class="label">DAKİKA</span></div>
+                        <div class="time-separator">:</div>
+                        <div class="time-unit"><span class="number" id="seconds">00</span><span
+                                class="label">SANİYE</span></div>
+                    </div>
+                    <div class="current-date" id="current-date">--/--/----</div>
+                </section>
+
+                <section class="prayer-times-list">
+                    <h3>Bugünün Vakitleri</h3>
+                    <div class="prayer-item" id="imsak-row"><span class="prayer-name">İmsak</span><span
+                            class="prayer-time">05:30</span></div>
+                    <div class="prayer-item" id="aksam-row"><span class="prayer-name">İftar</span><span
+                            class="prayer-time">19:45</span></div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // SIMULATION LOGIC
+        let simulatedNow = new Date();
+        const RAMADAN_START = new Date('2026-02-18T00:00:00');
+
+        // Mock Translations
+        const t = {
+            tr: {
+                ramadanStart: "Ramazan 2026 Başlangıcı",
+                nextEventLabel: "18 Şubat 2026 - Ramazan Başlangıcına Kalan Süre",
+                iftarLeft: "İftar'a Kalan Süre",
+                imsakLeft: "İmsak'a Kalan Süre",
+                days: "GÜN", hours: "SAAT", minutes: "DAKİKA", seconds: "SANİYE",
+                tomorrowImsak: "Yarınki İmsak'a Kalan Süre"
+            }
+        };
+
+        // Mock Prayer Times (Static for Demo)
+        const mockPrayers = {
+            Imsak: "05:30",
+            Maghrib: "19:45"
+        };
+
+        // Helper to parse HH:mm to Date for the Simulated Day
+        function parseMockTime(timeStr, baseDate) {
+            const [h, m] = timeStr.split(':').map(Number);
+            const d = new Date(baseDate);
+            d.setHours(h, m, 0, 0);
+            return d;
+        }
+
+        function setSimulatedDate(dateStr) {
+            if (dateStr === '2025-12-15') {
+                simulatedNow = new Date(); // Real time
+                document.getElementById('simulated-status').innerText = "Mod: Normal (Ramazan Öncesi)";
+            } else {
+                // Set to specifically 15:00 (3 PM) to show a clear calculation
+                // If Iftar is 19:45, expected result is 4 hours 45 mins.
+                simulatedNow = new Date(dateStr + 'T15:00:00');
+                document.getElementById('simulated-status').innerHTML = "Mod: Ramazan (Simüle Zaman: " + simulatedNow.toLocaleTimeString() + ")<br>İftar Vakti: 19:45";
+            }
+            updateDemo();
+        }
+
+        function updateDemo() {
+            const label = document.getElementById('next-event-label');
+            const name = document.getElementById('next-event-name');
+
+            if (simulatedNow < RAMADAN_START) {
+                // BEFORE RAMADAN
+                label.innerText = t.tr.nextEventLabel;
+                name.innerText = t.tr.ramadanStart;
+
+                const diff = RAMADAN_START - simulatedNow;
+                renderDiff(diff);
+            } else {
+                // DURING RAMADAN LOGIC (Exact Copy of Logic)
+                const imsakTime = parseMockTime(mockPrayers.Imsak, simulatedNow);
+                const maghribTime = parseMockTime(mockPrayers.Maghrib, simulatedNow);
+
+                let targetTime, labelText, eventName;
+
+                if (simulatedNow < imsakTime) {
+                    targetTime = imsakTime;
+                    labelText = t.tr.imsakLeft;
+                    eventName = "İmsak Vakti";
+                } else if (simulatedNow < maghribTime) {
+                    targetTime = maghribTime;
+                    labelText = t.tr.iftarLeft;
+                    eventName = "İftar Vakti (Akşam Ezanı)";
+                } else {
+                    // After Iftar
+                    targetTime = new Date(imsakTime);
+                    targetTime.setDate(targetTime.getDate() + 1);
+                    labelText = t.tr.tomorrowImsak;
+                    eventName = "Yarınki İmsak";
+                }
+
+                label.innerText = labelText;
+                name.innerText = eventName;
+
+                const diff = targetTime - simulatedNow;
+                renderDiff(diff);
+            }
+
+            // Update Date Display
+            document.getElementById('current-date').innerText = simulatedNow.toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        function renderDiff(diff) {
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = d.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+        }
+
+        // Initialize
+        updateDemo();
+
+    </script>
+</body>
+
+</html>
