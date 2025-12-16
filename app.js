@@ -3,7 +3,7 @@ const API_URL = 'https://api.aladhan.com/v1/timings';
 // Default Coordinates (Istanbul)
 let currentUserLat = 41.0082;
 let currentUserLng = 28.9784;
-const RAMADAN_START_DATE = new Date('2025-12-16T00:00:00'); // TEST MODE: Starts Tomorrow!
+const RAMADAN_START_DATE = new Date('2026-02-18T00:00:00'); // Real Date
 
 // GLOBAL BLOCK: Disable Right-Click immediately (Capture Phase)
 window.addEventListener('contextmenu', (e) => {
@@ -441,6 +441,12 @@ function updateDate() {
 function getLocation() {
     const t = translations[currentLang];
     if (navigator.geolocation) {
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
@@ -452,9 +458,13 @@ function getLocation() {
             },
             (error) => {
                 console.error("Error getting location:", error);
+                // Fallback to Istanbul
+                currentUserLat = 41.0082;
+                currentUserLng = 28.9784;
                 elements.cityName.textContent = t.locationDefault;
-                fetchPrayerTimes(41.0082, 28.9784);
-            }
+                fetchPrayerTimes(currentUserLat, currentUserLng);
+            },
+            options
         );
     } else {
         elements.cityName.textContent = t.locationDefault;
@@ -666,14 +676,13 @@ function init() {
     }
     getLocation();
     updateDate();
+    startCountdown(); // Start ticking immediately (handles loading/countdown logic)
     setInterval(updateDate, 60000);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     try {
         init();
-        init();
-        console.log('Main init called');
         initZikirmatik();
         initQibla(); // Moved here from redundant listener
         renderPrayers();
