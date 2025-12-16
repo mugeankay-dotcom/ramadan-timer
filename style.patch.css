@@ -606,7 +606,8 @@ option {
 #app-sidebar {
     z-index: 10001 !important;
     /* User Requested: "Koyu ama daha silik olsun" -> Dark Faded Glass */
-    background: rgba(15, 20, 25, 0.9) !important;
+    background: rgba(15, 20, 25, 0.75) !important;
+    /* Increased transparency from 0.9 to 0.75 */
     backdrop-filter: blur(10px);
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5) !important;
     border-right: 1px solid rgba(255, 215, 0, 0.2) !important;
