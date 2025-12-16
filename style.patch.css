@@ -597,34 +597,48 @@ option {
     align-items: center;
     justify-content: center;
     width: 100%;
-    color: #4a4a4a !important;
-    /* Dark Grey for readability */
+    margin: 25px 0 15px 0;
+}
+
+/* Divider ends here */
+
+/* Fix Overlap: Sidebar must be higher than Toggle Button */
+#app-sidebar {
+    z-index: 10001 !important;
+    /* User Requested: "Koyu ama daha silik olsun" -> Dark Faded Glass */
+    background: rgba(15, 20, 25, 0.9) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5) !important;
+    border-right: 1px solid rgba(255, 215, 0, 0.2) !important;
+}
+
+/* Revert Text Color to Light (Gold/White) */
+.sidebar-header h2 {
+    color: #FFD700 !important;
+    /* Gold */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+.sidebar-item {
+    color: #ddd !important;
+    /* Off-white */
     font-weight: 500;
 }
 
+/* Hover State */
 .sidebar-item:hover,
 .sidebar-item.active {
-    background: rgba(212, 175, 55, 0.2) !important;
-    color: #000 !important;
+    background: rgba(255, 215, 0, 0.15) !important;
+    color: #fff !important;
+    border-right: 3px solid #FFD700;
 }
 
 .sidebar-item .icon svg {
     width: 24px;
     height: 24px;
     fill: currentColor;
-    /* Inherit text color */
+    /* Inherit text color (White/Gold) */
     transition: all 0.3s ease;
-}
-
-/* --- SIDEBAR FIXES (Overlap & Brightness) --- */
-
-/* Fix Overlap: Sidebar must be higher than Toggle Button */
-#app-sidebar {
-    z-index: 10001 !important;
-    /* User Requested: "Background daha parlak olsun" -> Light Premium Gold/Cream */
-    background: linear-gradient(135deg, #FFFDF5 0%, #F5E6CA 100%) !important;
-    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2) !important;
-    border-right: 1px solid #d4af37 !important;
 }
 
 /* Ensure Overlay covers the toggle button */
@@ -632,11 +646,26 @@ option {
     z-index: 10000 !important;
 }
 
-/* Close Button - Darker for visibility on light bg */
+/* Close Button - Light for dark bg */
 .menu-close-btn {
     font-size: 2.5rem !important;
-    color: #8b6c00 !important;
-    opacity: 1 !important;
+    color: #FFD700 !important;
+    opacity: 0.8 !important;
+}
+
+/* --- IMSAKIYE BORDER THINNING --- */
+/* Thin Table Borders */
+#imsakiye-table th,
+#imsakiye-table td {
+    border-width: 0.5px !important;
+    /* Much thinner */
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+/* Thin Button Border */
+.imsakiye-inline-btn {
+    border-width: 1px !important;
+    /* Was 3px */
 }
 
 .qibla-divider span {
