@@ -6,6 +6,10 @@ let currentUserLng = 28.9784;
 const RAMADAN_START_DATE = new Date('2025-12-16T00:00:00'); // TEST MODE: Starts Today!
 let prayerTimesData = null; // Global variable to store fetched data
 
+// TEST MODE: Enable Adhan Outside Ramadan (for testing Dec 18)
+const TEST_MODE_ADHAN = true; // Set to false after testing
+let prayerAlertsShown = {}; // Track which prayers have triggered today
+
 // GLOBAL BLOCK: Disable Right-Click immediately (Capture Phase)
 window.addEventListener('contextmenu', (e) => {
     e.preventDefault();
@@ -761,6 +765,11 @@ function updateCountdown() {
             elements.seconds.textContent = s.toString().padStart(2, '0');
             elements.seconds.nextElementSibling.textContent = t.seconds;
         }
+
+        // TEST MODE: Check prayer times for adhan (Ikindi + Maghrib)
+        if (TEST_MODE_ADHAN) {
+            checkAllPrayerTimesForAdhan(now, prayerTimesData);
+        }
     }
 }
 
@@ -801,6 +810,63 @@ function triggerIftarAlert() {
         // Reset flag after 1 minute so it doesn't loop instantly but allows next day
         setTimeout(() => { alertShown = false; }, 60000);
     }, 1000); // Wait 1 sec for audio to start
+}
+
+// TEST MODE: Check All Prayer Times (Ikindi + Maghrib)
+function checkAllPrayerTimesForAdhan(now, timings) {
+    if (!timings) return;
+
+    const prayers = [
+        { name: 'Asr', time: parseTime(timings.Asr), label: '📢 İKİNDİ VAKTİ!', body: 'Allah kabul etsin.' },
+        { name: 'Maghrib', time: parseTime(timings.Maghrib), label: '📢 İFTAR VAKTİ!', body: 'Allah orucunuzu kabul etsin.' }
+    ];
+
+    prayers.forEach(prayer => {
+        const timeSince = now - prayer.time;
+        const key = `${prayer.name}_${getTodayKey()}`;
+
+        // Within 1 minute after prayer time AND not shown today
+        if (timeSince >= 0 && timeSince < 60000 && !prayerAlertsShown[key]) {
+            prayerAlertsShown[key] = true;
+            playAdhanAlert(prayer.label, prayer.body);
+        }
+    });
+}
+
+function playAdhanAlert(title, body) {
+    // 1. Browser Notification
+    if (Notification.permission === "granted") {
+        new Notification(title, {
+            body: body,
+            icon: "icon-kabe-192.png"
+        });
+    }
+
+    // 2. Play Adhan Audio
+    const audio = document.getElementById('adhan-audio');
+    if (audio) {
+        audio.currentTime = 0;
+        audio.play().catch(e => console.log("Audio play failed:", e));
+    }
+
+    // 3. Vibrate
+    try {
+        navigator.vibrate([1000, 500, 1000]);
+    } catch (e) { }
+
+    // 4. Alert Modal
+    setTimeout(() => {
+        alert(`${title}\n\n${body} (Ezan Okunuyor)`);
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    }, 1000);
+}
+
+function getTodayKey() {
+    const d = new Date();
+    return `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`;
 }
 
 
