@@ -812,11 +812,12 @@ function triggerIftarAlert() {
     setTimeout(() => { alertShown = false; }, 120000);
 }
 
-// TEST MODE: Check All Prayer Times (Ikindi + Maghrib)
+// TEST MODE: Check All Prayer Times (Öğle + Ikindi + Maghrib)
 function checkAllPrayerTimesForAdhan(now, timings) {
     if (!timings) return;
 
     const prayers = [
+        { name: 'Dhuhr', time: parseTime(timings.Dhuhr), label: '📢 ÖĞLE VAKTİ!', body: 'Allah kabul etsin.' },
         { name: 'Asr', time: parseTime(timings.Asr), label: '📢 İKİNDİ VAKTİ!', body: 'Allah kabul etsin.' },
         { name: 'Maghrib', time: parseTime(timings.Maghrib), label: '📢 İFTAR VAKTİ!', body: 'Allah orucunuzu kabul etsin.' }
     ];
