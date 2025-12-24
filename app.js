@@ -779,37 +779,37 @@ function triggerIftarAlert() {
     if (alertShown) return;
     alertShown = true;
 
+    console.log('🌙 Triggering Iftar Alert!'); // Debug log
+
     // 1. Browser Notification
     if (Notification.permission === "granted") {
-        new Notification("İftar Vakti!", {
+        new Notification("📢 İftar Vakti!", {
             body: "Allah kabul etsin. Hayırlı iftarlar!",
-            icon: "icon-kabe-192.png"
+            icon: "icon-kabe-192.png",
+            requireInteraction: true
         });
     }
 
-    // 2. Play Adhan Audio (New Request)
+    // 2. Play Adhan Audio
     const audio = document.getElementById('adhan-audio');
     if (audio) {
         audio.currentTime = 0;
-        audio.play().catch(e => console.log("Audio play failed (interaction needed):", e));
+        audio.volume = 1.0;
+        audio.play().then(() => {
+            console.log('✅ Iftar Adhan started playing');
+        }).catch(e => {
+            console.warn('⚠️ Iftar audio blocked:', e);
+            window.pendingAdhanPlay = true;
+        });
     }
 
-    // 3. Audible/Visual Alert
+    // 3. Vibrate
     try {
-        navigator.vibrate([1000, 500, 1000]); // Vibrate 
+        navigator.vibrate([1000, 500, 1000, 500, 1000]);
     } catch (e) { }
 
-    // 4. Simple Alert Modal
-    setTimeout(() => {
-        // Stop audio when alert is closed (user interacts)
-        alert("📢 İFTAR VAKTİ! \n\nAllah orucunuzu kabul etsin (Ezan Okunuyor).");
-        if (audio) {
-            audio.pause();
-            audio.currentTime = 0;
-        }
-        // Reset flag after 1 minute so it doesn't loop instantly but allows next day
-        setTimeout(() => { alertShown = false; }, 60000);
-    }, 1000); // Wait 1 sec for audio to start
+    // Reset flag after 2 minutes so it doesn't loop
+    setTimeout(() => { alertShown = false; }, 120000);
 }
 
 // TEST MODE: Check All Prayer Times (Ikindi + Maghrib)
@@ -834,11 +834,24 @@ function checkAllPrayerTimesForAdhan(now, timings) {
 }
 
 function playAdhanAlert(title, body) {
+    console.log('🔊 Playing Adhan Alert:', title); // Debug log
+
     // 1. Browser Notification
     if (Notification.permission === "granted") {
         new Notification(title, {
             body: body,
-            icon: "icon-kabe-192.png"
+            icon: "icon-kabe-192.png",
+            requireInteraction: true // Keep notification visible until user dismisses
+        });
+    } else if (Notification.permission !== "denied") {
+        // Request permission if not yet asked
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                new Notification(title, {
+                    body: body,
+                    icon: "icon-kabe-192.png"
+                });
+            }
         });
     }
 
@@ -846,22 +859,29 @@ function playAdhanAlert(title, body) {
     const audio = document.getElementById('adhan-audio');
     if (audio) {
         audio.currentTime = 0;
-        audio.play().catch(e => console.log("Audio play failed:", e));
+        audio.volume = 1.0; // Full volume
+
+        // Try to play with user interaction workaround
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log('✅ Adhan started playing successfully');
+            }).catch(e => {
+                console.warn('⚠️ Audio autoplay blocked, will play on next interaction:', e);
+                // Store for later playback on user interaction
+                window.pendingAdhanPlay = true;
+            });
+        }
+    } else {
+        console.error('❌ adhan-audio element not found!');
     }
 
     // 3. Vibrate
     try {
-        navigator.vibrate([1000, 500, 1000]);
+        navigator.vibrate([1000, 500, 1000, 500, 1000]);
     } catch (e) { }
 
-    // 4. Alert Modal
-    setTimeout(() => {
-        alert(`${title}\n\n${body} (Ezan Okunuyor)`);
-        if (audio) {
-            audio.pause();
-            audio.currentTime = 0;
-        }
-    }, 1000);
+    // NOTE: Removed alert() as it was blocking and stopping the audio after 1 second
 }
 
 function getTodayKey() {
