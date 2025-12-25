@@ -816,7 +816,7 @@ option {
 /* AUDIO ENABLE BANNER (Mobile Fix) */
 .audio-enable-banner {
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
     z-index: 9999;
@@ -826,7 +826,7 @@ option {
     gap: 10px;
     padding: 12px 20px;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    border-bottom: 2px solid #FFD700;
+    border-top: 2px solid #FFD700;
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
 
@@ -862,3 +862,5 @@ option {
 .audio-enable-banner .enable-audio-btn:active {
     transform: scale(0.98);
 }
+
+
