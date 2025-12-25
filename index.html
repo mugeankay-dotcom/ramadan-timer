@@ -7,9 +7,9 @@
     <meta name="description" content="Ramazan 2026 Geri Sayım ve İmsakiye">
     <meta name="theme-color" content="#FFD700">
     <title>Ramazan 2026</title>
-    <link rel="stylesheet" href="style.main.css?v=77">
-    <link rel="stylesheet" href="style.patch.css?v=77">
-    <link rel="manifest" href="manifest.json?v=77">
+    <link rel="stylesheet" href="style.main.css?v=80">
+    <link rel="stylesheet" href="style.patch.css?v=80">
+    <link rel="manifest" href="manifest.json?v=80">
     <link rel="apple-touch-icon" href="icon-kabe-192.png">
     <link rel="icon" type="image/png" href="icon-kabe-512.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -202,6 +202,14 @@
                 <button id="imsakiye-btn" class="imsakiye-inline-btn">
                     <span class="text">2026 Ramazan İmsakiyesi</span>
                 </button>
+
+                <!-- TEST EZAN BUTTON (Debug) -->
+                <button id="test-adhan-btn" onclick="testAdhanManual()"
+                    style="margin-top: 10px; padding: 12px 25px; background: linear-gradient(135deg, #2a5416, #4a9028); color: white; border: none; border-radius: 25px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; margin-left: auto; margin-right: auto;">
+                    🔊 Ezan Sesini Test Et
+                </button>
+                <p id="version-indicator" style="text-align: center; font-size: 10px; color: #666; margin-top: 5px;">v80
+                </p>
             </div>
 
             <!-- ZIKIRMATIK VIEW -->
@@ -351,7 +359,7 @@
         </div>
     </div>
 
-    <audio id="adhan-audio" src="https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3" preload="auto"></audio>
+    <audio id="adhan-audio" src="https://www.islamcan.com/audio/adhan/azan1.mp3" preload="auto"></audio>
 
     <!-- AUDIO ENABLE BANNER (Mobile Fix) - Bottom Position -->
     <div id="audio-enable-banner" class="audio-enable-banner" style="display: none;">
@@ -377,12 +385,12 @@
     </div>
     </div>
 
-    <script src="yasin_content.js?v=77"></script>
-    <script src="app.js?v=77"></script>
+    <script src="yasin_content.js?v=80"></script>
+    <script src="app.js?v=80"></script>
     <script>
         if ('serviceWorker' in navigator) {
             // Force verify update
-            navigator.serviceWorker.register('./sw.js?v=77&t=' + Date.now()).then(reg => {
+            navigator.serviceWorker.register('./sw.js?v=80&t=' + Date.now()).then(reg => {
                 console.log('SW Registered!', reg);
                 reg.update(); // Force update check
             }).catch(console.error);

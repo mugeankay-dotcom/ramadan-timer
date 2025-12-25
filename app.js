@@ -1,4 +1,11 @@
-console.log('App.js loaded');
+const APP_VERSION = 'v80-adhan-fix';
+console.log('🚀 App.js loaded - VERSION:', APP_VERSION);
+
+// Force clear old prayer alerts on new version
+if (localStorage.getItem('appVersion') !== APP_VERSION) {
+    localStorage.setItem('appVersion', APP_VERSION);
+    console.log('🔄 New version detected, clearing prayer alerts cache');
+}
 const API_URL = 'https://api.aladhan.com/v1/timings';
 // Default Coordinates (Istanbul)
 let currentUserLat = 41.0082;
