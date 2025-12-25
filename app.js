@@ -870,22 +870,33 @@ function triggerIftarAlert() {
     setTimeout(() => { alertShown = false; }, 120000);
 }
 
-// TEST MODE: Check All Prayer Times (Öğle + Ikindi + Maghrib)
+// TEST MODE: Check All Prayer Times (Öğle + Ikindi + Maghrib + Yatsı)
 function checkAllPrayerTimesForAdhan(now, timings) {
     if (!timings) return;
 
     const prayers = [
         { name: 'Dhuhr', time: parseTime(timings.Dhuhr), label: '📢 ÖĞLE VAKTİ!', body: 'Allah kabul etsin.' },
         { name: 'Asr', time: parseTime(timings.Asr), label: '📢 İKİNDİ VAKTİ!', body: 'Allah kabul etsin.' },
-        { name: 'Maghrib', time: parseTime(timings.Maghrib), label: '📢 İFTAR VAKTİ!', body: 'Allah orucunuzu kabul etsin.' }
+        { name: 'Maghrib', time: parseTime(timings.Maghrib), label: '📢 İFTAR VAKTİ!', body: 'Allah orucunuzu kabul etsin.' },
+        { name: 'Isha', time: parseTime(timings.Isha), label: '📢 YATSI VAKTİ!', body: 'Allah kabul etsin.' }
     ];
+
+    // Debug: Log current time and prayer times every 30 seconds
+    if (now.getSeconds() % 30 === 0) {
+        console.log('⏰ Prayer Time Check:', {
+            currentTime: now.toLocaleTimeString('tr-TR'),
+            isha: timings.Isha,
+            alertsShown: Object.keys(prayerAlertsShown)
+        });
+    }
 
     prayers.forEach(prayer => {
         const timeSince = now - prayer.time;
         const key = `${prayer.name}_${getTodayKey()}`;
 
-        // Within 1 minute after prayer time AND not shown today
-        if (timeSince >= 0 && timeSince < 60000 && !prayerAlertsShown[key]) {
+        // Within 2 minutes after prayer time AND not shown today (increased window)
+        if (timeSince >= 0 && timeSince < 120000 && !prayerAlertsShown[key]) {
+            console.log('🕌 ADHAN TRIGGER:', prayer.name, 'at', now.toLocaleTimeString('tr-TR'));
             prayerAlertsShown[key] = true;
             playAdhanAlert(prayer.label, prayer.body);
         }
@@ -914,33 +925,79 @@ function playAdhanAlert(title, body) {
         });
     }
 
-    // 2. Play Adhan Audio
+    // 2. Play Adhan Audio with retry logic
     const audio = document.getElementById('adhan-audio');
     if (audio) {
         audio.currentTime = 0;
         audio.volume = 1.0; // Full volume
 
-        // Try to play with user interaction workaround
-        const playPromise = audio.play();
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                console.log('✅ Adhan started playing successfully');
-            }).catch(e => {
-                console.warn('⚠️ Audio autoplay blocked, will play on next interaction:', e);
-                // Store for later playback on user interaction
-                window.pendingAdhanPlay = true;
-            });
-        }
+        // Try to play with multiple attempts
+        const attemptPlay = (attempt = 1) => {
+            console.log(`🎵 Audio play attempt ${attempt}...`);
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log('✅ Adhan started playing successfully on attempt', attempt);
+                }).catch(e => {
+                    console.warn(`⚠️ Audio attempt ${attempt} failed:`, e.message);
+                    if (attempt < 3) {
+                        setTimeout(() => attemptPlay(attempt + 1), 500);
+                    } else {
+                        showVisualAdhanAlert(title);
+                        window.pendingAdhanPlay = true;
+                    }
+                });
+            }
+        };
+        attemptPlay();
     } else {
         console.error('❌ adhan-audio element not found!');
+        showVisualAdhanAlert(title);
     }
 
     // 3. Vibrate
     try {
         navigator.vibrate([1000, 500, 1000, 500, 1000]);
     } catch (e) { }
+}
 
-    // NOTE: Removed alert() as it was blocking and stopping the audio after 1 second
+// Visual notification when audio can't play
+function showVisualAdhanAlert(title) {
+    const existingAlert = document.getElementById('visual-adhan-alert');
+    if (existingAlert) existingAlert.remove();
+
+    const alert = document.createElement('div');
+    alert.id = 'visual-adhan-alert';
+    alert.innerHTML = `
+        <div style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.95);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;text-align:center;padding:20px;">
+            <div style="font-size:60px;margin-bottom:20px;">🕌</div>
+            <div style="font-size:28px;font-weight:bold;margin-bottom:15px;">${title}</div>
+            <div style="font-size:18px;margin-bottom:30px;">Ezan vakti geldi!</div>
+            <button onclick="testAdhanManual(); this.parentElement.parentElement.remove();" style="padding:15px 40px;font-size:18px;background:#d4af37;color:#000;border:none;border-radius:8px;cursor:pointer;">
+                🔊 Ezanı Çal
+            </button>
+            <button onclick="this.parentElement.parentElement.remove();" style="margin-top:15px;padding:10px 30px;font-size:14px;background:transparent;color:#888;border:1px solid #888;border-radius:8px;cursor:pointer;">
+                Kapat
+            </button>
+        </div>
+    `;
+    document.body.appendChild(alert);
+}
+
+// Manual test function
+function testAdhanManual() {
+    console.log('🧪 Manual Adhan Test triggered');
+    const audio = document.getElementById('adhan-audio');
+    if (audio) {
+        audio.currentTime = 0;
+        audio.volume = 1.0;
+        audio.play().then(() => {
+            console.log('✅ Manual adhan playing!');
+        }).catch(e => {
+            console.error('❌ Manual adhan failed:', e);
+            alert('Ses çalınamadı. Lütfen sessize almayı kontrol edin.');
+        });
+    }
 }
 
 function getTodayKey() {
