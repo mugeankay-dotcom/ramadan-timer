@@ -7,9 +7,9 @@
     <meta name="description" content="Ramazan 2026 Geri Sayım ve İmsakiye">
     <meta name="theme-color" content="#FFD700">
     <title>Ramazan 2026</title>
-    <link rel="stylesheet" href="style.main.css?v=75">
-    <link rel="stylesheet" href="style.patch.css?v=75">
-    <link rel="manifest" href="manifest.json?v=75">
+    <link rel="stylesheet" href="style.main.css?v=76">
+    <link rel="stylesheet" href="style.patch.css?v=76">
+    <link rel="manifest" href="manifest.json?v=76">
     <link rel="apple-touch-icon" href="icon-kabe-192.png">
     <link rel="icon" type="image/png" href="icon-kabe-512.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,6 +56,15 @@
 </head>
 
 <body oncontextmenu="return false;">
+    <!-- AUDIO ENABLE BANNER (Mobile Fix) -->
+    <div id="audio-enable-banner" class="audio-enable-banner" style="display: none;">
+        <span class="banner-icon">🔔</span>
+        <span class="banner-text">Ezan bildirimleri için</span>
+        <button id="enable-audio-btn" class="enable-audio-btn" onclick="enableAudioOnUserInteraction()">
+            Sesi Etkinleştir
+        </button>
+    </div>
+
     <div class="background-overlay"></div>
     <div class="container">
         <!-- Menu Button (Fixed Overlay) -->
@@ -369,12 +378,12 @@
     </div>
     </div>
 
-    <script src="yasin_content.js?v=75"></script>
-    <script src="app.js?v=75"></script>
+    <script src="yasin_content.js?v=76"></script>
+    <script src="app.js?v=76"></script>
     <script>
         if ('serviceWorker' in navigator) {
             // Force verify update
-            navigator.serviceWorker.register('./sw.js?v=75&t=' + Date.now()).then(reg => {
+            navigator.serviceWorker.register('./sw.js?v=76&t=' + Date.now()).then(reg => {
                 console.log('SW Registered!', reg);
                 reg.update(); // Force update check
             }).catch(console.error);

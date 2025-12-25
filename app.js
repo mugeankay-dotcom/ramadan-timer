@@ -10,6 +10,64 @@ let prayerTimesData = null; // Global variable to store fetched data
 const TEST_MODE_ADHAN = true; // Set to false after testing
 let prayerAlertsShown = {}; // Track which prayers have triggered today
 
+// MOBILE AUDIO FIX: Track if user has enabled audio
+let audioEnabled = localStorage.getItem('audioEnabled') === 'true';
+
+// Show/hide audio enable banner based on permission status
+function checkAudioPermission() {
+    const banner = document.getElementById('audio-enable-banner');
+    if (!banner) return;
+
+    if (audioEnabled) {
+        banner.style.display = 'none';
+        console.log('✅ Audio already enabled by user');
+    } else {
+        banner.style.display = 'flex';
+        console.log('⚠️ Audio not enabled - showing banner');
+    }
+}
+
+// Called when user clicks "Enable Audio" button
+function enableAudioOnUserInteraction() {
+    console.log('🔊 User clicked Enable Audio...');
+
+    const audio = document.getElementById('adhan-audio');
+    const banner = document.getElementById('audio-enable-banner');
+
+    if (audio) {
+        // Play briefly to unlock audio on mobile
+        audio.volume = 0.5;
+        audio.currentTime = 0;
+
+        audio.play().then(() => {
+            console.log('✅ Audio permission granted!');
+
+            // Stop after 0.5 seconds (just enough to unlock)
+            setTimeout(() => {
+                audio.pause();
+                audio.currentTime = 0;
+                audio.volume = 1.0;
+            }, 500);
+
+            // Save permission
+            audioEnabled = true;
+            localStorage.setItem('audioEnabled', 'true');
+
+            // Hide banner
+            if (banner) {
+                banner.style.display = 'none';
+            }
+
+            // Show success feedback
+            alert('✅ Ezan sesi etkinleştirildi!\n\nNamaz vaktinde ezan otomatik çalacak.');
+
+        }).catch(e => {
+            console.error('❌ Audio enable failed:', e);
+            alert('❌ Ses etkinleştirilemedi. Lütfen tekrar deneyin.');
+        });
+    }
+}
+
 // GLOBAL BLOCK: Disable Right-Click immediately (Capture Phase)
 window.addEventListener('contextmenu', (e) => {
     e.preventDefault();
@@ -901,10 +959,14 @@ function parseTime(timeStr) {
 
 // --- INITIALIZATION WRAPPER ---
 function init() {
-    // Request Permission
+    // Request Notification Permission
     if ('Notification' in window && Notification.permission !== "granted") {
         Notification.requestPermission();
     }
+
+    // Check Audio Permission (Mobile Fix)
+    checkAudioPermission();
+
     getLocation();
     updateDate();
     startCountdown(); // Start ticking immediately (handles loading/countdown logic)

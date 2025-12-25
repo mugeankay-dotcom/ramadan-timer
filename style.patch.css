@@ -812,3 +812,53 @@ option {
     letter-spacing: 0.5px;
 }
 
+
+/* AUDIO ENABLE BANNER (Mobile Fix) */
+.audio-enable-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-bottom: 2px solid #FFD700;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.audio-enable-banner .banner-icon {
+    font-size: 1.5rem;
+}
+
+.audio-enable-banner .banner-text {
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+}
+
+.audio-enable-banner .enable-audio-btn {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: #1a1a2e;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(255, 215, 0, 0.4);
+}
+
+.audio-enable-banner .enable-audio-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6);
+}
+
+.audio-enable-banner .enable-audio-btn:active {
+    transform: scale(0.98);
+}
