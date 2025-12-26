@@ -1,20 +1,18 @@
-const APP_VERSION = 'v80-adhan-fix';
-console.log('🚀 App.js loaded - VERSION:', APP_VERSION);
+const APP_VERSION = '1.0.0';
 
-// Force clear old prayer alerts on new version
+// Clear old prayer alerts on new version
 if (localStorage.getItem('appVersion') !== APP_VERSION) {
     localStorage.setItem('appVersion', APP_VERSION);
-    console.log('🔄 New version detected, clearing prayer alerts cache');
 }
 const API_URL = 'https://api.aladhan.com/v1/timings';
 // Default Coordinates (Istanbul)
 let currentUserLat = 41.0082;
 let currentUserLng = 28.9784;
-const RAMADAN_START_DATE = new Date('2025-12-16T00:00:00'); // TEST MODE: Starts Today!
+const RAMADAN_START_DATE = new Date('2026-02-18T00:00:00'); // Ramazan 2026 - 1 Ramazan 1447
 let prayerTimesData = null; // Global variable to store fetched data
 
-// TEST MODE: Enable Adhan Outside Ramadan (for testing Dec 18)
-const TEST_MODE_ADHAN = true; // Set to false after testing
+// Adhan only during Ramadan
+const TEST_MODE_ADHAN = false; // Production mode
 let prayerAlertsShown = {}; // Track which prayers have triggered today
 
 // MOBILE AUDIO FIX: Track if user has enabled audio
@@ -654,6 +652,8 @@ function getLocation() {
             },
             (error) => {
                 console.error("Error getting location:", error);
+                // Show error message to user
+                showLocationError(error.code);
                 // Fallback to Istanbul
                 currentUserLat = 41.0082;
                 currentUserLng = 28.9784;
@@ -663,10 +663,51 @@ function getLocation() {
             options
         );
     } else {
+        showLocationError(0);
         elements.cityName.textContent = t.locationDefault;
         // Default to Istanbul if no geolocation support or permission
         fetchPrayerTimes(41.0082, 28.9784);
     }
+}
+
+// Show location error message
+function showLocationError(errorCode) {
+    const t = translations[currentLang];
+    let message = '';
+
+    switch (errorCode) {
+        case 1: // PERMISSION_DENIED
+            message = t.locationDenied || 'Konum izni reddedildi. İstanbul için namaz vakitleri gösteriliyor.';
+            break;
+        case 2: // POSITION_UNAVAILABLE
+            message = t.locationUnavailable || 'Konum bilgisi alınamadı. İstanbul için namaz vakitleri gösteriliyor.';
+            break;
+        case 3: // TIMEOUT
+            message = t.locationTimeout || 'Konum alınırken zaman aşımı. İstanbul için namaz vakitleri gösteriliyor.';
+            break;
+        default:
+            message = t.locationNotSupported || 'Konum servisi desteklenmiyor. İstanbul için namaz vakitleri gösteriliyor.';
+    }
+
+    // Create and show error banner
+    const banner = document.createElement('div');
+    banner.id = 'location-error-banner';
+    banner.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; padding: 12px 20px; text-align: center; z-index: 10000; font-size: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.3);';
+    banner.innerHTML = `
+        <span>⚠️ ${message}</span>
+        <button onclick="this.parentElement.remove()" style="margin-left: 15px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 15px; border-radius: 15px; cursor: pointer;">Tamam</button>
+    `;
+
+    // Remove existing banner if any
+    const existing = document.getElementById('location-error-banner');
+    if (existing) existing.remove();
+
+    document.body.prepend(banner);
+
+    // Auto-hide after 10 seconds
+    setTimeout(() => {
+        if (banner.parentElement) banner.remove();
+    }, 10000);
 }
 
 async function fetchPrayerTimes(lat, lng) {
