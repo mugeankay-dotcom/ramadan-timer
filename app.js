@@ -1418,21 +1418,113 @@ function handleDhikrClick() {
             }
         } catch (e) { }
 
-        // Show completion alert after a short delay
+        // Show custom completion modal after a short delay
         setTimeout(() => {
             const selector = document.getElementById('dhikr-selector');
             const selectedOption = selector ? selector.options[selector.selectedIndex].text : '';
-            const completionMsg = translations[currentLang]?.dhikrComplete || 'Tamamlandı! Allah kabul etsin.';
-            const continueMsg = translations[currentLang]?.dhikrContinue || 'Sıfırlanıp devam edilsin mi?';
-
-            if (confirm(`✅ ${selectedOption}\n${completionMsg}\n\n${continueMsg}`)) {
-                // Reset counter
-                dhikrCount = 0;
-                if (display) display.textContent = dhikrCount;
-                localStorage.setItem('dhikrCount', dhikrCount);
-            }
+            showDhikrCompleteModal(selectedOption, display);
         }, 300);
     }
+}
+
+// Custom styled completion modal
+function showDhikrCompleteModal(dhikrName, displayElement) {
+    // Remove any existing modal
+    const existingModal = document.getElementById('dhikr-complete-modal');
+    if (existingModal) existingModal.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'dhikr-complete-modal';
+    modal.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        ">
+            <div style="
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+                border: 2px solid #d4af37;
+                border-radius: 20px;
+                padding: 30px;
+                max-width: 320px;
+                width: 100%;
+                text-align: center;
+                box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
+            ">
+                <div style="font-size: 50px; margin-bottom: 15px;">✅</div>
+                <div style="
+                    font-size: 18px;
+                    color: #d4af37;
+                    font-weight: 600;
+                    margin-bottom: 10px;
+                    font-family: 'Playfair Display', serif;
+                ">${dhikrName}</div>
+                <div style="
+                    font-size: 22px;
+                    color: #fff;
+                    font-weight: 700;
+                    margin-bottom: 8px;
+                ">Tamamlandı!</div>
+                <div style="
+                    font-size: 16px;
+                    color: #aaa;
+                    margin-bottom: 25px;
+                ">Allah kabul etsin 🤲</div>
+                <div style="display: flex; gap: 12px; justify-content: center;">
+                    <button id="dhikr-modal-close" style="
+                        padding: 12px 24px;
+                        font-size: 14px;
+                        background: transparent;
+                        color: #888;
+                        border: 1px solid #555;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        font-weight: 500;
+                    ">Kapat</button>
+                    <button id="dhikr-modal-reset" style="
+                        padding: 12px 24px;
+                        font-size: 14px;
+                        background: linear-gradient(135deg, #d4af37, #f4cf47);
+                        color: #000;
+                        border: none;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        font-weight: 600;
+                    ">Tekrar Başla</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Event listeners
+    document.getElementById('dhikr-modal-close').addEventListener('click', () => {
+        modal.remove();
+    });
+
+    document.getElementById('dhikr-modal-reset').addEventListener('click', () => {
+        dhikrCount = 0;
+        if (displayElement) displayElement.textContent = dhikrCount;
+        localStorage.setItem('dhikrCount', dhikrCount);
+        modal.remove();
+    });
+
+    // Close on backdrop click
+    modal.firstElementChild.addEventListener('click', (e) => {
+        if (e.target === modal.firstElementChild) {
+            modal.remove();
+        }
+    });
 }
 
 function addToHistory(amount) {
