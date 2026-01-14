@@ -1442,63 +1442,55 @@ function showDhikrCompleteModal(dhikrName, displayElement) {
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 10000;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            animation: fadeIn 0.3s ease;
+            padding: 15px;
         ">
             <div style="
-                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
-                border: 2px solid #d4af37;
-                border-radius: 20px;
-                padding: 30px;
-                max-width: 320px;
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+                border: 1px solid #d4af37;
+                border-radius: 12px;
+                padding: 20px;
+                max-width: 260px;
                 width: 100%;
                 text-align: center;
-                box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
             ">
-                <div style="font-size: 50px; margin-bottom: 15px;">✅</div>
                 <div style="
-                    font-size: 18px;
+                    font-size: 14px;
                     color: #d4af37;
-                    font-weight: 600;
-                    margin-bottom: 10px;
-                    font-family: 'Playfair Display', serif;
+                    margin-bottom: 8px;
                 ">${dhikrName}</div>
                 <div style="
-                    font-size: 22px;
+                    font-size: 14px;
                     color: #fff;
-                    font-weight: 700;
-                    margin-bottom: 8px;
+                    margin-bottom: 6px;
                 ">Tamamlandı!</div>
                 <div style="
-                    font-size: 16px;
-                    color: #aaa;
-                    margin-bottom: 25px;
-                ">Allah kabul etsin 🤲</div>
-                <div style="display: flex; gap: 12px; justify-content: center;">
+                    font-size: 14px;
+                    color: #ccc;
+                    margin-bottom: 18px;
+                ">Allah kabul etsin</div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
                     <button id="dhikr-modal-close" style="
-                        padding: 12px 24px;
-                        font-size: 14px;
+                        padding: 10px 18px;
+                        font-size: 13px;
                         background: transparent;
                         color: #888;
                         border: 1px solid #555;
-                        border-radius: 10px;
+                        border-radius: 8px;
                         cursor: pointer;
-                        font-weight: 500;
                     ">Kapat</button>
                     <button id="dhikr-modal-reset" style="
-                        padding: 12px 24px;
-                        font-size: 14px;
-                        background: linear-gradient(135deg, #d4af37, #f4cf47);
+                        padding: 10px 18px;
+                        font-size: 13px;
+                        background: #d4af37;
                         color: #000;
                         border: none;
-                        border-radius: 10px;
+                        border-radius: 8px;
                         cursor: pointer;
-                        font-weight: 600;
                     ">Tekrar Başla</button>
                 </div>
             </div>
