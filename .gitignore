@@ -11,6 +11,7 @@ ramadan-keystore
 *.apk
 *.aab
 *.idsig
+*.zip
 
 # Android project folders
 android-project/
