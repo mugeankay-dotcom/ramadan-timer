@@ -1,0 +1,30 @@
+# Keystore and signing files (SENSITIVE - DO NOT COMMIT)
+android_build/signing.keystore
+android_build/signing-key-info.txt
+android-project/signing.keystore
+android-project/signing-key-info.txt
+*.keystore
+signing-key-info.txt
+ramadan-keystore
+
+# Build outputs
+*.apk
+*.aab
+*.idsig
+
+# Android project folders
+android-project/
+android-source/
+android-twa/
+twa-android-project/
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local properties
+local.properties
