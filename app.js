@@ -1269,6 +1269,23 @@ let dhikrCount = 0;
 let dhikrHistory = {}; // Store daily history { "YYYY-MM-DD": count }
 let isVibrateOn = true; // Default to true
 
+// Target counts for each dhikr type (custom = unlimited)
+const dhikrTargets = {
+    custom: Infinity,
+    subhanallah: 33,
+    elhamdulillah: 33,
+    allahuekber: 33,
+    lailaheillallah: 99
+};
+
+function getCurrentDhikrTarget() {
+    const selector = document.getElementById('dhikr-selector');
+    if (selector) {
+        return dhikrTargets[selector.value] || Infinity;
+    }
+    return Infinity;
+}
+
 function initZikirmatik() {
     const btn = document.getElementById('dhikr-btn');
     const resetBtn = document.getElementById('reset-dhikr-btn');
@@ -1316,6 +1333,16 @@ function initZikirmatik() {
     // Vibrate Toggle (REMOVED UI, but kept logic default ON)
     // if (vibrateBtn) { ... }
 
+    // Selector change listener - reset count when switching dhikr types
+    const dhikrSelector = document.getElementById('dhikr-selector');
+    if (dhikrSelector) {
+        dhikrSelector.addEventListener('change', () => {
+            dhikrCount = 0;
+            if (countDisplay) countDisplay.textContent = dhikrCount;
+            localStorage.setItem('dhikrCount', dhikrCount);
+        });
+    }
+
     // History Modal Listeners
     if (historyBtn) historyBtn.addEventListener('click', openHistoryModal);
     if (closeHistoryBtn) closeHistoryBtn.addEventListener('click', closeHistoryModal);
@@ -1345,8 +1372,15 @@ function initZikirmatik() {
 
 // Helper Functions (Must be defined!)
 function handleDhikrClick() {
-    dhikrCount++;
+    const target = getCurrentDhikrTarget();
     const display = document.getElementById('dhikr-display') || document.getElementById('dhikr-count');
+
+    // Check if already at target (custom/serbest has no limit)
+    if (target !== Infinity && dhikrCount >= target) {
+        return; // Don't count beyond target
+    }
+
+    dhikrCount++;
     if (display) display.textContent = dhikrCount;
 
     // Save
@@ -1373,6 +1407,31 @@ function handleDhikrClick() {
     if (btn) {
         btn.classList.add('clicked');
         setTimeout(() => btn.classList.remove('clicked'), 100);
+    }
+
+    // Check if target reached (not for custom/serbest)
+    if (target !== Infinity && dhikrCount >= target) {
+        // Vibrate longer for completion
+        try {
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200, 100, 400]);
+            }
+        } catch (e) { }
+
+        // Show completion alert after a short delay
+        setTimeout(() => {
+            const selector = document.getElementById('dhikr-selector');
+            const selectedOption = selector ? selector.options[selector.selectedIndex].text : '';
+            const completionMsg = translations[currentLang]?.dhikrComplete || 'Tamamlandı! Allah kabul etsin.';
+            const continueMsg = translations[currentLang]?.dhikrContinue || 'Sıfırlanıp devam edilsin mi?';
+
+            if (confirm(`✅ ${selectedOption}\n${completionMsg}\n\n${continueMsg}`)) {
+                // Reset counter
+                dhikrCount = 0;
+                if (display) display.textContent = dhikrCount;
+                localStorage.setItem('dhikrCount', dhikrCount);
+            }
+        }, 300);
     }
 }
 
