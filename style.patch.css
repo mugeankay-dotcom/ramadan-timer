@@ -870,3 +870,22 @@ option {
 
 /* Menu button pozisyonu */
 .menu-toggle-btn { top: 35px !important; }
+
+/* Toggle Switch Styles */
+.sound-slider:before {
+    position: absolute;
+    content: '';
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+input:checked + .sound-slider {
+    background-color: #d4af37 !important;
+}
+input:checked + .sound-slider:before {
+    transform: translateX(22px);
+}

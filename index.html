@@ -7,9 +7,9 @@
     <meta name="description" content="Ramazan 2026 Geri Sayım ve İmsakiye">
     <meta name="theme-color" content="#FFD700">
     <title>Ramazan 2026</title>
-    <link rel="stylesheet" href="style.main.css?v=88">
-    <link rel="stylesheet" href="style.patch.css?v=88">
-    <link rel="manifest" href="manifest.json?v=88">
+    <link rel="stylesheet" href="style.main.css?v=89">
+    <link rel="stylesheet" href="style.patch.css?v=89">
+    <link rel="manifest" href="manifest.json?v=89">
     <link rel="apple-touch-icon" href="icon-kabe-192.png">
     <link rel="icon" type="image/png" href="icon-kabe-512.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -329,6 +329,57 @@
     </div>
 
 
+    <!-- SETTINGS SECTION -->
+    <div id="settings-section" class="tab-section" style="display: none;">
+        <div style="padding: 20px; max-width: 400px; margin: 0 auto;">
+            <h2 style="color: #d4af37; font-size: 1.5rem; margin-bottom: 25px; text-align: center;" id="settings-title">
+                Ayarlar</h2>
+
+            <!-- Sound Settings -->
+            <div
+                style="background: rgba(0,0,0,0.3); border: 1px solid #333; border-radius: 12px; padding: 18px; margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="color: #fff; font-size: 1rem; margin-bottom: 4px;" id="settings-sound-label">Uyarı
+                            Sesleri</div>
+                        <div style="color: #888; font-size: 0.8rem;" id="settings-sound-desc">Namaz vakti sesli
+                            uyarıları</div>
+                    </div>
+                    <label style="position: relative; display: inline-block; width: 50px; height: 28px;">
+                        <input type="checkbox" id="sound-toggle" checked style="opacity: 0; width: 0; height: 0;">
+                        <span
+                            style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #555; border-radius: 28px; transition: 0.3s;"
+                            class="sound-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Vibration Settings -->
+            <div
+                style="background: rgba(0,0,0,0.3); border: 1px solid #333; border-radius: 12px; padding: 18px; margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="color: #fff; font-size: 1rem; margin-bottom: 4px;" id="settings-vibration-label">
+                            Titreşim</div>
+                        <div style="color: #888; font-size: 0.8rem;" id="settings-vibration-desc">Zikirmatik titreşim
+                            geri bildirimi</div>
+                    </div>
+                    <label style="position: relative; display: inline-block; width: 50px; height: 28px;">
+                        <input type="checkbox" id="vibration-toggle" checked style="opacity: 0; width: 0; height: 0;">
+                        <span
+                            style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #555; border-radius: 28px; transition: 0.3s;"
+                            class="sound-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- App Version -->
+            <div style="text-align: center; margin-top: 40px; color: #666; font-size: 0.75rem;">
+                Ramazan 2026 v1.0.88
+            </div>
+        </div>
+    </div>
+
 
     <!-- IMSAKIYE MODAL -->
     <div id="imsakiye-modal" class="modal-overlay">
@@ -376,12 +427,12 @@
     </div>
     </div>
 
-    <script src="yasin_content.js?v=88"></script>
-    <script src="app.js?v=88"></script>
+    <script src="yasin_content.js?v=89"></script>
+    <script src="app.js?v=89"></script>
     <script>
         if ('serviceWorker' in navigator) {
             // Force verify update
-            navigator.serviceWorker.register('./sw.js?v=88&t=' + Date.now()).then(reg => {
+            navigator.serviceWorker.register('./sw.js?v=89&t=' + Date.now()).then(reg => {
                 console.log('SW Registered!', reg);
                 reg.update(); // Force update check
             }).catch(console.error);

@@ -2116,3 +2116,101 @@ function calculateQibla(lat, lng) {
 
     return (bearing + 360) % 360;
 }
+
+// ===== SETTINGS FUNCTIONALITY =====
+let soundEnabled = localStorage.getItem('soundEnabled') !== 'false'; // Default: true
+let vibrationEnabled = localStorage.getItem('vibrationEnabled') !== 'false'; // Default: true
+
+function initSettings() {
+    const soundToggle = document.getElementById('sound-toggle');
+    const vibrationToggle = document.getElementById('vibration-toggle');
+    
+    if (soundToggle) {
+        soundToggle.checked = soundEnabled;
+        soundToggle.addEventListener('change', function() {
+            soundEnabled = this.checked;
+            localStorage.setItem('soundEnabled', soundEnabled);
+            console.log('Sound:', soundEnabled ? 'ON' : 'OFF');
+        });
+    }
+    
+    if (vibrationToggle) {
+        vibrationToggle.checked = vibrationEnabled;
+        vibrationToggle.addEventListener('change', function() {
+            vibrationEnabled = this.checked;
+            localStorage.setItem('vibrationEnabled', vibrationEnabled);
+            console.log('Vibration:', vibrationEnabled ? 'ON' : 'OFF');
+        });
+    }
+}
+
+// Global switchTab function - handles all tab switching including settings
+window.switchTab = function(tabName) {
+    // Hide all tab sections
+    const allSections = ['home-section', 'prayers-section', 'dhikr-section', 'qibla-section', 'settings-section'];
+    allSections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+    });
+    
+    // Also hide other main views
+    document.querySelectorAll('.tab-section').forEach(el => el.style.display = 'none');
+    
+    // Show selected section
+    const targetSection = document.getElementById(tabName + '-section');
+    if (targetSection) {
+        targetSection.style.display = 'block';
+    }
+    
+    // Update sidebar active state
+    document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+    
+    // Close sidebar after selection
+    const sidebar = document.getElementById('app-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    if (sidebar) sidebar.classList.remove('open');
+    if (overlay) overlay.classList.remove('active');
+};
+
+// Initialize settings on page load
+document.addEventListener('DOMContentLoaded', function() {
+    initSettings();
+});
+
+// Settings translations
+function applySettingsTranslations() {
+    const lang = currentLanguage || 'tr';
+    
+    const settingsTranslations = {
+        tr: { title: 'Ayarlar', soundLabel: 'Uyari Sesleri', soundDesc: 'Namaz vakti sesli uyarilari', vibLabel: 'Titresim', vibDesc: 'Zikirmatik titresim geri bildirimi' },
+        en: { title: 'Settings', soundLabel: 'Alert Sounds', soundDesc: 'Prayer time audio alerts', vibLabel: 'Vibration', vibDesc: 'Tasbih vibration feedback' },
+        ar: { title: 'الإعدادات', soundLabel: 'أصوات التنبيه', soundDesc: 'تنبيهات صوتية', vibLabel: 'اهتزاز', vibDesc: 'تغذية راجعة' },
+        id: { title: 'Pengaturan', soundLabel: 'Suara Peringatan', soundDesc: 'Peringatan audio waktu sholat', vibLabel: 'Getaran', vibDesc: 'Umpan balik getaran' },
+        ur: { title: 'ترتیبات', soundLabel: 'الرٹ آواز', soundDesc: 'نماز کے وقت کی آڈیو', vibLabel: 'وائبریشن', vibDesc: 'تسبیح وائبریشن' },
+        fr: { title: 'Parametres', soundLabel: 'Sons', soundDesc: 'Alertes audio pour les prieres', vibLabel: 'Vibration', vibDesc: 'Retour de vibration' }
+    };
+    
+    const t = settingsTranslations[lang] || settingsTranslations.tr;
+    
+    const titleEl = document.getElementById('settings-title');
+    const soundLabelEl = document.getElementById('settings-sound-label');
+    const soundDescEl = document.getElementById('settings-sound-desc');
+    const vibLabelEl = document.getElementById('settings-vibration-label');
+    const vibDescEl = document.getElementById('settings-vibration-desc');
+    const menuSettingsEl = document.getElementById('menu-settings-text');
+    
+    if (titleEl) titleEl.textContent = t.title;
+    if (soundLabelEl) soundLabelEl.textContent = t.soundLabel;
+    if (soundDescEl) soundDescEl.textContent = t.soundDesc;
+    if (vibLabelEl) vibLabelEl.textContent = t.vibLabel;
+    if (vibDescEl) vibDescEl.textContent = t.vibDesc;
+    if (menuSettingsEl) menuSettingsEl.textContent = t.title;
+}
+
+// Call on language change
+const origLangSelector = document.getElementById('language-selector');
+if (origLangSelector) {
+    origLangSelector.addEventListener('change', function() {
+        setTimeout(applySettingsTranslations, 100);
+    });
+}
