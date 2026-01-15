@@ -7,9 +7,9 @@
     <meta name="description" content="Ramazan 2026 Geri Sayım ve İmsakiye">
     <meta name="theme-color" content="#FFD700">
     <title>Ramazan 2026</title>
-    <link rel="stylesheet" href="style.main.css?v=83">
-    <link rel="stylesheet" href="style.patch.css?v=83">
-    <link rel="manifest" href="manifest.json?v=83">
+    <link rel="stylesheet" href="style.main.css?v=88">
+    <link rel="stylesheet" href="style.patch.css?v=88">
+    <link rel="manifest" href="manifest.json?v=88">
     <link rel="apple-touch-icon" href="icon-kabe-192.png">
     <link rel="icon" type="image/png" href="icon-kabe-512.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -126,6 +126,13 @@
                         </svg>
                     </span>
                     <span class="label" id="menu-qibla-text">Kıble</span>
+                </button>
+                <button class="sidebar-item" onclick="switchTab('settings')">
+                    <span class="icon"
+                        style="display: flex; justify-content: center; align-items: center; font-size: 24px; filter: grayscale(100%) brightness(500%);">
+                        ⚙️
+                    </span>
+                    <span class="label" id="menu-settings-text">Ayarlar</span>
                 </button>
             </nav>
         </aside>
@@ -369,12 +376,12 @@
     </div>
     </div>
 
-    <script src="yasin_content.js?v=83"></script>
-    <script src="app.js?v=83"></script>
+    <script src="yasin_content.js?v=88"></script>
+    <script src="app.js?v=88"></script>
     <script>
         if ('serviceWorker' in navigator) {
             // Force verify update
-            navigator.serviceWorker.register('./sw.js?v=83&t=' + Date.now()).then(reg => {
+            navigator.serviceWorker.register('./sw.js?v=88&t=' + Date.now()).then(reg => {
                 console.log('SW Registered!', reg);
                 reg.update(); // Force update check
             }).catch(console.error);

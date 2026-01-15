@@ -1427,11 +1427,48 @@ function handleDhikrClick() {
     }
 }
 
-// Custom styled completion modal
+// Custom styled completion modal with translations
 function showDhikrCompleteModal(dhikrName, displayElement) {
     // Remove any existing modal
     const existingModal = document.getElementById('dhikr-complete-modal');
     if (existingModal) existingModal.remove();
+
+    // Get translations for current language
+    const completedText = {
+        tr: 'Tamamlandı!',
+        en: 'Completed!',
+        ar: 'اكتمل!',
+        id: 'Selesai!',
+        ur: 'مکمل!',
+        fr: 'Terminé!'
+    }[currentLanguage] || 'Tamamlandı!';
+
+    const acceptedText = {
+        tr: 'Allah kabul etsin',
+        en: 'May Allah accept it',
+        ar: 'تقبل الله',
+        id: 'Semoga Allah menerima',
+        ur: 'اللہ قبول کرے',
+        fr: 'Qu\'Allah accepte'
+    }[currentLanguage] || 'Allah kabul etsin';
+
+    const closeText = {
+        tr: 'Kapat',
+        en: 'Close',
+        ar: 'إغلاق',
+        id: 'Tutup',
+        ur: 'بند کریں',
+        fr: 'Fermer'
+    }[currentLanguage] || 'Kapat';
+
+    const restartText = {
+        tr: 'Tekrar Başla',
+        en: 'Restart',
+        ar: 'إعادة البدء',
+        id: 'Mulai Lagi',
+        ur: 'دوبارہ شروع',
+        fr: 'Recommencer'
+    }[currentLanguage] || 'Tekrar Başla';
 
     const modal = document.createElement('div');
     modal.id = 'dhikr-complete-modal';
@@ -1467,12 +1504,12 @@ function showDhikrCompleteModal(dhikrName, displayElement) {
                     font-size: 14px;
                     color: #fff;
                     margin-bottom: 6px;
-                ">Tamamlandı!</div>
+                ">${completedText}</div>
                 <div style="
                     font-size: 14px;
                     color: #ccc;
                     margin-bottom: 18px;
-                ">Allah kabul etsin</div>
+                ">${acceptedText}</div>
                 <div style="display: flex; gap: 10px; justify-content: center;">
                     <button id="dhikr-modal-close" style="
                         padding: 10px 18px;
@@ -1482,7 +1519,7 @@ function showDhikrCompleteModal(dhikrName, displayElement) {
                         border: 1px solid #555;
                         border-radius: 8px;
                         cursor: pointer;
-                    ">Kapat</button>
+                    ">${closeText}</button>
                     <button id="dhikr-modal-reset" style="
                         padding: 10px 18px;
                         font-size: 13px;
@@ -1491,7 +1528,7 @@ function showDhikrCompleteModal(dhikrName, displayElement) {
                         border: none;
                         border-radius: 8px;
                         cursor: pointer;
-                    ">Tekrar Başla</button>
+                    ">${restartText}</button>
                 </div>
             </div>
         </div>
