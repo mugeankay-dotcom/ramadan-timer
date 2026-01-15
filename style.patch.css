@@ -881,3 +881,21 @@ option {
 body {
     padding-top: env(safe-area-inset-top, 0);
 }
+
+/* FORCED Safe Area Fix - Direct Padding */
+.menu-toggle-btn {
+    top: 35px !important;
+}
+
+.app-header {
+    padding-top: 30px !important;
+    margin-top: 0 !important;
+}
+
+.header-controls {
+    margin-top: 25px !important;
+}
+
+.container {
+    padding-top: 30px !important;
+}
