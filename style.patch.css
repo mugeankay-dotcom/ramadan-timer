@@ -864,3 +864,20 @@ option {
 }
 
 
+
+/* Safe Area Fix for Phone Status Bar (Battery/Signal) */
+.menu-toggle-btn {
+    top: max(15px, env(safe-area-inset-top, 15px)) !important;
+}
+
+.app-header {
+    padding-top: max(10px, env(safe-area-inset-top, 10px)) !important;
+}
+
+.language-selector-wrapper {
+    margin-top: max(5px, env(safe-area-inset-top, 5px)) !important;
+}
+
+body {
+    padding-top: env(safe-area-inset-top, 0);
+}
