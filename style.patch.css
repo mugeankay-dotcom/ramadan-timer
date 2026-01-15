@@ -864,3 +864,6 @@ option {
 }
 
 
+
+/* Dil secici status bar fix */
+.header-controls { margin-top: 25px !important; }
