@@ -359,7 +359,16 @@ body.rtl .countdown-display {
 
 
 .location-badge {
-    display: none !important;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    color: #d4af37;
+    backdrop-filter: blur(5px);
 }
 
 .app-title-wrapper {
@@ -1359,6 +1368,7 @@ body.prayers-mode .prayers-layout {
     font-size: 4rem;
     margin-bottom: 20px;
 }
+
 /* NUCLEAR FIX: Force Desktop Styles to override any legacy/duplicate blocks */
 @media (min-width: 601px) {
     .time-unit {

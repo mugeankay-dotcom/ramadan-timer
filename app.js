@@ -419,6 +419,62 @@ const translations = {
         imsakiyeHeaders: ["Date", "Fajr", "Lev", "Dhu", "Asr", "Mag", "Ish"],
         monthsShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"],
         daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"]
+    },
+    de: {
+        title: "Willkommen Ramadan 2026",
+        menuTitle: "Menü",
+        menuHome: "Startseite",
+        menuPrayers: "Gebete",
+        menuDhikr: "Tasbih",
+        prayersTitle: "Gebete",
+        nextEventLabel: "18. Feb 2026 - Nächstes Gebet",
+        loading: "Laden...",
+        hours: "Stunden",
+        minutes: "Minuten",
+        seconds: "Sekunden",
+        days: "TAGE",
+        locationFound: "Standort erkannt",
+        locationDefault: "Istanbul (Standard)",
+        ramadanStart: "Ramadan 2026 Beginn",
+        imsakLeft: "Zeit bis Imsak",
+        iftarLeft: "Zeit bis Iftar",
+        tomorrowImsak: "Zeit bis morgen Imsak",
+        todayPrayers: "Heutige Gebetszeiten",
+        dhikrTitle: "Mein Tägliches Dhikr",
+        dhikrLabel: "Dhikr",
+        historyTitle: "Dhikr-Verlauf",
+        historyEmpty: "Noch keine Einträge.",
+        resetBtn: "ZURÜCKSETZEN",
+        vibrateBtn: "VIBRIEREN",
+        historyBtn: "VERLAUF",
+        dhikrOptions: {
+            custom: "Freies Dhikr",
+            subhanallah: "Subhanallah (33)",
+            elhamdulillah: "Alhamdulillah (33)",
+            allahuekber: "Allahu Akbar (33)",
+            lailaheillallah: "La Ilaha Illallah (99)"
+        },
+        prayers: {
+            Imsak: "Imsak",
+            Sunrise: "Sonnenaufgang",
+            Dhuhr: "Dhuhr",
+            Asr: "Asr",
+            Maghrib: "Maghrib",
+            Isha: "Isha"
+        },
+        menuQibla: "Qibla",
+        qiblaTitle: "Qibla-Finder",
+        qiblaStatus: "Gerät flach halten und kalibrieren.",
+        qiblaInstructions: "Bewegen Sie Ihr Gerät in einer 8er-Form zur Kalibrierung. Die rote Nadel zeigt nach Norden, das Kaaba-Symbol zeigt zur Qibla.",
+        qiblaAltText: "--- oder ---",
+        googleQiblaBtn: "Auf Karte anzeigen (Google)",
+        startCompass: "KOMPASS STARTEN",
+        imsakiyeBtn: "RAMADAN KALENDER 2026",
+        daySuffix: ". Tag",
+        imsakiyeTitle: "Ramadan 2026 Kalender",
+        imsakiyeHeaders: ["Datum", "Fajr", "Sonne", "Dhu", "Asr", "Mag", "Ish"],
+        monthsShort: ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"],
+        daysShort: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
     }
 };
 
@@ -588,6 +644,11 @@ function setLanguage(lang) {
     if (elements.languageSelector) {
         elements.languageSelector.value = lang;
     }
+    // Also sync settings language selector
+    const settingsLangSelector = document.getElementById('settings-language-selector');
+    if (settingsLangSelector) {
+        settingsLangSelector.value = lang;
+    }
 
     // IMSAKIYE FIX: Clear table so it re-renders in new language
     const imsakiyeBody = document.getElementById('imsakiye-body');
@@ -623,6 +684,7 @@ function updateDate() {
     // Use locale based on selected language
     let locale = 'tr-TR';
     if (currentLang === 'en') locale = 'en-US';
+    if (currentLang === 'de') locale = 'de-DE';
     if (currentLang === 'ar') locale = 'ar-SA';
     if (currentLang === 'id') locale = 'id-ID';
     if (currentLang === 'ur') locale = 'ur-PK';
@@ -1390,7 +1452,7 @@ function handleDhikrClick() {
     addToHistory(1);
 
     // Vibrate (Robust)
-    if (localStorage.getItem('isVibrateOn') === 'true') {
+    if (localStorage.getItem('vibrationEnabled') !== 'false') {
         try {
             if (navigator.vibrate) {
                 navigator.vibrate(100); // Increased duration
@@ -1682,7 +1744,7 @@ const prayersData = [
     YASIN_FULL_DATA,
     {
         id: "ihlas",
-        title: "İhlas Suresi (Kulvallah)",
+        title: "İhlas Suresi (Kul hüvellâhü)",
         audio: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/112.mp3",
         arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ<br>اللَّهُ الصَّمَدُ<br>لَمْ يَلِدْ وَلَمْ يُولَدْ<br>وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",
         reading: "Kul hüvellâhü ehad.<br>Allâhüssamed.<br>Lem yelid ve lem yûled.<br>Ve lem yekün lehû küfüven ehad.",
@@ -2124,6 +2186,8 @@ let vibrationEnabled = localStorage.getItem('vibrationEnabled') !== 'false'; // 
 function initSettings() {
     const soundToggle = document.getElementById('sound-toggle');
     const vibrationToggle = document.getElementById('vibration-toggle');
+    const settingsLangSelector = document.getElementById('settings-language-selector');
+    const headerLangSelector = document.getElementById('language-selector');
 
     if (soundToggle) {
         soundToggle.checked = soundEnabled;
@@ -2140,6 +2204,21 @@ function initSettings() {
             vibrationEnabled = this.checked;
             localStorage.setItem('vibrationEnabled', vibrationEnabled);
             console.log('Vibration:', vibrationEnabled ? 'ON' : 'OFF');
+        });
+    }
+
+    // Settings Language Selector
+    if (settingsLangSelector) {
+        // Sync with current language
+        settingsLangSelector.value = currentLang;
+
+        settingsLangSelector.addEventListener('change', function () {
+            setLanguage(this.value);
+            // Sync header selector too
+            if (headerLangSelector) {
+                headerLangSelector.value = this.value;
+            }
+            console.log('Language changed to:', this.value);
         });
     }
 }
@@ -2192,15 +2271,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Settings translations
 function applySettingsTranslations() {
-    const lang = currentLanguage || 'tr';
+    const lang = currentLang || 'tr';
 
     const settingsTranslations = {
-        tr: { title: 'Ayarlar', soundLabel: 'Uyari Sesleri', soundDesc: 'Namaz vakti sesli uyarilari', vibLabel: 'Titresim', vibDesc: 'Zikirmatik titresim geri bildirimi' },
-        en: { title: 'Settings', soundLabel: 'Alert Sounds', soundDesc: 'Prayer time audio alerts', vibLabel: 'Vibration', vibDesc: 'Tasbih vibration feedback' },
-        ar: { title: 'الإعدادات', soundLabel: 'أصوات التنبيه', soundDesc: 'تنبيهات صوتية', vibLabel: 'اهتزاز', vibDesc: 'تغذية راجعة' },
-        id: { title: 'Pengaturan', soundLabel: 'Suara Peringatan', soundDesc: 'Peringatan audio waktu sholat', vibLabel: 'Getaran', vibDesc: 'Umpan balik getaran' },
-        ur: { title: 'ترتیبات', soundLabel: 'الرٹ آواز', soundDesc: 'نماز کے وقت کی آڈیو', vibLabel: 'وائبریشن', vibDesc: 'تسبیح وائبریشن' },
-        fr: { title: 'Parametres', soundLabel: 'Sons', soundDesc: 'Alertes audio pour les prieres', vibLabel: 'Vibration', vibDesc: 'Retour de vibration' }
+        tr: { title: 'Ayarlar', soundLabel: 'Uyarı Sesleri', soundDesc: 'Namaz vakti sesli uyarıları', vibLabel: 'Titreşim', vibDesc: 'Zikirmatik titreşim geri bildirimi', langLabel: 'Dil', langDesc: 'Uygulama dili' },
+        en: { title: 'Settings', soundLabel: 'Alert Sounds', soundDesc: 'Prayer time audio alerts', vibLabel: 'Vibration', vibDesc: 'Tasbih vibration feedback', langLabel: 'Language', langDesc: 'App language' },
+        de: { title: 'Einstellungen', soundLabel: 'Benachricht.', soundDesc: 'Gebetszeit-Hinweise', vibLabel: 'Vibration', vibDesc: 'Tasbih Vibration', langLabel: 'Sprache', langDesc: 'App-Sprache' },
+        ar: { title: 'الإعدادات', soundLabel: 'أصوات التنبيه', soundDesc: 'تنبيهات صوتية', vibLabel: 'اهتزاز', vibDesc: 'تغذية راجعة', langLabel: 'اللغة', langDesc: 'لغة التطبيق' },
+        id: { title: 'Pengaturan', soundLabel: 'Suara Peringatan', soundDesc: 'Peringatan audio waktu sholat', vibLabel: 'Getaran', vibDesc: 'Umpan balik getaran', langLabel: 'Bahasa', langDesc: 'Bahasa aplikasi' },
+        ur: { title: 'ترتیبات', soundLabel: 'الرٹ آواز', soundDesc: 'نماز کے وقت کی آڈیو', vibLabel: 'وائبریشن', vibDesc: 'تسبیح وائبریشن', langLabel: 'زبان', langDesc: 'ایپ کی زبان' },
+        fr: { title: 'Paramètres', soundLabel: 'Sons', soundDesc: 'Alertes audio pour les prières', vibLabel: 'Vibration', vibDesc: 'Retour de vibration', langLabel: 'Langue', langDesc: "Langue de l'app" }
     };
 
     const t = settingsTranslations[lang] || settingsTranslations.tr;
@@ -2218,6 +2298,12 @@ function applySettingsTranslations() {
     if (vibLabelEl) vibLabelEl.textContent = t.vibLabel;
     if (vibDescEl) vibDescEl.textContent = t.vibDesc;
     if (menuSettingsEl) menuSettingsEl.textContent = t.title;
+
+    // Language label translations
+    const langLabelEl = document.getElementById('settings-language-label');
+    const langDescEl = document.getElementById('settings-language-desc');
+    if (langLabelEl) langLabelEl.textContent = t.langLabel;
+    if (langDescEl) langDescEl.textContent = t.langDesc;
 }
 
 // Call on language change
@@ -2227,3 +2313,58 @@ if (origLangSelector) {
         setTimeout(applySettingsTranslations, 100);
     });
 }
+
+// ===== LANGUAGE SELECTION MODAL =====
+function initLanguageModal() {
+    const modal = document.getElementById('language-modal');
+    const languageCards = document.querySelectorAll('.language-card');
+
+    // Check if user has already selected a language
+    const savedLang = localStorage.getItem('selectedLanguage');
+
+    if (savedLang) {
+        // User already selected a language, hide modal and apply
+        if (modal) modal.classList.add('hidden');
+        setLanguage(savedLang);
+        applySettingsTranslations();
+    } else {
+        // First time - show modal
+        if (modal) modal.classList.remove('hidden');
+    }
+
+    // Language card click handlers
+    languageCards.forEach(card => {
+        card.addEventListener('click', function () {
+            const selectedLang = this.getAttribute('data-lang');
+
+            // Save selection
+            localStorage.setItem('selectedLanguage', selectedLang);
+
+            // Apply language
+            setLanguage(selectedLang);
+            applySettingsTranslations();
+
+            // Sync settings dropdown
+            const settingsLangSelector = document.getElementById('settings-language-selector');
+            if (settingsLangSelector) {
+                settingsLangSelector.value = selectedLang;
+            }
+
+            // Hide modal with animation
+            if (modal) {
+                modal.style.animation = 'fadeOut 0.3s ease forwards';
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.style.animation = '';
+                }, 300);
+            }
+
+            console.log('Language selected:', selectedLang);
+        });
+    });
+}
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', function () {
+    initLanguageModal();
+});
