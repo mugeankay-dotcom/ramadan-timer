@@ -1499,38 +1499,42 @@ function showDhikrCompleteModal(dhikrName, displayElement) {
     const completedText = {
         tr: 'Tamamlandı!',
         en: 'Completed!',
+        de: 'Fertig!',
         ar: 'اكتمل!',
         id: 'Selesai!',
         ur: 'مکمل!',
         fr: 'Terminé!'
-    }[currentLanguage] || 'Tamamlandı!';
+    }[currentLang] || 'Tamamlandı!';
 
     const acceptedText = {
         tr: 'Allah kabul etsin',
         en: 'May Allah accept it',
+        de: 'Möge Allah es annehmen',
         ar: 'تقبل الله',
         id: 'Semoga Allah menerima',
         ur: 'اللہ قبول کرے',
         fr: 'Qu\'Allah accepte'
-    }[currentLanguage] || 'Allah kabul etsin';
+    }[currentLang] || 'Allah kabul etsin';
 
     const closeText = {
         tr: 'Kapat',
         en: 'Close',
+        de: 'Schließen',
         ar: 'إغلاق',
         id: 'Tutup',
         ur: 'بند کریں',
         fr: 'Fermer'
-    }[currentLanguage] || 'Kapat';
+    }[currentLang] || 'Kapat';
 
     const restartText = {
         tr: 'Tekrar Başla',
         en: 'Restart',
+        de: 'Neu starten',
         ar: 'إعادة البدء',
         id: 'Mulai Lagi',
         ur: 'دوبارہ شروع',
         fr: 'Recommencer'
-    }[currentLanguage] || 'Tekrar Başla';
+    }[currentLang] || 'Tekrar Başla';
 
     const modal = document.createElement('div');
     modal.id = 'dhikr-complete-modal';
