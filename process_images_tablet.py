@@ -61,7 +61,7 @@ for i, filename in enumerate(TARGET_FILES):
     try:
         with Image.open(img_path) as img:
             # Create Tablet 7-inch version (800x1280) - Standard 7" Android Tablet Portrait
-            process_and_save(img, 800, 1280, "Tablet7", i)
+            process_and_save(img, 720, 1280, "Tablet7", i)
             
             # (Optional) Re-verify Phone version if needed, but user asked for Tablet *also*
             # process_and_save(img, 1080, 1920, "Phone", i) 
