@@ -2165,17 +2165,15 @@ window.switchTab = function (tabName) {
     // Update sidebar active state
     document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
 
-    // Close sidebar after selection - multiple methods for reliability
+    // Close sidebar after selection - use only class removal to preserve toggle functionality
     const sidebar = document.getElementById('app-sidebar');
     const overlay = document.getElementById('sidebar-overlay');
     if (sidebar) {
         sidebar.classList.remove('open');
         sidebar.classList.remove('active');
-        sidebar.style.transform = 'translateX(-100%)';
     }
     if (overlay) {
         overlay.classList.remove('active');
-        overlay.style.display = 'none';
     }
 };
 
