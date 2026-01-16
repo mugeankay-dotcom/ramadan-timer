@@ -7,9 +7,9 @@
     <meta name="description" content="Ramazan 2026 Geri Sayım ve İmsakiye">
     <meta name="theme-color" content="#FFD700">
     <title>Ramazan 2026</title>
-    <link rel="stylesheet" href="style.main.css?v=93">
-    <link rel="stylesheet" href="style.patch.css?v=93">
-    <link rel="manifest" href="manifest.json?v=93">
+    <link rel="stylesheet" href="style.main.css?v=94">
+    <link rel="stylesheet" href="style.patch.css?v=94">
+    <link rel="manifest" href="manifest.json?v=94">
     <link rel="apple-touch-icon" href="icon-kabe-192.png">
     <link rel="icon" type="image/png" href="icon-kabe-512.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,6 +51,51 @@
                 padding: 0 10px !important;
                 justify-content: center !important;
             }
+        }
+
+        /* VIEW SECTION - Full screen, no scroll */
+        .view-section {
+            height: 100vh !important;
+            max-height: 100vh !important;
+            overflow: hidden !important;
+            box-sizing: border-box !important;
+        }
+
+        /* Dhikr view specific - center content */
+        #dhikr-view {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding-top: 60px !important;
+        }
+
+        #dhikr-view[style*="display: none"] {
+            display: none !important;
+        }
+
+        .dhikr-container {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            height: auto !important;
+            max-height: calc(100vh - 100px) !important;
+        }
+
+        /* Settings view specific */
+        #settings-view {
+            padding-top: 80px !important;
+        }
+
+        /* Qibla view specific */
+        #qibla-view {
+            padding-top: 60px !important;
+        }
+
+        /* Body no scroll */
+        body {
+            overflow: hidden !important;
         }
     </style>
 </head>
@@ -326,113 +371,119 @@
                     </p>
                 </div>
             </div>
-    </div>
 
+            <!-- SETTINGS VIEW -->
+            <div id="settings-view" class="view-section" style="display: none;">
+                <div style="padding: 20px; max-width: 400px; margin: 0 auto;">
+                    <h2 style="color: #d4af37; font-size: 1.5rem; margin-bottom: 25px; text-align: center;"
+                        id="settings-title">
+                        Ayarlar</h2>
 
-    <!-- SETTINGS SECTION -->
-    <div id="settings-section" class="tab-section" style="display: none;">
-        <div style="padding: 20px; max-width: 400px; margin: 0 auto;">
-            <h2 style="color: #d4af37; font-size: 1.5rem; margin-bottom: 25px; text-align: center;" id="settings-title">
-                Ayarlar</h2>
-
-            <!-- Sound Settings -->
-            <div
-                style="background: rgba(0,0,0,0.3); border: 1px solid #333; border-radius: 12px; padding: 18px; margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <div style="color: #fff; font-size: 1rem; margin-bottom: 4px;" id="settings-sound-label">Uyarı
-                            Sesleri</div>
-                        <div style="color: #888; font-size: 0.8rem;" id="settings-sound-desc">Namaz vakti sesli
-                            uyarıları</div>
+                    <!-- Sound Settings -->
+                    <div
+                        style="background: rgba(0,0,0,0.3); border: 1px solid #333; border-radius: 12px; padding: 18px; margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="color: #fff; font-size: 1rem; margin-bottom: 4px;"
+                                    id="settings-sound-label">Uyarı
+                                    Sesleri</div>
+                                <div style="color: #888; font-size: 0.8rem;" id="settings-sound-desc">Namaz vakti sesli
+                                    uyarıları</div>
+                            </div>
+                            <label style="position: relative; display: inline-block; width: 50px; height: 28px;">
+                                <input type="checkbox" id="sound-toggle" checked
+                                    style="opacity: 0; width: 0; height: 0;">
+                                <span
+                                    style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #555; border-radius: 28px; transition: 0.3s;"
+                                    class="sound-slider"></span>
+                            </label>
+                        </div>
                     </div>
-                    <label style="position: relative; display: inline-block; width: 50px; height: 28px;">
-                        <input type="checkbox" id="sound-toggle" checked style="opacity: 0; width: 0; height: 0;">
-                        <span
-                            style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #555; border-radius: 28px; transition: 0.3s;"
-                            class="sound-slider"></span>
-                    </label>
+
+                    <!-- Vibration Settings -->
+                    <div
+                        style="background: rgba(0,0,0,0.3); border: 1px solid #333; border-radius: 12px; padding: 18px; margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="color: #fff; font-size: 1rem; margin-bottom: 4px;"
+                                    id="settings-vibration-label">
+                                    Titreşim</div>
+                                <div style="color: #888; font-size: 0.8rem;" id="settings-vibration-desc">Zikirmatik
+                                    titreşim
+                                    geri bildirimi</div>
+                            </div>
+                            <label style="position: relative; display: inline-block; width: 50px; height: 28px;">
+                                <input type="checkbox" id="vibration-toggle" checked
+                                    style="opacity: 0; width: 0; height: 0;">
+                                <span
+                                    style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #555; border-radius: 28px; transition: 0.3s;"
+                                    class="sound-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- App Version -->
+                    <div style="text-align: center; margin-top: 40px; color: #666; font-size: 0.75rem;">
+                        Ramazan 2026 v1.0.94
+                    </div>
                 </div>
             </div>
 
-            <!-- Vibration Settings -->
-            <div
-                style="background: rgba(0,0,0,0.3); border: 1px solid #333; border-radius: 12px; padding: 18px; margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <div style="color: #fff; font-size: 1rem; margin-bottom: 4px;" id="settings-vibration-label">
-                            Titreşim</div>
-                        <div style="color: #888; font-size: 0.8rem;" id="settings-vibration-desc">Zikirmatik titreşim
-                            geri bildirimi</div>
+
+
+
+            <!-- IMSAKIYE MODAL -->
+            <div id="imsakiye-modal" class="modal-overlay">
+                <div class="imsakiye-modal-content">
+                    <div class="modal-header">
+                        <h3>Ramazan 2026 İmsakiyesi</h3>
+                        <button id="close-imsakiye-btn" class="close-modal">&times;</button>
                     </div>
-                    <label style="position: relative; display: inline-block; width: 50px; height: 28px;">
-                        <input type="checkbox" id="vibration-toggle" checked style="opacity: 0; width: 0; height: 0;">
-                        <span
-                            style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #555; border-radius: 28px; transition: 0.3s;"
-                            class="sound-slider"></span>
-                    </label>
+                    <div class="imsakiye-table-container">
+                        <table id="imsakiye-table">
+                            <thead>
+                                <tr>
+                                    <th class="compact-date-header">Trh</th>
+                                    <th>İms</th>
+                                    <th>Gun</th>
+                                    <th>Öğl</th>
+                                    <th>İkn</th>
+                                    <th>İft</th>
+                                    <th>Yat</th>
+                                </tr>
+                            </thead>
+                            <tbody id="imsakiye-body">
+                                <!-- Data will be injected here -->
+                            </tbody>
+                        </table>
+                        <div id="imsakiye-loading" class="loading-spinner">Yükleniyor...</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- App Version -->
-            <div style="text-align: center; margin-top: 40px; color: #666; font-size: 0.75rem;">
-                Ramazan 2026 v1.0.88
+            <audio id="adhan-audio" src="https://www.islamcan.com/audio/adhan/azan1.mp3" preload="auto"></audio>
+        </main>
+
+        <!-- History Modal -->
+        <div id="history-modal-overlay" class="modal-overlay">
+            <div class="history-modal-content">
+                <div class="modal-header">
+                    <h3 id="history-modal-title">Zikir Geçmişi</h3>
+                    <button id="close-history-btn" class="close-modal">&times;</button>
+                </div>
+                <ul id="history-list">
+                    <!-- Items will be injected here -->
+                </ul>
             </div>
         </div>
     </div>
 
-
-    <!-- IMSAKIYE MODAL -->
-    <div id="imsakiye-modal" class="modal-overlay">
-        <div class="imsakiye-modal-content">
-            <div class="modal-header">
-                <h3>Ramazan 2026 İmsakiyesi</h3>
-                <button id="close-imsakiye-btn" class="close-modal">&times;</button>
-            </div>
-            <div class="imsakiye-table-container">
-                <table id="imsakiye-table">
-                    <thead>
-                        <tr>
-                            <th class="compact-date-header">Trh</th>
-                            <th>İms</th>
-                            <th>Gun</th>
-                            <th>Öğl</th>
-                            <th>İkn</th>
-                            <th>İft</th>
-                            <th>Yat</th>
-                        </tr>
-                    </thead>
-                    <tbody id="imsakiye-body">
-                        <!-- Data will be injected here -->
-                    </tbody>
-                </table>
-                <div id="imsakiye-loading" class="loading-spinner">Yükleniyor...</div>
-            </div>
-        </div>
-    </div>
-
-    <audio id="adhan-audio" src="https://www.islamcan.com/audio/adhan/azan1.mp3" preload="auto"></audio>
-    </main>
-
-    <!-- History Modal -->
-    <div id="history-modal-overlay" class="modal-overlay">
-        <div class="history-modal-content">
-            <div class="modal-header">
-                <h3 id="history-modal-title">Zikir Geçmişi</h3>
-                <button id="close-history-btn" class="close-modal">&times;</button>
-            </div>
-            <ul id="history-list">
-                <!-- Items will be injected here -->
-            </ul>
-        </div>
-    </div>
-    </div>
-
-    <script src="yasin_content.js?v=93"></script>
-    <script src="app.js?v=93"></script>
+    <script src="yasin_content.js?v=94"></script>
+    <script src="app.js?v=94"></script>
     <script>
         if ('serviceWorker' in navigator) {
             // Force verify update
-            navigator.serviceWorker.register('./sw.js?v=93&t=' + Date.now()).then(reg => {
+            navigator.serviceWorker.register('./sw.js?v=94&t=' + Date.now()).then(reg => {
                 console.log('SW Registered!', reg);
                 reg.update(); // Force update check
             }).catch(console.error);

@@ -2146,31 +2146,28 @@ function initSettings() {
 
 // Global switchTab function - handles all tab switching including settings
 window.switchTab = function (tabName) {
-    // Hide all view sections (home, prayers, dhikr, qibla use -view suffix)
-    const allViews = ['home-view', 'prayers-view', 'dhikr-view', 'qibla-view'];
+    // Hide all view sections (all now use -view suffix)
+    const allViews = ['home-view', 'prayers-view', 'dhikr-view', 'qibla-view', 'settings-view'];
     allViews.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
     });
 
-    // Also hide settings section (uses -section suffix)
-    const settingsSection = document.getElementById('settings-section');
-    if (settingsSection) settingsSection.style.display = 'none';
-
-    // Also hide other main views with .tab-section class
-    document.querySelectorAll('.tab-section').forEach(el => el.style.display = 'none');
-
-    // Show selected section - determine correct suffix
-    let targetId;
-    if (tabName === 'settings') {
-        targetId = 'settings-section';
-    } else {
-        targetId = tabName + '-view';
-    }
-
+    // Show selected section
+    const targetId = tabName + '-view';
     const targetSection = document.getElementById(targetId);
     if (targetSection) {
         targetSection.style.display = 'block';
+    }
+
+    // Show/Hide Header based on tab
+    const appHeader = document.querySelector('.app-header');
+    if (appHeader) {
+        if (tabName === 'home') {
+            appHeader.style.display = 'block';
+        } else {
+            appHeader.style.display = 'none';
+        }
     }
 
     // Update sidebar active state

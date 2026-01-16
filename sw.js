@@ -2,9 +2,9 @@ const CACHE_NAME = 'ramadan-timer-v115';
 const ASSETS = [
     './',
     './index.html',
-    './style.main.css?v=93',
-    './app.js?v=93',
-    './manifest.json?v=93',
+    './style.main.css?v=94',
+    './app.js?v=94',
+    './manifest.json?v=94',
     './crystal_gem.svg',
     './icon-kabe-192.png',
     './icon-kabe-512.png',
