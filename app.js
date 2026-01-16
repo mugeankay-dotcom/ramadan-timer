@@ -124,6 +124,7 @@ const translations = {
             Isha: "Yatsı"
         },
         menuQibla: "Kıble",
+        menuSettings: "Ayarlar",
         qiblaTitle: "Kıble Bulucu",
         qiblaStatus: "Cihazı düz tutun ve kalibre edin.",
         qiblaInstructions: "Cihazınızı 8 şeklinde hareket ettirerek kalibre edin. Kırmızı ibre Kuzeyi, Kabe simgesi Kıble yönünü gösterir.",
@@ -180,6 +181,7 @@ const translations = {
             Isha: "Isha"
         },
         menuQibla: "Qibla",
+        menuSettings: "Settings",
         qiblaTitle: "Qibla Finder",
         qiblaStatus: "Keep device flat and calibrate.",
         qiblaInstructions: "Calibrate by moving your device in a figure 8 motion. The red needle points North, the Kaaba icon points to Qibla.",
@@ -236,6 +238,7 @@ const translations = {
             Isha: "العشاء"
         },
         menuQibla: "القبلة",
+        menuSettings: "الإعدادات",
         qiblaTitle: "اتجاه القبلة",
         qiblaStatus: "حافظ على وضع الجهاز مسطحًا وقم بالمعايرة.",
         qiblaInstructions: "قم بمعايرة جهازك بتحريكه على شكل رقم 8. الإبرة الحمراء تشير إلى الشمال، ورمز الكعبة يشير إلى القبلة.",
@@ -256,6 +259,7 @@ const translations = {
         menuPrayers: "Doa-doa",
         menuDhikr: "Dzikir",
         menuQibla: "Kiblat",
+        menuSettings: "Pengaturan",
         prayersTitle: "Doa-doa",
         nextEventLabel: "18 Februari 2026 - Waktu Berikutnya",
         loading: "Memuat...",
@@ -350,6 +354,7 @@ const translations = {
             Isha: "عشاء"
         },
         menuQibla: "قبلہ",
+        menuSettings: "ترتیبات",
         qiblaTitle: "قبلہ رخ",
         qiblaStatus: "ڈیوائس کو ہموار رکھیں",
         qiblaInstructions: "اپنے آلے کو 8 کی شکل میں گھما کر کیلیبریٹ کریں۔ سرخ سوئی شمال کی طرف اشارہ کرتی ہے، کعبہ کا نشان قبلہ کی طرف۔",
@@ -407,6 +412,7 @@ const translations = {
             Isha: "Isha"
         },
         menuQibla: "Qibla",
+        menuSettings: "Paramètres",
         qiblaTitle: "Boussole Qibla",
         qiblaStatus: "Gardez l'appareil à plat.",
         qiblaInstructions: "Calibrez en déplaçant votre appareil en forme de 8. L'aiguille rouge indique le Nord, l'icône de la Kaaba indique la Qibla.",
@@ -463,6 +469,7 @@ const translations = {
             Isha: "Isha"
         },
         menuQibla: "Qibla",
+        menuSettings: "Einstellungen",
         qiblaTitle: "Qibla-Finder",
         qiblaStatus: "Gerät flach halten und kalibrieren.",
         qiblaInstructions: "Bewegen Sie Ihr Gerät in einer 8er-Form zur Kalibrierung. Die rote Nadel zeigt nach Norden, das Kaaba-Symbol zeigt zur Qibla.",
@@ -677,6 +684,15 @@ function setLanguage(lang) {
     if (googleQiblaBtn && t.googleQiblaBtn) {
         googleQiblaBtn.textContent = t.googleQiblaBtn;
     }
+
+    // Update Settings Menu Item
+    const menuSettingsEl = document.getElementById('menu-settings-text');
+    if (menuSettingsEl && t.menuSettings) {
+        menuSettingsEl.textContent = t.menuSettings;
+    }
+
+    // Apply Settings Page Translations
+    applySettingsTranslations();
 }
 
 function updateDate() {
