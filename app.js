@@ -1395,16 +1395,62 @@ function initZikirmatik() {
         if (vibrateBtn) updateVibrateBtnUI();
     }
 
+    // Custom Modal Elements
+    const customModal = document.getElementById('reset-confirm-modal');
+    const btnConfirmReset = document.getElementById('btn-confirm-reset');
+    const btnCancelReset = document.getElementById('btn-cancel-reset');
+
     // Event Listeners
     if (btn) btn.addEventListener('click', handleDhikrClick);
 
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
-            if (confirm(translations[currentLang].resetConfirm || "Sıfırlamak istediğinize emin misiniz?")) {
-                dhikrCount = 0;
-                if (countDisplay) countDisplay.textContent = dhikrCount;
-                saveDhikrState();
+            // Open Custom Modal
+            if (customModal) {
+                customModal.classList.add('active');
+                // Update Title text dynamically
+                const titleEl = document.getElementById('reset-modal-title');
+                const msgEl = document.getElementById('reset-modal-message');
+                const confirmBtnEl = document.getElementById('btn-confirm-reset');
+                const cancelBtnEl = document.getElementById('btn-cancel-reset');
+
+                const t = translations[currentLang];
+
+                if (titleEl) titleEl.textContent = t.resetBtn; // Or custom "Reset Confirmation" key
+                if (msgEl) msgEl.textContent = t.resetConfirm || "Sıfırlamak istediğinize emin misiniz?";
+                if (confirmBtnEl) confirmBtnEl.textContent = t.resetBtn;
+                if (cancelBtnEl) cancelBtnEl.textContent = t.close || "İptal";
             }
+        });
+    }
+
+    // Modal Action Listeners
+    if (btnConfirmReset) {
+        // Clone to remove previous listeners to prevent duplicates
+        const newBtn = btnConfirmReset.cloneNode(true);
+        btnConfirmReset.parentNode.replaceChild(newBtn, btnConfirmReset);
+
+        newBtn.addEventListener('click', () => {
+            dhikrCount = 0;
+            if (countDisplay) countDisplay.textContent = dhikrCount;
+            saveDhikrState();
+            if (customModal) customModal.classList.remove('active');
+        });
+    }
+
+    if (btnCancelReset) {
+        const newBtn = btnCancelReset.cloneNode(true);
+        btnCancelReset.parentNode.replaceChild(newBtn, btnCancelReset);
+
+        newBtn.addEventListener('click', () => {
+            if (customModal) customModal.classList.remove('active');
+        });
+    }
+
+    // Close on outside click
+    if (customModal) {
+        customModal.addEventListener('click', (e) => {
+            if (e.target === customModal) customModal.classList.remove('active');
         });
     }
 
