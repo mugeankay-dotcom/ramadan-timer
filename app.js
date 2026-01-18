@@ -124,7 +124,6 @@ const translations = {
             Isha: "Yatsı"
         },
         menuQibla: "Kıble",
-        menuSettings: "Ayarlar",
         qiblaTitle: "Kıble Bulucu",
         qiblaStatus: "Cihazı düz tutun ve kalibre edin.",
         qiblaInstructions: "Cihazınızı 8 şeklinde hareket ettirerek kalibre edin. Kırmızı ibre Kuzeyi, Kabe simgesi Kıble yönünü gösterir.",
@@ -181,7 +180,6 @@ const translations = {
             Isha: "Isha"
         },
         menuQibla: "Qibla",
-        menuSettings: "Settings",
         qiblaTitle: "Qibla Finder",
         qiblaStatus: "Keep device flat and calibrate.",
         qiblaInstructions: "Calibrate by moving your device in a figure 8 motion. The red needle points North, the Kaaba icon points to Qibla.",
@@ -238,7 +236,6 @@ const translations = {
             Isha: "العشاء"
         },
         menuQibla: "القبلة",
-        menuSettings: "الإعدادات",
         qiblaTitle: "اتجاه القبلة",
         qiblaStatus: "حافظ على وضع الجهاز مسطحًا وقم بالمعايرة.",
         qiblaInstructions: "قم بمعايرة جهازك بتحريكه على شكل رقم 8. الإبرة الحمراء تشير إلى الشمال، ورمز الكعبة يشير إلى القبلة.",
@@ -259,7 +256,6 @@ const translations = {
         menuPrayers: "Doa-doa",
         menuDhikr: "Dzikir",
         menuQibla: "Kiblat",
-        menuSettings: "Pengaturan",
         prayersTitle: "Doa-doa",
         nextEventLabel: "18 Februari 2026 - Waktu Berikutnya",
         loading: "Memuat...",
@@ -354,7 +350,6 @@ const translations = {
             Isha: "عشاء"
         },
         menuQibla: "قبلہ",
-        menuSettings: "ترتیبات",
         qiblaTitle: "قبلہ رخ",
         qiblaStatus: "ڈیوائس کو ہموار رکھیں",
         qiblaInstructions: "اپنے آلے کو 8 کی شکل میں گھما کر کیلیبریٹ کریں۔ سرخ سوئی شمال کی طرف اشارہ کرتی ہے، کعبہ کا نشان قبلہ کی طرف۔",
@@ -412,7 +407,6 @@ const translations = {
             Isha: "Isha"
         },
         menuQibla: "Qibla",
-        menuSettings: "Paramètres",
         qiblaTitle: "Boussole Qibla",
         qiblaStatus: "Gardez l'appareil à plat.",
         qiblaInstructions: "Calibrez en déplaçant votre appareil en forme de 8. L'aiguille rouge indique le Nord, l'icône de la Kaaba indique la Qibla.",
@@ -425,63 +419,6 @@ const translations = {
         imsakiyeHeaders: ["Date", "Fajr", "Lev", "Dhu", "Asr", "Mag", "Ish"],
         monthsShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"],
         daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"]
-    },
-    de: {
-        title: "Willkommen Ramadan 2026",
-        menuTitle: "Menü",
-        menuHome: "Startseite",
-        menuPrayers: "Gebete",
-        menuDhikr: "Tasbih",
-        prayersTitle: "Gebete",
-        nextEventLabel: "18. Feb 2026 - Nächstes Gebet",
-        loading: "Laden...",
-        hours: "Stunden",
-        minutes: "Minuten",
-        seconds: "Sekunden",
-        days: "TAGE",
-        locationFound: "Standort erkannt",
-        locationDefault: "Istanbul (Standard)",
-        ramadanStart: "Ramadan 2026 Beginn",
-        imsakLeft: "Zeit bis Imsak",
-        iftarLeft: "Zeit bis Iftar",
-        tomorrowImsak: "Zeit bis morgen Imsak",
-        todayPrayers: "Heutige Gebetszeiten",
-        dhikrTitle: "Mein Tägliches Dhikr",
-        dhikrLabel: "Dhikr",
-        historyTitle: "Dhikr-Verlauf",
-        historyEmpty: "Noch keine Einträge.",
-        resetBtn: "ZURÜCKSETZEN",
-        vibrateBtn: "VIBRIEREN",
-        historyBtn: "VERLAUF",
-        dhikrOptions: {
-            custom: "Freies Dhikr",
-            subhanallah: "Subhanallah (33)",
-            elhamdulillah: "Alhamdulillah (33)",
-            allahuekber: "Allahu Akbar (33)",
-            lailaheillallah: "La Ilaha Illallah (99)"
-        },
-        prayers: {
-            Imsak: "Imsak",
-            Sunrise: "Sonnenaufgang",
-            Dhuhr: "Dhuhr",
-            Asr: "Asr",
-            Maghrib: "Maghrib",
-            Isha: "Isha"
-        },
-        menuQibla: "Qibla",
-        menuSettings: "Einstellungen",
-        qiblaTitle: "Qibla-Finder",
-        qiblaStatus: "Gerät flach halten und kalibrieren.",
-        qiblaInstructions: "Bewegen Sie Ihr Gerät in einer 8er-Form zur Kalibrierung. Die rote Nadel zeigt nach Norden, das Kaaba-Symbol zeigt zur Qibla.",
-        qiblaAltText: "--- oder ---",
-        googleQiblaBtn: "Auf Karte anzeigen (Google)",
-        startCompass: "KOMPASS STARTEN",
-        imsakiyeBtn: "RAMADAN KALENDER 2026",
-        daySuffix: ". Tag",
-        imsakiyeTitle: "Ramadan 2026 Kalender",
-        imsakiyeHeaders: ["Datum", "Fajr", "Sonne", "Dhu", "Asr", "Mag", "Ish"],
-        monthsShort: ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"],
-        daysShort: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
     }
 };
 
@@ -651,11 +588,6 @@ function setLanguage(lang) {
     if (elements.languageSelector) {
         elements.languageSelector.value = lang;
     }
-    // Also sync settings language selector
-    const settingsLangSelector = document.getElementById('settings-language-selector');
-    if (settingsLangSelector) {
-        settingsLangSelector.value = lang;
-    }
 
     // IMSAKIYE FIX: Clear table so it re-renders in new language
     const imsakiyeBody = document.getElementById('imsakiye-body');
@@ -684,15 +616,6 @@ function setLanguage(lang) {
     if (googleQiblaBtn && t.googleQiblaBtn) {
         googleQiblaBtn.textContent = t.googleQiblaBtn;
     }
-
-    // Update Settings Menu Item
-    const menuSettingsEl = document.getElementById('menu-settings-text');
-    if (menuSettingsEl && t.menuSettings) {
-        menuSettingsEl.textContent = t.menuSettings;
-    }
-
-    // Apply Settings Page Translations
-    applySettingsTranslations();
 }
 
 function updateDate() {
@@ -700,7 +623,6 @@ function updateDate() {
     // Use locale based on selected language
     let locale = 'tr-TR';
     if (currentLang === 'en') locale = 'en-US';
-    if (currentLang === 'de') locale = 'de-DE';
     if (currentLang === 'ar') locale = 'ar-SA';
     if (currentLang === 'id') locale = 'id-ID';
     if (currentLang === 'ur') locale = 'ur-PK';
@@ -1395,60 +1317,17 @@ function initZikirmatik() {
         if (vibrateBtn) updateVibrateBtnUI();
     }
 
-    // Custom Modal Elements
-    const customModal = document.getElementById('reset-confirm-modal');
-    const btnConfirmReset = document.getElementById('btn-confirm-reset');
-    const btnCancelReset = document.getElementById('btn-cancel-reset');
-
     // Event Listeners
     if (btn) btn.addEventListener('click', handleDhikrClick);
 
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
-            // Open Custom Modal
-            if (customModal) {
-                customModal.classList.add('active');
-                // Update Title text dynamically
-                const titleEl = document.getElementById('reset-modal-title');
-                const msgEl = document.getElementById('reset-modal-message');
-                const confirmBtnEl = document.getElementById('btn-confirm-reset');
-                const cancelBtnEl = document.getElementById('btn-cancel-reset');
-
-                const t = translations[currentLang];
-
-                if (titleEl) titleEl.textContent = t.resetBtn; // Or custom "Reset Confirmation" key
-                if (msgEl) msgEl.textContent = t.resetConfirm || "Sıfırlamak istediğinize emin misiniz?";
-                if (confirmBtnEl) confirmBtnEl.textContent = t.resetBtn;
-                if (cancelBtnEl) cancelBtnEl.textContent = t.close || "İptal";
+            if (confirm(translations[currentLang].resetConfirm || "Sıfırlamak istediğinize emin misiniz?")) {
+                dhikrCount = 0;
+                if (countDisplay) countDisplay.textContent = dhikrCount;
+                saveDhikrState();
             }
         });
-    }
-
-    // Modal Action Listeners - Direct attachment (no cloning)
-    const confirmResetBtn = document.getElementById('btn-confirm-reset');
-    const cancelResetBtn = document.getElementById('btn-cancel-reset');
-
-    if (confirmResetBtn) {
-        confirmResetBtn.onclick = function () {
-            dhikrCount = 0;
-            const display = document.getElementById('dhikr-display') || document.getElementById('dhikr-count');
-            if (display) display.textContent = dhikrCount;
-            localStorage.setItem('dhikrCount', dhikrCount);
-            if (customModal) customModal.classList.remove('active');
-        };
-    }
-
-    if (cancelResetBtn) {
-        cancelResetBtn.onclick = function () {
-            if (customModal) customModal.classList.remove('active');
-        };
-    }
-
-    // Close on outside click
-    if (customModal) {
-        customModal.onclick = function (e) {
-            if (e.target === customModal) customModal.classList.remove('active');
-        };
     }
 
     // Vibrate Toggle (REMOVED UI, but kept logic default ON)
@@ -1511,7 +1390,7 @@ function handleDhikrClick() {
     addToHistory(1);
 
     // Vibrate (Robust)
-    if (localStorage.getItem('vibrationEnabled') !== 'false') {
+    if (localStorage.getItem('isVibrateOn') === 'true') {
         try {
             if (navigator.vibrate) {
                 navigator.vibrate(100); // Increased duration
@@ -1548,52 +1427,11 @@ function handleDhikrClick() {
     }
 }
 
-// Custom styled completion modal with translations
+// Custom styled completion modal
 function showDhikrCompleteModal(dhikrName, displayElement) {
     // Remove any existing modal
     const existingModal = document.getElementById('dhikr-complete-modal');
     if (existingModal) existingModal.remove();
-
-    // Get translations for current language
-    const completedText = {
-        tr: 'Tamamlandı!',
-        en: 'Completed!',
-        de: 'Fertig!',
-        ar: 'اكتمل!',
-        id: 'Selesai!',
-        ur: 'مکمل!',
-        fr: 'Terminé!'
-    }[currentLang] || 'Tamamlandı!';
-
-    const acceptedText = {
-        tr: 'Allah kabul etsin',
-        en: 'May Allah accept it',
-        de: 'Möge Allah es annehmen',
-        ar: 'تقبل الله',
-        id: 'Semoga Allah menerima',
-        ur: 'اللہ قبول کرے',
-        fr: 'Qu\'Allah accepte'
-    }[currentLang] || 'Allah kabul etsin';
-
-    const closeText = {
-        tr: 'Kapat',
-        en: 'Close',
-        de: 'Schließen',
-        ar: 'إغلاق',
-        id: 'Tutup',
-        ur: 'بند کریں',
-        fr: 'Fermer'
-    }[currentLang] || 'Kapat';
-
-    const restartText = {
-        tr: 'Tekrar Başla',
-        en: 'Restart',
-        de: 'Neu starten',
-        ar: 'إعادة البدء',
-        id: 'Mulai Lagi',
-        ur: 'دوبارہ شروع',
-        fr: 'Recommencer'
-    }[currentLang] || 'Tekrar Başla';
 
     const modal = document.createElement('div');
     modal.id = 'dhikr-complete-modal';
@@ -1629,12 +1467,12 @@ function showDhikrCompleteModal(dhikrName, displayElement) {
                     font-size: 14px;
                     color: #fff;
                     margin-bottom: 6px;
-                ">${completedText}</div>
+                ">Tamamlandı!</div>
                 <div style="
                     font-size: 14px;
                     color: #ccc;
                     margin-bottom: 18px;
-                ">${acceptedText}</div>
+                ">Allah kabul etsin</div>
                 <div style="display: flex; gap: 10px; justify-content: center;">
                     <button id="dhikr-modal-close" style="
                         padding: 10px 18px;
@@ -1644,7 +1482,7 @@ function showDhikrCompleteModal(dhikrName, displayElement) {
                         border: 1px solid #555;
                         border-radius: 8px;
                         cursor: pointer;
-                    ">${closeText}</button>
+                    ">Kapat</button>
                     <button id="dhikr-modal-reset" style="
                         padding: 10px 18px;
                         font-size: 13px;
@@ -1653,7 +1491,7 @@ function showDhikrCompleteModal(dhikrName, displayElement) {
                         border: none;
                         border-radius: 8px;
                         cursor: pointer;
-                    ">${restartText}</button>
+                    ">Tekrar Başla</button>
                 </div>
             </div>
         </div>
@@ -1807,7 +1645,7 @@ const prayersData = [
     YASIN_FULL_DATA,
     {
         id: "ihlas",
-        title: "İhlas Suresi (Kul hüvellâhü)",
+        title: "İhlas Suresi (Kulvallah)",
         audio: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/112.mp3",
         arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ<br>اللَّهُ الصَّمَدُ<br>لَمْ يَلِدْ وَلَمْ يُولَدْ<br>وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",
         reading: "Kul hüvellâhü ehad.<br>Allâhüssamed.<br>Lem yelid ve lem yûled.<br>Ve lem yekün lehû küfüven ehad.",
@@ -2241,193 +2079,3 @@ function calculateQibla(lat, lng) {
 
     return (bearing + 360) % 360;
 }
-
-// ===== SETTINGS FUNCTIONALITY =====
-let soundEnabled = localStorage.getItem('soundEnabled') !== 'false'; // Default: true
-let vibrationEnabled = localStorage.getItem('vibrationEnabled') !== 'false'; // Default: true
-
-function initSettings() {
-    const soundToggle = document.getElementById('sound-toggle');
-    const vibrationToggle = document.getElementById('vibration-toggle');
-    const settingsLangSelector = document.getElementById('settings-language-selector');
-    const headerLangSelector = document.getElementById('language-selector');
-
-    if (soundToggle) {
-        soundToggle.checked = soundEnabled;
-        soundToggle.addEventListener('change', function () {
-            soundEnabled = this.checked;
-            localStorage.setItem('soundEnabled', soundEnabled);
-            console.log('Sound:', soundEnabled ? 'ON' : 'OFF');
-        });
-    }
-
-    if (vibrationToggle) {
-        vibrationToggle.checked = vibrationEnabled;
-        vibrationToggle.addEventListener('change', function () {
-            vibrationEnabled = this.checked;
-            localStorage.setItem('vibrationEnabled', vibrationEnabled);
-            console.log('Vibration:', vibrationEnabled ? 'ON' : 'OFF');
-        });
-    }
-
-    // Settings Language Selector
-    if (settingsLangSelector) {
-        // Sync with current language
-        settingsLangSelector.value = currentLang;
-
-        settingsLangSelector.addEventListener('change', function () {
-            setLanguage(this.value);
-            // Sync header selector too
-            if (headerLangSelector) {
-                headerLangSelector.value = this.value;
-            }
-            console.log('Language changed to:', this.value);
-        });
-    }
-}
-
-// Global switchTab function - handles all tab switching including settings
-window.switchTab = function (tabName) {
-    // Hide all view sections (all now use -view suffix)
-    const allViews = ['home-view', 'prayers-view', 'dhikr-view', 'qibla-view', 'settings-view'];
-    allViews.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = 'none';
-    });
-
-    // Show selected section
-    const targetId = tabName + '-view';
-    const targetSection = document.getElementById(targetId);
-    if (targetSection) {
-        targetSection.style.display = 'block';
-    }
-
-    // Show/Hide Header based on tab
-    const appHeader = document.querySelector('.app-header');
-    if (appHeader) {
-        if (tabName === 'home') {
-            appHeader.style.display = 'block';
-        } else {
-            appHeader.style.display = 'none';
-        }
-    }
-
-    // Update sidebar active state
-    document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
-
-    // Close sidebar after selection - use only class removal to preserve toggle functionality
-    const sidebar = document.getElementById('app-sidebar');
-    const overlay = document.getElementById('sidebar-overlay');
-    if (sidebar) {
-        sidebar.classList.remove('open');
-        sidebar.classList.remove('active');
-    }
-    if (overlay) {
-        overlay.classList.remove('active');
-    }
-};
-
-// Initialize settings on page load
-document.addEventListener('DOMContentLoaded', function () {
-    initSettings();
-});
-
-// Settings translations
-function applySettingsTranslations() {
-    const lang = currentLang || 'tr';
-
-    const settingsTranslations = {
-        tr: { title: 'Ayarlar', soundLabel: 'Uyarı Sesleri', soundDesc: 'Namaz vakti sesli uyarıları', vibLabel: 'Titreşim', vibDesc: 'Zikirmatik titreşim geri bildirimi', langLabel: 'Dil', langDesc: 'Uygulama dili' },
-        en: { title: 'Settings', soundLabel: 'Alert Sounds', soundDesc: 'Prayer time audio alerts', vibLabel: 'Vibration', vibDesc: 'Tasbih vibration feedback', langLabel: 'Language', langDesc: 'App language' },
-        de: { title: 'Einstellungen', soundLabel: 'Benachricht.', soundDesc: 'Gebetszeit-Hinweise', vibLabel: 'Vibration', vibDesc: 'Tasbih Vibration', langLabel: 'Sprache', langDesc: 'App-Sprache' },
-        ar: { title: 'الإعدادات', soundLabel: 'أصوات التنبيه', soundDesc: 'تنبيهات صوتية', vibLabel: 'اهتزاز', vibDesc: 'تغذية راجعة', langLabel: 'اللغة', langDesc: 'لغة التطبيق' },
-        id: { title: 'Pengaturan', soundLabel: 'Suara Peringatan', soundDesc: 'Peringatan audio waktu sholat', vibLabel: 'Getaran', vibDesc: 'Umpan balik getaran', langLabel: 'Bahasa', langDesc: 'Bahasa aplikasi' },
-        ur: { title: 'ترتیبات', soundLabel: 'الرٹ آواز', soundDesc: 'نماز کے وقت کی آڈیو', vibLabel: 'وائبریشن', vibDesc: 'تسبیح وائبریشن', langLabel: 'زبان', langDesc: 'ایپ کی زبان' },
-        fr: { title: 'Paramètres', soundLabel: 'Sons', soundDesc: 'Alertes audio pour les prières', vibLabel: 'Vibration', vibDesc: 'Retour de vibration', langLabel: 'Langue', langDesc: "Langue de l'app" }
-    };
-
-    const t = settingsTranslations[lang] || settingsTranslations.tr;
-
-    const titleEl = document.getElementById('settings-title');
-    const soundLabelEl = document.getElementById('settings-sound-label');
-    const soundDescEl = document.getElementById('settings-sound-desc');
-    const vibLabelEl = document.getElementById('settings-vibration-label');
-    const vibDescEl = document.getElementById('settings-vibration-desc');
-    const menuSettingsEl = document.getElementById('menu-settings-text');
-
-    if (titleEl) titleEl.textContent = t.title;
-    if (soundLabelEl) soundLabelEl.textContent = t.soundLabel;
-    if (soundDescEl) soundDescEl.textContent = t.soundDesc;
-    if (vibLabelEl) vibLabelEl.textContent = t.vibLabel;
-    if (vibDescEl) vibDescEl.textContent = t.vibDesc;
-    if (menuSettingsEl) menuSettingsEl.textContent = t.title;
-
-    // Language label translations
-    const langLabelEl = document.getElementById('settings-language-label');
-    const langDescEl = document.getElementById('settings-language-desc');
-    if (langLabelEl) langLabelEl.textContent = t.langLabel;
-    if (langDescEl) langDescEl.textContent = t.langDesc;
-}
-
-// Call on language change
-const origLangSelector = document.getElementById('language-selector');
-if (origLangSelector) {
-    origLangSelector.addEventListener('change', function () {
-        setTimeout(applySettingsTranslations, 100);
-    });
-}
-
-// ===== LANGUAGE SELECTION MODAL =====
-function initLanguageModal() {
-    const modal = document.getElementById('language-modal');
-    const languageCards = document.querySelectorAll('.language-card');
-
-    // Check if user has already selected a language
-    const savedLang = localStorage.getItem('selectedLanguage');
-
-    if (savedLang) {
-        // User already selected a language, hide modal and apply
-        if (modal) modal.classList.add('hidden');
-        setLanguage(savedLang);
-        applySettingsTranslations();
-    } else {
-        // First time - show modal
-        if (modal) modal.classList.remove('hidden');
-    }
-
-    // Language card click handlers
-    languageCards.forEach(card => {
-        card.addEventListener('click', function () {
-            const selectedLang = this.getAttribute('data-lang');
-
-            // Save selection
-            localStorage.setItem('selectedLanguage', selectedLang);
-
-            // Apply language
-            setLanguage(selectedLang);
-            applySettingsTranslations();
-
-            // Sync settings dropdown
-            const settingsLangSelector = document.getElementById('settings-language-selector');
-            if (settingsLangSelector) {
-                settingsLangSelector.value = selectedLang;
-            }
-
-            // Hide modal with animation
-            if (modal) {
-                modal.style.animation = 'fadeOut 0.3s ease forwards';
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                    modal.style.animation = '';
-                }, 300);
-            }
-
-            console.log('Language selected:', selectedLang);
-        });
-    });
-}
-
-// Initialize on DOM ready
-document.addEventListener('DOMContentLoaded', function () {
-    initLanguageModal();
-});
