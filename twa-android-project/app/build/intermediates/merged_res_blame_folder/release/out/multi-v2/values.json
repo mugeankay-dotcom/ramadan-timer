@@ -1,0 +1,45 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.ramazan.vakti.app-mergeReleaseResources-2:/values/values.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\HP\\.gemini\\antigravity\\scratch\\ramadan_timer\\twa-android-project\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "3,12",
+                        "startColumns": "4,4",
+                        "startOffsets": "94,515",
+                        "endLines": "9,14",
+                        "endColumns": "12,12",
+                        "endOffsets": "473,675"
+                    },
+                    "to": {
+                        "startLines": "5,12",
+                        "startColumns": "4,4",
+                        "startOffsets": "268,646",
+                        "endLines": "11,14",
+                        "endColumns": "12,12",
+                        "endOffsets": "641,804"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\HP\\.gemini\\antigravity\\scratch\\ramadan_timer\\twa-android-project\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "2,4,3",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "57,181,108",
+                        "endColumns": "49,90,71",
+                        "endOffsets": "102,267,175"
+                    },
+                    "to": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,105,196",
+                        "endColumns": "49,90,71",
+                        "endOffsets": "100,191,263"
+                    }
+                }
+            ]
+        }
+    ]
+}

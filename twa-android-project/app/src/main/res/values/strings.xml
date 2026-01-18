@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ramazan 2026</string>
+    <string name="notification_channel_name">Ezan Bildirimleri</string>
+    <string name="notification_channel_description">Namaz vakitlerinde ezan çalar</string>
+</resources>

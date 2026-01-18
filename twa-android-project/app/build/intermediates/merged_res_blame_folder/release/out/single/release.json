@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.ramazan.vakti.app-merged_res-4:/drawable_ic_launcher.png.flat",
+        "source": "com.ramazan.vakti.app-main-5:/drawable/ic_launcher.png"
+    },
+    {
+        "merged": "com.ramazan.vakti.app-merged_res-4:/drawable_ic_launcher_round.png.flat",
+        "source": "com.ramazan.vakti.app-main-5:/drawable/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.ramazan.vakti.app-merged_res-4:/drawable_splash_screen.xml.flat",
+        "source": "com.ramazan.vakti.app-main-5:/drawable/splash_screen.xml"
+    }
+]

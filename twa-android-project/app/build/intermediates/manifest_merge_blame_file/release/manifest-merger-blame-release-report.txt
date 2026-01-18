@@ -1,0 +1,75 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.ramazan.vakti"
+4    android:versionCode="4"
+5    android:versionName="1.0.3" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="35" />
+10
+11    <application
+11-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:5:5-30:19
+12        android:allowBackup="true"
+12-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:6:9-35
+13        android:extractNativeLibs="true"
+14        android:icon="@mipmap/ic_launcher"
+14-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:7:9-43
+15        android:label="@string/app_name"
+15-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:8:9-41
+16        android:supportsRtl="true"
+16-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:9:9-35
+17        android:theme="@style/AppTheme" >
+17-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:10:9-40
+18        <activity
+18-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:12:9-29:20
+19            android:name="com.google.androidbrowserhelper.trusted.LauncherActivity"
+19-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:13:13-84
+20            android:exported="true"
+20-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:15:13-36
+21            android:label="@string/app_name" >
+21-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:14:13-45
+22            <meta-data
+22-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:16:13-18:85
+23                android:name="android.support.customtabs.trusted.DEFAULT_URL"
+23-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:17:17-78
+24                android:value="https://mugeankay-dotcom.github.io/ramadan-timer/" />
+24-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:18:17-82
+25
+26            <intent-filter>
+26-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:19:13-22:29
+27                <action android:name="android.intent.action.MAIN" />
+27-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:20:17-69
+27-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:20:25-66
+28
+29                <category android:name="android.intent.category.LAUNCHER" />
+29-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:21:17-77
+29-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:21:27-74
+30            </intent-filter>
+31            <intent-filter android:autoVerify="true" >
+31-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:23:13-28:29
+31-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:23:28-53
+32                <action android:name="android.intent.action.VIEW" />
+32-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:24:17-68
+32-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:24:25-66
+33
+34                <category android:name="android.intent.category.DEFAULT" />
+34-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:25:17-76
+34-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:25:27-73
+35                <category android:name="android.intent.category.BROWSABLE" />
+35-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:26:17-77
+35-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:26:27-75
+36
+37                <data
+37-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:27:17-126
+38                    android:host="mugeankay-dotcom.github.io"
+38-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:27:46-87
+39                    android:pathPrefix="/ramadan-timer"
+39-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:27:88-123
+40                    android:scheme="https" />
+40-->C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\AndroidManifest.xml:27:23-45
+41            </intent-filter>
+42        </activity>
+43    </application>
+44
+45</manifest>

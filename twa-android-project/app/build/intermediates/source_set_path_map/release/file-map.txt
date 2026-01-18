@@ -1,0 +1,7 @@
+com.ramazan.vakti.app-pngs-0 C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\build\generated\res\pngs\release
+com.ramazan.vakti.app-resValues-1 C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\build\generated\res\resValues\release
+com.ramazan.vakti.app-packageReleaseResources-2 C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\build\intermediates\incremental\release\packageReleaseResources\merged.dir
+com.ramazan.vakti.app-packageReleaseResources-3 C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\build\intermediates\incremental\release\packageReleaseResources\stripped.dir
+com.ramazan.vakti.app-merged_res-4 C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\build\intermediates\merged_res\release
+com.ramazan.vakti.app-main-5 C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\main\res
+com.ramazan.vakti.app-release-6 C:\Users\HP\.gemini\antigravity\scratch\ramadan_timer\twa-android-project\app\src\release\res

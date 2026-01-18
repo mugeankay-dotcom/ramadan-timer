@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ramazan 2026</string>
+    <string name="notification_channel_description">Namaz vakitlerinde ezan çalar</string>
+    <string name="notification_channel_name">Ezan Bildirimleri</string>
+    <style name="Theme.RamadanVakti" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#1a1a2e</item>
+        <item name="colorPrimaryDark">#0f0f1a</item>
+        <item name="colorAccent">#FFD700</item>
+        <item name="android:statusBarColor">#1a1a2e</item>
+        <item name="android:navigationBarColor">#1a1a2e</item>
+    </style>
+    <style name="Theme.RamadanVakti.Splash" parent="Theme.RamadanVakti">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+</resources>
