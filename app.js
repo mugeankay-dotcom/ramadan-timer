@@ -1424,34 +1424,31 @@ function initZikirmatik() {
         });
     }
 
-    // Modal Action Listeners
-    if (btnConfirmReset) {
-        // Clone to remove previous listeners to prevent duplicates
-        const newBtn = btnConfirmReset.cloneNode(true);
-        btnConfirmReset.parentNode.replaceChild(newBtn, btnConfirmReset);
+    // Modal Action Listeners - Direct attachment (no cloning)
+    const confirmResetBtn = document.getElementById('btn-confirm-reset');
+    const cancelResetBtn = document.getElementById('btn-cancel-reset');
 
-        newBtn.addEventListener('click', () => {
+    if (confirmResetBtn) {
+        confirmResetBtn.onclick = function () {
             dhikrCount = 0;
-            if (countDisplay) countDisplay.textContent = dhikrCount;
-            saveDhikrState();
+            const display = document.getElementById('dhikr-display') || document.getElementById('dhikr-count');
+            if (display) display.textContent = dhikrCount;
+            localStorage.setItem('dhikrCount', dhikrCount);
             if (customModal) customModal.classList.remove('active');
-        });
+        };
     }
 
-    if (btnCancelReset) {
-        const newBtn = btnCancelReset.cloneNode(true);
-        btnCancelReset.parentNode.replaceChild(newBtn, btnCancelReset);
-
-        newBtn.addEventListener('click', () => {
+    if (cancelResetBtn) {
+        cancelResetBtn.onclick = function () {
             if (customModal) customModal.classList.remove('active');
-        });
+        };
     }
 
     // Close on outside click
     if (customModal) {
-        customModal.addEventListener('click', (e) => {
+        customModal.onclick = function (e) {
             if (e.target === customModal) customModal.classList.remove('active');
-        });
+        };
     }
 
     // Vibrate Toggle (REMOVED UI, but kept logic default ON)
