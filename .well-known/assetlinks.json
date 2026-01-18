@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.ramazan.vakti",
+            "sha256_cert_fingerprints": [
+                "F2:59:AF:A1:BA:F7:89:91:B3:A7:29:F2:0F:A3:35:D3:4F:F2:F9:CA:A9:C9:8C:2A:97:2F:8E:B4:C2:59:82:49"
+            ]
+        }
+    }
+]
