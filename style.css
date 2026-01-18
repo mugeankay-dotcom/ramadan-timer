@@ -4,72 +4,55 @@
     --secondary-color: #1a2a6c;
     /* Deep Blue */
     --accent-color: #b21f1f;
-    /* Deep Red/Purple hint */
+    /* Ruby Red */
     --text-light: #ffffff;
     --text-dim: #e0e0e0;
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --glass-bg: rgba(20, 30, 48, 0.6);
+    --glass-border: rgba(255, 215, 0, 0.15);
+    --glass-highlight: rgba(255, 255, 255, 0.05);
+    --shadow-soft: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --shadow-glow: 0 0 15px rgba(255, 215, 0, 0.2);
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Outfit', sans-serif;
 }
 
-
-
-/* UNIVERSAL RESET for App Feel */
+/* UNIVERSAL RESET */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* Prevent Long Press Menu on Everything */
-    -webkit-touch-callout: none !important;
-    -webkit-user-select: none !important;
-    user-select: none !important;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-/* Allow selection only on inputs if we had them (we don't), but good practice */
 input,
 select {
-    -webkit-user-select: auto !important;
-    user-select: auto !important;
+    -webkit-user-select: auto;
+    user-select: auto;
 }
 
 body {
-    font-family: 'Cinzel', serif;
-    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364);
+    font-family: var(--font-body);
+    /* Premium Deep Gradient Background */
+    background: radial-gradient(circle at top, #1a2a6c, #b21f1f, #fdbb2d);
+    /* Fallback */
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
     background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    animation: gradientFlow 20s ease infinite;
     color: var(--text-light);
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow-x: hidden;
+    align-items: flex-start;
+    /* Changed from center to allow scrolling if needed */
+    overflow: hidden;
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-
-    /* APP FEEL: Disable Selection & Long Press Menu */
-    /* Handled globally in * selector now, but keeping safe defaults */
-    overflow-x: hidden;
 }
 
-/* RTL Support */
-body.rtl {
-    direction: rtl;
-    text-align: right;
-}
-
-body.rtl .app-header,
-body.rtl .timer-card,
-body.rtl .prayer-times-list h3 {
-    text-align: center;
-}
-
-body.rtl .countdown-display {
-    flex-direction: row-reverse;
-}
-
-@keyframes gradientBG {
+@keyframes gradientFlow {
     0% {
         background-position: 0% 50%;
     }
@@ -83,516 +66,303 @@ body.rtl .countdown-display {
     }
 }
 
+/* BACKGROUND OVERLAY */
 .background-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("masjid_bg.png");
+    background-image: url("masjid_bg.png");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    opacity: 0.15;
+    /* Subtle texture */
+    mix-blend-mode: overlay;
     z-index: -1;
-    transition: background-image 0.5s ease;
-    /* Smooth transition */
-}
-
-/* Specific Background for Zikirmatik */
-.dhikr-mode .background-overlay {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("dhikr_bg.png");
+    pointer-events: none;
 }
 
 .container {
-    width: 90%;
-    max-width: 500px;
-    padding: 20px;
+    width: 100%;
+    max-width: 480px;
+    /* Mobile focused max-width */
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
+/* --- HEADER --- */
 .app-header {
+    text-align: center;
+    padding: 60px 20px 20px;
+    position: relative;
+    z-index: 10;
+    animation: slideDown 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.app-header h1 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    background: linear-gradient(to right, #FFD700, #FDB931, #FFD700);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* HEADER CONTROLS (Location) */
+.header-controls {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 50;
+}
+
+.location-badge {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* --- MAIN CONTENT --- */
+.content-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px 20px;
+    scrollbar-width: none;
+    /* Hide scrollbar */
+}
+
+.content-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* VIEW SECTIONS */
+.view-section {
+    display: none;
+    /* Hidden by default */
+    flex-direction: column;
+    height: 100%;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.view-section.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- TIMER CARD --- */
+.timer-card {
     text-align: center;
     margin-bottom: 30px;
     position: relative;
-    padding-top: 60px;
-    /* Increased to push title down */
-}
-
-.header-controls {
-    position: fixed;
-    /* Fixed to viewport */
-    top: 15px;
-    /* Safe distance from top */
-    right: 15px;
-    /* Safe distance from right */
-    padding-right: 0;
-    margin-top: 0;
-    z-index: 1000;
-    /* Ensure on top of everything */
-}
-
-.language-selector {
-    background: var(--glass-bg);
-    color: var(--text-light);
-    border: 1px solid var(--glass-border);
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-family: inherit;
-    cursor: pointer;
-    outline: none;
-    font-size: 0.75rem;
-}
-
-.language-selector option {
-    background: #203a43;
-    color: var(--text-light);
-}
-
-.content-wrapper {
-    flex: 1;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    position: relative;
-    height: 100%;
-}
-
-.view-section {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    overflow: hidden;
-}
-
-
-.app-title-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-}
-
-.crescent-icon {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-}
-
-.location-badge,
-.language-selector {
-    background: rgba(0, 0, 0, 0.4);
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-    font-weight: 500;
-}
-
-.timer-card {
-    background: transparent;
-    box-shadow: none;
-    border: none;
-    padding: 0;
 }
 
 .timer-header h2 {
-    color: var(--primary-color);
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 1.3rem;
-    font-weight: 700;
-    opacity: 1;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    font-weight: 400;
 }
 
-#next-event-name {
-    display: none;
-}
-
+/* CRYSTAL COUNTDOWN */
 .countdown-display {
     display: flex;
     justify-content: center;
-    /* Center items per user request */
     align-items: center;
-    width: 100%;
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 0 10px;
-    gap: 15px;
+    gap: 10px;
+    margin: 20px 0;
 }
 
-/* UNIFIED SIZE: 90px for Crystal Shape */
-/* UNIFIED SIZE: 90px for Crystal Shape */
 .time-unit {
+    width: 80px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 90px;
-    height: 90px;
-    background: url('crystal_gem.svg') no-repeat center center;
-    background-size: contain;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
+    align-items: center;
     position: relative;
-    flex-shrink: 0;
-    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
-    margin: 0 5px;
-    padding: 8px 0;
-    /* Centering padding */
+    backdrop-filter: blur(10px);
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        inset 0 0 20px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease;
 }
 
-/* Hide tick for crystal look */
-.time-unit::before {
-    display: none;
+.time-unit:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 10px var(--shadow-glow);
 }
 
 .time-unit .number {
-    font-size: 1.5rem;
-    /* Smaller to fit */
+    font-family: var(--font-heading);
+    font-size: 2rem;
     font-weight: 700;
     color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
     line-height: 1;
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-    z-index: 2;
-    margin-bottom: 0;
-    margin-top: 5px;
 }
 
 .time-unit .label {
-    font-size: 0.5rem;
-    /* Smaller label */
-    color: #fff;
-    margin-top: 0;
-    letter-spacing: 0.5px;
-    font-weight: 600;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    margin-top: 8px;
+    opacity: 0.7;
+    letter-spacing: 1px;
 }
 
 .time-separator {
     font-size: 2rem;
-    color: var(--primary-color);
-    margin-top: -15px;
-    font-weight: bold;
+    color: var(--glass-border);
+    margin-top: -20px;
 }
 
+/* --- PRAYER TIMES GRID --- */
 .prayer-times-list {
-    display: flex;
-    justify-content: center;
-    /* Center items per user request */
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    gap: 8px;
-    background: transparent;
-    padding: 0 10px;
-    backdrop-filter: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 10px;
 }
 
-@media (min-width: 600px) {
-    /* Keep flex behavior consistent */
-}
-
-.prayer-times-list h3 {
-    display: none;
-}
-
-/* UNIFIED SIZE: 90px for Crystal Shape */
 .prayer-item {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 15px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 90px;
-    height: 90px;
-    background: url('crystal_gem.svg') no-repeat center center;
-    background-size: contain;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-    position: relative;
-    padding: 0;
-    transition: transform 0.3s ease;
-    margin: 5px;
-    flex-shrink: 0;
-    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
-}
-
-.prayer-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-    transform: translateY(-5px);
-}
-
-.prayer-name {
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #FFD700;
-    margin-bottom: 0;
-    letter-spacing: 0.5px;
-    z-index: 2;
-    text-shadow: none;
-    line-height: 1.1;
-}
-
-.prayer-time {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-    z-index: 2;
-    line-height: 1.1;
-}
-
-.prayer-time::before {
-    content: '🕒';
-    display: block;
-    font-size: 0.8rem;
-    margin-bottom: 0;
-    opacity: 0.7;
-    filter: grayscale(1);
-    line-height: 1;
-}
-
-
-
-.location-badge {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 20px;
-    padding: 6px 12px;
-    font-size: 0.75rem;
-    color: #d4af37;
-    backdrop-filter: blur(5px);
-}
-
-.app-title-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-}
-
-.crescent-icon {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-}
-
-.location-badge,
-.language-selector {
-    background: rgba(0, 0, 0, 0.4);
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-    font-weight: 500;
-}
-
-.timer-card {
-    background: transparent;
-    box-shadow: none;
-    border: none;
-    padding: 0;
-}
-
-.timer-header h2 {
-    color: var(--primary-color);
-    letter-spacing: 2px;
-    font-size: 1.3rem;
-    font-weight: 700;
-    opacity: 1;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-    margin-bottom: 15px;
-}
-
-#next-event-name {
-    display: none;
-}
-
-/* Duplicates removed to fix desktop distortion */
-
-.prayer-times-list {
-    display: flex;
-    justify-content: center;
-    /* Center items per user request */
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
     gap: 8px;
-    background: transparent;
-    padding: 0 10px;
-    backdrop-filter: none;
-}
-
-@media (min-width: 600px) {
-    /* Keep flex behavior consistent */
-}
-
-.prayer-times-list h3 {
-    display: none;
-}
-
-/* UNIFIED SIZE: 90px for Crystal Shape */
-/* HYBRID DESIGN: Glass Cards for Prayer Times (v29) */
-.prayer-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90px;
-    /* Keep consistent width but flexible */
-    height: 75px;
-    /* Shorter height, rectangular feel */
-    background: rgba(14, 25, 36, 0.6);
-    /* Semi-transparent dark bg */
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    /* Subtle Gold Border */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    border-radius: 15px;
-    /* Modern Rounded Corners */
+    backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
-    padding: 5px;
-    transition: transform 0.3s ease;
-    margin: 5px;
-    flex-shrink: 0;
-    backdrop-filter: blur(5px);
+    overflow: hidden;
 }
 
-.prayer-item:hover {
-    transform: translateY(-3px);
-    border-color: rgba(255, 215, 0, 0.5);
-    background: rgba(14, 25, 36, 0.8);
-}
-
-.prayer-name {
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #FFD700;
-    margin-bottom: 0;
-    letter-spacing: 0.5px;
-    z-index: 2;
-    text-shadow: none;
-    line-height: 1.1;
-}
-
-.prayer-time {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-    z-index: 2;
-    line-height: 1.1;
-}
-
-.prayer-time::before {
-    content: '🕒';
-    display: block;
-    font-size: 0.8rem;
-    margin-bottom: 0;
-    opacity: 0.7;
-    filter: grayscale(1);
-    line-height: 1;
-}
-
-#current-date {
-    display: none;
-}
-
-@media (max-width: 500px) {
-    .app-header {
-        padding-top: 50px;
-        /* Less padding on mobile */
-        margin-bottom: 20px;
-    }
-
-    .app-header h1 {
-        font-size: 2rem;
-        /* Smaller title on mobile */
-    }
-
-    .header-controls {
-        top: 10px;
-        /* Slight adjustment for mobile status bar */
-        right: 10px;
-    }
-
-    .time-unit {
-        width: 72px;
-        height: 72px;
-        margin: 1px;
-    }
-
-    /* Adjust Prayer Items for Mobile to be cleaner grid */
-    .prayer-item {
-        width: 30%;
-        /* 3 items per row approx */
-        height: auto;
-        padding: 10px 0;
-        margin: 2px;
-    }
-
-    .countdown-display,
-    .prayer-times-list {
-        gap: 3px;
-        /* Minimal gap to prevent wrapping */
-        padding: 0 8px;
-        /* Increased padding for shadow visibility */
-    }
-
-    .time-unit .number,
-    .prayer-time {
-        font-size: 1.4rem;
-        /* Slightly smaller for 72px box */
-    }
-
-    .prayer-name {
-        font-size: 0.6rem;
-    }
-}
-
-/* --- MAIN NAVIGATION (SIDEBAR) --- */
-.menu-toggle-btn {
+.prayer-item::before {
+    content: '';
     position: absolute;
-    /* Changed from relative/static */
-    top: 15px;
-    left: 15px;
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-size: 1.8rem;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1100;
-    transition: transform 0.2s ease;
-}
-
-.menu-toggle-btn:active {
-    transform: scale(0.9);
-}
-
-.sidebar-overlay {
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(3px);
-    z-index: 1200;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+    pointer-events: none;
 }
 
-.sidebar-overlay.active {
-    opacity: 1;
-    visibility: visible;
+.prayer-item:active {
+    transform: scale(0.95);
+}
+
+.prayer-item.next-prayer {
+    border-color: var(--primary-color);
+    background: rgba(255, 215, 0, 0.1);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+}
+
+.prayer-name {
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.prayer-time {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--text-light);
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* IMSAKIYE BUTTON */
+.imsakiye-inline-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 18px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+    border: 1px solid var(--primary-color);
+    border-radius: 12px;
+    color: var(--primary-color);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.imsakiye-inline-btn:hover {
+    background: var(--primary-color);
+    color: #000;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+}
+
+/* --- SIDEBAR MENU (Modernized) --- */
+.menu-toggle-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    z-index: 100;
+    backdrop-filter: blur(5px);
 }
 
 .app-sidebar {
@@ -601,13 +371,13 @@ body.rtl .countdown-display {
     left: 0;
     width: 280px;
     height: 100%;
-    background: rgba(14, 25, 36, 0.98);
-    backdrop-filter: blur(15px);
-    z-index: 1300;
+    background: rgba(10, 20, 30, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: 200;
     transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
-    border-right: 1px solid rgba(255, 215, 0, 0.1);
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
 }
@@ -617,8 +387,8 @@ body.rtl .countdown-display {
 }
 
 .sidebar-header {
-    padding: 20px;
-    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+    padding: 30px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -626,191 +396,86 @@ body.rtl .countdown-display {
 
 .sidebar-header h2 {
     color: var(--primary-color);
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    margin: 0;
-}
-
-.menu-close-btn {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-family: var(--font-heading);
 }
 
 .sidebar-nav {
     padding: 20px 0;
-    flex: 1;
 }
 
 .sidebar-item {
     width: 100%;
+    padding: 16px 25px;
     background: transparent;
     border: none;
-    text-align: left;
-    padding: 15px 25px;
     color: var(--text-dim);
-    font-family: 'Outfit', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
+    font-size: 1.1rem;
+    text-align: left;
     display: flex;
     align-items: center;
     gap: 15px;
-    transition: all 0.2s ease;
+    cursor: pointer;
+    transition: all 0.2s;
     border-left: 3px solid transparent;
 }
 
-.sidebar-item:hover,
 .sidebar-item.active {
-    background: rgba(255, 215, 0, 0.05);
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), transparent);
     color: var(--primary-color);
-}
-
-.sidebar-item.active {
     border-left-color: var(--primary-color);
-    font-weight: 500;
 }
 
-.sidebar-item .icon {
-    font-size: 1.2rem;
-    width: 24px;
-    text-align: center;
+.sidebar-overlay.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 150;
+    opacity: 1;
+    visibility: visible;
 }
 
-/* --- ZIKIRMATIK UI --- */
+/* --- ZIKIRMATIK (Modern Circle) --- */
 .dhikr-container {
-    background: transparent;
-    max-width: 100%;
-    height: calc(100vh - 40px);
-    /* Full height minus padding */
-    margin: 0 auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Center vertically */
     align-items: center;
-    text-align: center;
-    padding: 20px;
-    padding-top: 40px;
-    /* Slight top padding */
-    box-sizing: border-box;
-}
-
-.dhikr-header {
-    margin-bottom: 30px;
-}
-
-.dhikr-header h3 {
-    color: var(--primary-color);
-    font-family: 'Cinzel', serif;
-    margin-bottom: 15px;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-}
-
-.dhikr-selector {
-    background: rgba(14, 25, 36, 0.8);
-    color: #fff;
-    border: 1px solid var(--primary-color);
-    padding: 8px 15px;
-    border-radius: 12px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 1rem;
-    outline: none;
-    width: 100%;
-    cursor: pointer;
-}
-
-.counter-display {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px 0;
+    padding-bottom: 60px;
 }
 
 .dhikr-btn {
-    width: 220px;
-    height: 220px;
+    width: 240px;
+    height: 240px;
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, #2c3e50, #000);
-    border: 4px solid var(--primary-color);
+    border: 3px solid var(--primary-color);
     box-shadow:
-        0 0 20px rgba(255, 215, 0, 0.2),
-        inset 0 0 30px rgba(0, 0, 0, 0.8),
-        0 10px 20px rgba(0, 0, 0, 0.5);
+        0 0 30px rgba(255, 215, 0, 0.15),
+        inset 0 0 50px rgba(0, 0, 0, 0.8);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: all 0.1s ease;
     position: relative;
-    overflow: hidden;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
+    margin: 40px auto;
+    transition: transform 0.1s;
 }
 
 .dhikr-btn:active {
-    transform: scale(0.95);
-    box-shadow:
-        0 0 10px rgba(255, 215, 0, 0.1),
-        inset 0 0 10px rgba(0, 0, 0, 0.8);
-    border-color: #d4af37;
-}
-
-/* Glass shine effect on button */
-.dhikr-btn::after {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 20px;
-    width: 60px;
-    height: 30px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    transform: rotate(-15deg);
-    pointer-events: none;
+    transform: scale(0.96);
+    border-color: #fff;
 }
 
 #dhikr-count {
-    font-size: 4.5rem;
+    font-size: 5rem;
     font-weight: 700;
-    color: #fff;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-    line-height: 1;
-    font-family: 'Outfit', sans-serif;
-}
-
-.dhikr-label {
-    font-size: 0.8rem;
-    color: var(--primary-color);
-    letter-spacing: 2px;
-    margin-top: 5px;
-    opacity: 0.8;
-}
-
-
-/* UTILITY */
-.hidden {
-    display: none !important;
-}
-
-/* --- SIMPLIFIED ZIKIRMATIK CONTROLS (vNew) --- */
-/* --- ZIKIRMATIK CONTROLS & HISTORY --- */
-.dhikr-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    margin-top: 30px;
-    width: 100%;
+    font-family: var(--font-body);
 }
 
 .zikirmatik-controls {
@@ -819,588 +484,73 @@ body.rtl .countdown-display {
 }
 
 .control-btn {
-    width: 100px;
-    height: 80px;
-    border-radius: 12px;
-    background: rgba(14, 25, 36, 0.6);
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    color: #fff;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.control-btn .btn-icon {
-    font-size: 1.8rem;
-}
-
-.control-btn .btn-text {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-.control-btn:hover {
-    transform: translateY(-2px);
-    background: rgba(14, 25, 36, 0.8);
-    border-color: rgba(255, 215, 0, 0.5);
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-}
-
-.control-btn:active {
-    transform: scale(0.95);
-}
-
-.control-btn.active {
-    border-color: #d4af37;
-    background: rgba(212, 175, 55, 0.15);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-    color: #d4af37;
-}
-
-/* History Modal */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 2000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(3px);
-}
-
-.modal-overlay.active {
-    display: flex;
-}
-
-.history-modal-content {
-    background: #1a1a1a;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 15px;
-    border: 1px solid #d4af37;
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
-    overflow: hidden;
-    animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.modal-header {
-    background: #0f0f0f;
-    padding: 15px 20px;
-    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-header h3 {
-    margin: 0;
-    color: #d4af37;
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-}
-
-.close-modal {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    cursor: pointer;
-    line-height: 1;
-}
-
-#history-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-#history-list li {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    color: #eee;
-    font-family: 'Outfit', sans-serif;
-}
-
-#history-list li:last-child {
-    border-bottom: none;
-}
-
-.history-date {
-    opacity: 0.8;
-}
-
-.history-count {
-    color: #d4af37;
-    font-weight: bold;
-    font-family: 'Cinzel', serif;
-}
-
-.empty-msg {
-    text-align: center;
-    padding: 30px !important;
-    opacity: 0.6;
-    font-style: italic;
-}
-
-#reset-btn {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-}
-
-/* --- PRAYERS SECTION (Split View) --- */
-.prayers-layout {
-    display: flex;
-    height: calc(100vh - 80px);
-    /* Full height minus header/padding approx */
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Background for Prayers Mode */
-.prayers-mode .background-overlay {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("prayers_bg.png");
-}
-
-/* --- PRAYERS BOOK UI (Redesign) --- */
-
-/* Main Container (Shelf View) */
-/* Main Container (Shelf View) */
-.book-container {
-    display: flex;
-    width: 100%;
-    /* Fix: Use explicit Viewport Height minus header + padding */
-    height: calc(100vh - 140px);
-    min-height: 500px;
-    margin-top: 60px;
-    /* Fix Menu Overlap */
-
-    /* Premium Leather Look */
-    background-color: #2c1a12;
-    /* Dark Brown Leather */
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMmMxYTEyIi8+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNmZmQ3MDAiIG9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+');
-
-    border: 8px double #d4af37;
-    /* Double Gold Border */
-    border-radius: 15px;
-    box-shadow:
-        inset 0 0 60px rgba(0, 0, 0, 0.7),
-        0 20px 50px rgba(0, 0, 0, 0.6);
-
-    position: relative;
-    overflow: hidden;
-    padding: 30px 20px;
-    gap: 0;
-    margin-bottom: 20px;
-}
-
-/* Spine (Center Divider) */
-.book-spine {
-    position: absolute;
-    left: 50%;
-    top: 2%;
-    /* Slightly smaller than page */
-    bottom: 2%;
-    width: 4px;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
-    transform: translateX(-50%);
-    border-radius: 2px;
-    z-index: 10;
-}
-
-/* Pages */
-.book-page {
-    flex: 1;
-    padding: 10px 20px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.book-page.left {
-    padding-right: 25px;
-    /* Space for spine */
-    border-right: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.book-page.right {
-    padding-left: 25px;
-    /* Space for spine */
-}
-
-/* Book Items (List) */
-.prayer-book-item {
-    display: flex;
-    align-items: center;
-    padding: 12px 15px;
-    background: #fff;
-    border: 1px solid #e1d6c0;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
-}
-
-.prayer-book-item:hover {
-    transform: translateX(3px);
-    border-color: #d4af37;
-    background: #fffdf5;
-    box-shadow: 0 4px 8px rgba(212, 175, 55, 0.15);
-}
-
-.book-item-number {
-    font-family: 'Cinzel', serif;
-    font-weight: bold;
-    color: #d4af37;
-    margin-right: 12px;
-    font-size: 1.1rem;
-    min-width: 25px;
-}
-
-.book-item-title {
-    font-family: 'Outfit', sans-serif;
-    color: #4a3b2a;
-    font-weight: 500;
-    font-size: 1rem;
-}
-
-
-/* --- FULL SCREEN DETAIL VIEW --- */
-.prayer-detail-view {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('./prayers_bg.png');
-    /* Reusing existing BG */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    z-index: 2000;
-    /* Above everything including header/sidebar */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 60px;
-    /* Space for back button */
-    padding-bottom: 20px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.prayer-detail-view.active {
-    opacity: 1;
-}
-
-/* Back Button */
-/* Back Button - Wax Seal Style */
-.back-to-book-btn {
-    position: absolute;
-    top: 20px;
-    left: 20px;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #b21f1f, #800000);
-    border: 4px solid #d4af37;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-    z-index: 2005;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    padding: 0;
-    font-size: 0;
-    /* Hide text, only icon */
+    transition: all 0.3s;
 }
 
-.back-to-book-btn::before {
-    content: '⬅';
-    font-size: 1.5rem;
-    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
-}
-
-.back-to-book-btn .icon {
-    display: none;
-    /* Hide old icon span */
-}
-
-.back-to-book-btn:hover {
-    background: #d4af37;
+.control-btn:hover {
+    background: var(--primary-color);
     color: #000;
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
 }
 
-.back-to-book-btn .icon {
-    font-size: 1.2rem;
+/* --- OTHER VIEWS (Settings, Qibla) --- */
+#settings-view,
+#qibla-view {
+    padding-top: 20px;
 }
 
-/* Prayer Content (Full Screen Mode) */
-#prayer-content-full {
-    width: 90%;
-    max-width: 600px;
-    background: rgba(255, 255, 255, 0.93);
-    border-radius: 15px;
-    padding: 30px;
-    /* Generous padding */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    overflow-y: auto;
-    max-height: 85vh;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-
-    /* Scrollbar styling */
-    scrollbar-width: thin;
-    scrollbar-color: #d4af37 rgba(0, 0, 0, 0.1);
+/* Ensure qibla canvas is visible */
+.compass-ring {
+    margin: 20px auto;
 }
 
-/* Reuse existing typography inside detail */
-.prayer-page-header {
-    text-align: center;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #d4af37;
-    padding-bottom: 10px;
-}
-
-/* Mobile Adjustments for Book */
-@media (max-width: 768px) {
-
-    .quran-page {
-        padding: 20px;
-        border-width: 4px;
-        outline-offset: -6px;
-    }
-
-    .page-title {
-        font-size: 1.8rem;
-    }
-
-    .arabic-text.large {
-        font-size: 1.5rem;
+/* TABLET FIXES INJECTED IN FILE - KEEPING */
+@media (min-width: 600px) {
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
     }
 }
 
-/* Animations */
-@keyframes contentAppear {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+/* --- ANIMATIONS --- */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4);
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
     }
 }
 
-.fade-appear {
-    animation: contentAppear 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+/* Utilitarian classes */
+.hidden {
+    display: none !important;
 }
 
-/* OVERRIDE CONTAINER WIDTH FOR PRAYERS BOOK VIEW */
-body.prayers-mode .container {
-    max-width: 1600px !important;
-    /* Force wider container */
-    width: 98% !important;
-    padding: 10px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* Center vertically if needed */
+/* Custom Scrollbar for inner content */
+::-webkit-scrollbar {
+    width: 6px;
 }
 
-body.prayers-mode .prayers-layout {
-    height: 90vh;
-    /* Use most of the screen */
-}
-
-/* ULTRA COMPACT CENTERED LAYOUT */
-/* Internal Page Content */
-.prayer-page-header {
-    text-align: center;
-    margin-bottom: 10px;
-    /* Minimal */
-    border-bottom: 2px solid #d4af37;
-    padding-bottom: 5px;
-    flex-shrink: 0;
-}
-
-.page-title {
-    font-family: 'Cinzel', serif;
-    font-size: 1.5rem;
-    /* Reduced */
-    color: #8b4513;
-    margin: 0;
-}
-
-.ornament {
-    height: 10px;
-    /* Reduced */
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='10' viewBox='0 0 40 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 5 L25 10 L20 10 L15 10 Z' fill='%23d4af37'/%3E%3C/svg%3E");
-    background-repeat: repeat-x;
-    background-position: center;
-    opacity: 0.6;
-    margin-top: 2px;
-}
-
-.prayer-body {
-    padding-top: 5px;
-    display: flex;
-    /* Flex for centering */
-    flex-direction: column;
-    justify-content: center;
-    /* Center vertically if short */
-    flex: 1;
-    /* Take remaining space */
-    min-height: 0;
-    /* Allow shrinking */
-}
-
-/* TIGHT Arabic Layout */
-.arabic-text.large {
-    font-family: 'Amiri', serif;
-    font-size: 1.5rem;
-    /* Smaller to fit Fatiha */
-    color: #000;
-    text-align: center;
-    line-height: 1.3;
-    /* Very tight */
-    margin-bottom: 8px;
-    direction: rtl;
-    padding: 0 5px;
-}
-
-.section-divider {
-    text-align: center;
-    margin: 5px 0;
-    /* Minimal spacing */
-    color: #8b4513;
-    font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.section-divider::before,
-.section-divider::after {
-    content: "";
-    display: inline-block;
-    width: 15px;
-    height: 1px;
-    background: #d4af37;
-    vertical-align: middle;
-    margin: 0 5px;
-}
-
-.reading-text {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.9rem;
-    color: #8b4513;
-    font-style: italic;
-    line-height: 1.25;
-    text-align: center;
-    margin-bottom: 8px;
-}
-
-.meaning-text {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.9rem;
-    color: #444;
-    line-height: 1.25;
-    text-align: center;
-}
-
-/* Remove side-panel classes if any left in HTML (already cleaned in JS) */
-.prayer-content-arabic,
-.prayer-content-meaning {
-    display: contents;
-    /* Just in case */
-}
-
-/* Placeholder */
-.placeholder-msg {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: #8b4513;
-    opacity: 0.6;
-    font-size: 1.2rem;
-}
-
-.placeholder-msg .icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
-}
-
-/* NUCLEAR FIX: Force Desktop Styles to override any legacy/duplicate blocks */
-@media (min-width: 601px) {
-    .time-unit {
-        width: 90px !important;
-        height: 90px !important;
-        padding: 8px 0 !important;
-        margin: 0 5px !important;
-        background-size: contain !important;
-        flex-shrink: 0 !important;
-    }
-
-    .time-unit .number {
-        font-size: 1.5rem !important;
-        margin-top: 5px !important;
-        margin-bottom: 0 !important;
-        line-height: 1 !important;
-    }
-
-    .time-unit .label {
-        font-size: 0.5rem !important;
-        margin-top: 0 !important;
-    }
-
-    /* Ensure tick is hidden */
-    .time-unit::before {
-        display: none !important;
-        content: none !important;
-    }
-
-    .countdown-display {
-        gap: 15px !important;
-        padding: 0 10px !important;
-        justify-content: center !important;
-    }
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.3);
+    border-radius: 10px;
 }
