@@ -6,6 +6,8 @@ android-project/signing-key-info.txt
 *.keystore
 signing-key-info.txt
 ramadan-keystore
+# Added by Antigravity
+*.jks
 
 # Build outputs
 *.apk
